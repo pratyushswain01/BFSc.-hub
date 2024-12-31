@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy New Year 2023</title>
+    <title>Happy New Year 2025</title>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Montserrat:700|Pacifico');
         
@@ -216,26 +216,6 @@
             right: 10px;
         }
 
-        .photo-frame {
-            width: 200px;
-            height: 200px;
-            border: 10px solid #fff;
-            position: absolute;
-            background: #e8d57a;
-            background-size: cover;
-            background-position: center;
-        }
-        .frame1 {
-            top: 20px;
-            left: 20px;
-            background-image: url('https://via.placeholder.com/200');
-        }
-        .frame2 {
-            bottom: 20px;
-            right: 20px;
-            background-image: url('https://via.placeholder.com/200');
-        }
-
         /* Sweet message */
         .sweet-message {
             position: absolute;
@@ -433,8 +413,6 @@
             <span><i></i></span>
         </div>
     </div>
-    <div class="photo-frame frame1"></div>
-    <div class="photo-frame frame2"></div>
 
     <!-- Sweet message -->
     <div class="sweet-message">Happy New Year, my love! 💖 </div>
@@ -443,19 +421,15 @@
     <button class="surprise-button" onclick="showSurprise()">Click for a Surprise!</button>
 
     <!-- Surprise message -->
-    <div class="surprise-message" id="surpriseMessage">
-        
+    <div class="surprise-message" id="surprise-message">
+        You are my greatest blessing! Wishing us endless joy and love this year! 🥂🎇💝
     </div>
 
     <script>
-        // Function to show the surprise message and open a new page
         function showSurprise() {
-            document.getElementById('surpriseMessage').style.display = 'block'; // Show surprise message
-            setTimeout(function() {
-                window.location.href = "video.html"; // Replace with your
-            }, 3000); // Wait 3 seconds before redirecting
+            const surpriseMessage = document.getElementById('surprise-message');
+            surpriseMessage.style.display = 'block';
         }
     </script>
 </body>
 </html>
-     
