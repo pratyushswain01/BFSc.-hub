@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy New Year 2025</title>
+    <title>Happy New Year 2023</title>
     <style>
         @import url('https://fonts.googleapis.com/css?family=Montserrat:700|Pacifico');
         
@@ -216,6 +217,26 @@
             right: 10px;
         }
 
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            border: 10px solid #fff;
+            position: absolute;
+            background: #e8d57a;
+            background-size: cover;
+            background-position: center;
+        }
+        .frame1 {
+            top: 20px;
+            left: 20px;
+            background-image: url('https://via.placeholder.com/200');
+        }
+        .frame2 {
+            bottom: 20px;
+            right: 20px;
+            background-image: url('https://via.placeholder.com/200');
+        }
+
         /* Sweet message */
         .sweet-message {
             position: absolute;
@@ -413,6 +434,7 @@
             <span><i></i></span>
         </div>
     </div>
+   
 
     <!-- Sweet message -->
     <div class="sweet-message">Happy New Year, my love! 💖 </div>
@@ -420,6 +442,10 @@
     <!-- Surprise Button -->
     <button class="surprise-button" onclick="showSurprise()">Click for a Surprise!</button>
 
+    <!-- Surprise message -->
+    <div class="surprise-message" id="surpriseMessage">
+        
+    </div>
 
     <script>
         // Function to show the surprise message and open a new page
@@ -432,3 +458,4 @@
     </script>
 </body>
 </html>
+     
