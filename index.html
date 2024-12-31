@@ -426,9 +426,12 @@
     </div>
 
     <script>
+        // Function to show the surprise message and open a new page
         function showSurprise() {
-            const surpriseMessage = document.getElementById('surprise-message');
-            surpriseMessage.style.display = 'block';
+            document.getElementById('surpriseMessage').style.display = 'block'; // Show surprise message
+            setTimeout(function() {
+                window.location.href = "video.html"; // Replace with your
+            }, 3000); // Wait 3 seconds before redirecting
         }
     </script>
 </body>
