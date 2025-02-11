@@ -1,461 +1,155 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy New Year 2023</title>
+    <title>Birthday Invitation</title>
     <style>
-        @import url('https://fonts.googleapis.com/css?family=Montserrat:700|Pacifico');
-        
-        *, *:after, *:before {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-transition: all 100ms ease-in;
-            transition: all 100ms ease-in;
-        }
-        html {
-            background: #222048;
-        }
-        .feliz {
-            width: 100%;
-            font-family: 'Pacifico', cursive;
-            font-size: 100px;
-            font-weight: 700;
-            color: #f48fb1;
+        body {
+            font-family: Arial, sans-serif;
+            background: #ffccff;
             text-align: center;
-            position: absolute;
-            top: 50%;
-            opacity: 0;
-            animation: vem_feliz 2s ease-in-out 7s forwards;
-        }
-        .ano_novo {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
+            padding: 50px;
             overflow: hidden;
-            padding: 200px 100px 0px 0px;
+            position: relative;
         }
-        .ano_novo > span {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 175px;
-            font-weight: 700;
-            color: #7a8fe8;
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            margin: auto;
+            transition: transform 0.3s;
+            position: relative;
+            z-index: 2;
         }
-        span.seis {
-            position: absolute;
-            top: 50%;
-            right: 50%;
-            margin-right: -210px;
-            animation: vai_2016 5s ease-in-out 5s forwards;
+        .card:hover {
+            transform: scale(1.05);
         }
-        span.sete {
-            position: absolute;
-            right: 0%;
-            margin-right: -237px;
-            animation: vem_2017 6s ease-in-out forwards;
+        h1 {
+            color: #ff4081;
         }
-        span.sete:before {
-            content: '';
-            width: 0px;
-            height: 6px;
-            display: block;
-            border-radius: 3px;
-            background: #7a8fe8;
-            transform: rotate(0deg);
-            transform-origin: left top;
-            position: absolute;
-            top: 55px;
-            left: 10px;
-            z-index: -1;
-            animation: entrega_balao 1s ease-in-out 4s;
+        .details {
+            display: none;
+            margin-top: 10px;
+            color: #333;
         }
-        .balao {
-            width: 100px;
-            height: 100px;
-            display: block;
-            background: #e8d57a;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            margin-top: -165px;
-            right: 0%;
-            margin-right: -200px;
-            animation: vem_e_vai_balao 10s ease-in-out forwards;
-        }
-        .balao:before {
-            content: '';
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 0 10px 20px 10px;
-            border-color: transparent transparent #b19b32 transparent;
-            position: absolute;
-            left: 50%;
-            margin-left: -10px;
-            bottom: -10px;
-            z-index: -1;
-        }
-        .balao:after {
-            content: '';
-            width: 4px;
-            height: 100px;
-            display: block;
-            background: #fff;
-            border-radius: 0px 0px 3px 3px;
-            position: absolute;
-            left: 50%;
-            margin-left: -2px;
-            bottom: -110px;
-        }
-        .fogos {
-            width: 100%;
-            height: 100%;
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            overflow: hidden;
-        }
-        .fogos > div {
-            border: 2px solid #fff;
-            position: absolute;
-            opacity: 0;
-            animation: solta_fogos 1.5s ease-in-out 8s forwards;
-        }
-        .fogos > div.f1 {
-            left: 20%;
-            top: 40%;
-        }
-        .fogos > div.f2 {
-            left: 15%;
-            top: 70%;
-        }
-        .fogos > div.f3 {
-            right: 20%;
-            top: 40%;
-        }
-        .fogos > div.f4 {
-            right: 15%;
-            top: 70%;
-        }
-        .fogos > div span {
-            width: 6px;
-            height: 6px;
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            animation: estoura_fogos 0.5s ease-in-out 9s forwards;
-        }
-        .fogos > div span:nth-child(1) {
-            transform: rotate(0deg);
-        }
-        .fogos > div span:nth-child(2) {
-            transform: rotate(120deg);
-        }
-        .fogos > div span:nth-child(3) {
-            transform: rotate(240deg);
-        }
-        .fogos > div span:before {
-            content: '';
-            width: 2px;
-            height: 50px;
-            display: block;
-            background: #f5cc06;
-            position: absolute;
-            top: -60px;
-            left: 2px;
-        }
-        .fogos > div span:after {
-            content: '';
-            width: 2px;
-            height: 50px;
-            display: block;
-            background: #f5cc06;
-            position: absolute;
-            bottom: -60px;
-            left: 2px;
-        }
-        .fogos > div span i:before {
-            content: '';
-            width: 3px;
-            height: 3px;
-            display: block;
-            border-radius: 50%;
-            background: #fff;
-            position: absolute;
-            top: -15px;
-            left: 10px;
-        }
-        .fogos > div span i:after {
-            content: '';
-            width: 3px;
-            height: 3px;
-            display: block;
-            border-radius: 50%;
-            background: #fff;
-            position: absolute;
-            top: -15px;
-            right: 10px;
-        }
-        a.author {
-            font-size: 12px;
-            text-decoration: none;
-            color: #f47c7c;
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-        }
-
-        .photo-frame {
-            width: 200px;
-            height: 200px;
-            border: 10px solid #fff;
-            position: absolute;
-            background: #e8d57a;
-            background-size: cover;
-            background-position: center;
-        }
-        .frame1 {
-            top: 20px;
-            left: 20px;
-            background-image: url('https://via.placeholder.com/200');
-        }
-        .frame2 {
-            bottom: 20px;
-            right: 20px;
-            background-image: url('https://via.placeholder.com/200');
-        }
-
-        /* Sweet message */
-        .sweet-message {
-            position: absolute;
-            top: 110%;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'Montserrat', sans-serif;
-            font-size: 20px;
-            color: #fff;
-            text-align: center;
-            opacity: 0;
-            animation: show_message 3s ease-in-out 12s forwards;
-        }
-
-        /* Surprise Button */
-        .surprise-button {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 24px;
-            padding: 15px 30px;
-            background-color: #f48fb1;
-            color: #fff;
+        .show-btn, .map-btn {
+            background: #ff4081;
+            color: white;
             border: none;
+            padding: 10px;
             border-radius: 5px;
             cursor: pointer;
+            margin-top: 10px;
+            display: block;
+            text-decoration: none;
+            width: 80%;
+            margin: auto;
+        }
+        .show-btn:hover, .map-btn:hover {
+            background: #e91e63;
+        }
+        .balloon {
+            width: 50px;
+            height: 70px;
+            background: red;
+            border-radius: 50%;
             position: absolute;
-            top: 80%;
-            left: 50%;
-            transform: translateX(-50%);
-            transition: background-color 0.3s;
+            animation: float 4s infinite ease-in-out;
         }
-
-        .surprise-button:hover {
-            background-color: #f06292;
+        @keyframes float {
+            0% { transform: translateY(100vh); opacity: 1; }
+            100% { transform: translateY(-10vh); opacity: 0; }
         }
-
-        /* Surprise message */
-        .surprise-message {
+        .firework {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: 'Montserrat', sans-serif;
-            font-size: 24px;
-            color: #fff;
-            display: none;
-            text-align: center;
+            width: 10px;
+            height: 10px;
+            background: gold;
+            border-radius: 50%;
+            animation: explode 1.5s infinite;
         }
-
-        @keyframes show_message {
-            0% {
-                opacity: 0;
-                top: 60%;
-            }
-            100% {
-                opacity: 1;
-                top: 70%;
-            }
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(5); opacity: 0; }
         }
-
-        @keyframes vem_2017 {
-            0% {
-                right: 0%;
-            }
-            66.6666% {
-                right: 50%;
-                margin-right: -300px;
-            }
-            90% {
-                right: 50%;
-                margin-right: -300px;
-            }
-            100% {
-                right: 50%;
-            }
+        .flower {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: pink;
+            border-radius: 50%;
+            animation: bloom 3s infinite;
         }
-        @keyframes vem_e_vai_balao {
-            0% {
-                right: 0%;
-            }
-            40% {
-                right: 50%;
-                margin-right: -300px;
-            }
-            50% {
-                right: 50%;
-                margin-right: -200px;
-                top: 50%;
-            }
-            100% {
-                top: -100%;
-                right: 50%;
-            }
+        @keyframes bloom {
+            0% { transform: scale(0.5); opacity: 0.5; }
+            50% { transform: scale(1.5); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
         }
-        @keyframes entrega_balao {
-            0% {
-                transform: rotate(-30deg);
-                width: 40px;
-            }
-            100% {
-                transform: rotate(-150deg);
-                width: 70px;
-            }
+        .flower.left {
+            left: 5px;
+            animation-delay: 0.5s;
         }
-        @keyframes vai_2016 {
-            0% {
-                top: 50%;
-            }
-            100% {
-                top: -100%;
-            }
-        }
-        @keyframes vem_feliz {
-            0% {
-                margin-top: 0px;
-                opacity: 0;
-            }
-            100% {
-                margin-top: -200px;
-                opacity: 1;
-            }
-        }
-        @keyframes solta_fogos {
-            0% {
-                margin-top: 100%;
-                opacity: 0;
-                width: 2px;
-                height: 30px;
-                display: block;
-                border-radius: 50%;
-            }
-            75% {
-                margin-top: 0%;
-                opacity: 1;
-                width: 2px;
-                height: 30px;
-                display: block;
-                border-radius: 50%;
-            }
-            80% {
-                margin-top: 0px;
-                margin-left: 0px;
-                opacity: 1;
-                width: 10px;
-                height: 10px;
-                display: block;
-                border-radius: 50%;
-                transform: scale(0.2);
-            }
-            100% {
-                opacity: 1;
-                width: 10px;
-                height: 10px;
-                display: block;
-                border-radius: 50%;
-                transform: scale(1);
-            }
-        }
-        @keyframes estoura_fogos {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
+        .flower.right {
+            right: 5px;
+            animation-delay: 1s;
         }
     </style>
 </head>
 <body>
-    <div class="feliz">Happy new year my love </div>
-    <div class="ano_novo">
-        <span>202</span>
-        <span class="seis">4</span>
-        <span class="sete">5</span>
-        <div class="balao"></div>
-    </div>
-    <div class="fogos">
-        <div class="f1">
-            <span><i></i></span>
-            <span><i></i></span>
-            <span><i></i></span>
-        </div>
-        <div class="f2">
-            <span><i></i></span>
-            <span><i></i></span>
-            <span><i></i></span>
-        </div>
-        <div class="f3">
-            <span><i></i></span>
-            <span><i></i></span>
-            <span><i></i></span>
-        </div>
-        <div class="f4">
-            <span><i></i></span>
-            <span><i></i></span>
-            <span><i></i></span>
-        </div>
-    </div>
-   
-
-    <!-- Sweet message -->
-    <div class="sweet-message">Happy New Year, my love! 💖 </div>
-
-    <!-- Surprise Button -->
-    <button class="surprise-button" onclick="showSurprise()">Click for a Surprise!</button>
-
-    <!-- Surprise message -->
-    <div class="surprise-message" id="surpriseMessage">
-        
-    </div>
-
     <script>
-        // Function to show the surprise message and open a new page
-        function showSurprise() {
-            document.getElementById('surpriseMessage').style.display = 'block'; // Show surprise message
-            setTimeout(function() {
-                window.location.href = "video.html"; // Replace with your
-            }, 3000); // Wait 3 seconds before redirecting
+        function createBalloons(num) {
+            for (let i = 0; i < num; i++) {
+                let balloon = document.createElement("div");
+                balloon.classList.add("balloon");
+                balloon.style.left = Math.random() * 100 + "vw";
+                balloon.style.background = `hsl(${Math.random() * 360}, 100%, 60%)`;
+                balloon.style.animationDuration = (3 + Math.random() * 2) + "s";
+                document.body.appendChild(balloon);
+            }
+        }
+        function createFireworks(num) {
+            for (let i = 0; i < num; i++) {
+                let firework = document.createElement("div");
+                firework.classList.add("firework");
+                firework.style.left = Math.random() * 100 + "vw";
+                firework.style.top = Math.random() * 50 + "vh";
+                firework.style.animationDelay = Math.random() * 2 + "s";
+                document.body.appendChild(firework);
+            }
+        }
+        function createFlowers(num) {
+            for (let i = 0; i < num; i++) {
+                let flower = document.createElement("div");
+                flower.classList.add("flower");
+                flower.classList.add(i % 2 === 0 ? "left" : "right");
+                flower.style.top = (i * 10 + 5) + "vh";
+                document.body.appendChild(flower);
+            }
+        }
+        createBalloons(20);
+        createFireworks(10);
+        createFlowers(15);
+    </script>
+    <div class="card">
+        <h1>You're Invited!</h1>
+        <p>Join us to celebrate a special birthday!</p>
+        <button class="show-btn" onclick="showDetails()">View Details</button>
+        <div class="details" id="details">
+            <p><strong>Date:</strong> 21st February 2025</p>
+            <p><strong>Time:</strong> 6:00 PM</p>
+            <p><strong>Venue:</strong> Kerala Bakery, BERHAMPUR</p>
+            <p><strong>Location:</strong> Near Neelakanthanagar, Berhampur</p>
+            <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&destination=Kerala+Bakery+Cafe,Berhampur" target="_blank">Open in Google Maps</a>
+        </div>
+    </div>
+    <script>
+        function showDetails() {
+            document.getElementById('details').style.display = 'block';
         }
     </script>
 </body>
 </html>
-     
+
