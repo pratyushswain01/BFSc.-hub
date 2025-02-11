@@ -9,7 +9,13 @@
             font-family: Arial, sans-serif;
             background: #ffccff;
             text-align: center;
-            padding: 50px;
+            padding: 0;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
             overflow: hidden;
             position: relative;
         }
@@ -18,9 +24,10 @@
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 400px;
-            margin: auto;
+            width: 90%;
+            max-width: 400px;
             transition: transform 0.3s;
+            text-align: center;
             position: relative;
             z-index: 2;
         }
@@ -35,7 +42,7 @@
             margin-top: 10px;
             color: #333;
         }
-        .show-btn, .map-btn {
+        .show-btn, .map-btn, .photo-btn {
             background: #ff4081;
             color: white;
             border: none;
@@ -48,7 +55,7 @@
             width: 80%;
             margin: auto;
         }
-        .show-btn:hover, .map-btn:hover {
+        .show-btn:hover, .map-btn:hover, .photo-btn:hover {
             background: #e91e63;
         }
         .balloon {
@@ -75,27 +82,6 @@
             0% { transform: scale(1); opacity: 1; }
             100% { transform: scale(5); opacity: 0; }
         }
-        .flower {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background: pink;
-            border-radius: 50%;
-            animation: bloom 3s infinite;
-        }
-        @keyframes bloom {
-            0% { transform: scale(0.5); opacity: 0.5; }
-            50% { transform: scale(1.5); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.8; }
-        }
-        .flower.left {
-            left: 5px;
-            animation-delay: 0.5s;
-        }
-        .flower.right {
-            right: 5px;
-            animation-delay: 1s;
-        }
     </style>
 </head>
 <body>
@@ -120,18 +106,8 @@
                 document.body.appendChild(firework);
             }
         }
-        function createFlowers(num) {
-            for (let i = 0; i < num; i++) {
-                let flower = document.createElement("div");
-                flower.classList.add("flower");
-                flower.classList.add(i % 2 === 0 ? "left" : "right");
-                flower.style.top = (i * 10 + 5) + "vh";
-                document.body.appendChild(flower);
-            }
-        }
         createBalloons(20);
         createFireworks(10);
-        createFlowers(15);
     </script>
     <div class="card">
         <h1>You're Invited!</h1>
@@ -143,6 +119,7 @@
             <p><strong>Venue:</strong> Kerala Bakery, BERHAMPUR</p>
             <p><strong>Location:</strong> Near Neelakanthanagar, Berhampur</p>
             <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&destination=Kerala+Bakery+Cafe,Berhampur" target="_blank">Open in Google Maps</a>
+            <a class="photo-btn" href="photo.html">View Photos</a>
         </div>
     </div>
     <script>
@@ -152,5 +129,3 @@
     </script>
 </body>
 </html>
-
-
