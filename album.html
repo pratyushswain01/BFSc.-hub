@@ -1,137 +1,94 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy New Year 2025 My Sweetheart</title>
+    <title>Birthday Album</title>
     <style>
-        /* General Body Styling */
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #222048;
-            color: white;
-            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #ffccff;
+            text-align: center;
             padding: 0;
+            margin: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
             flex-direction: column;
-            position: relative;
         }
-
-        /* Title Message Styling */
-        .title-message {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 48px;
-            font-weight: 700;
-            text-align: center;
-            color: #f48fb1;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Video Styling */
-        .video-container {
-            position: relative;
-            width: 80%;
-            max-width: 1000px;
-            margin: 0 auto;
+        .album-box {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
             border-radius: 15px;
-            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            border: 5px solid #ff4081;
         }
-
-        /* Sweetheart Message Styling */
-        .sweetheart-message {
-            font-family: 'Montserrat', sans-serif;
+        .countdown {
             font-size: 24px;
-            color: #fff;
-            text-align: center;
+            font-weight: bold;
+            color: #e91e63;
             margin-top: 20px;
-            max-width: 600px;
-            margin-bottom: 50px;
-            opacity: 0;
-            animation: fadeIn 3s forwards 2s;
         }
-
-        /* Animation for Sweetheart Message */
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
+        .qr-box {
+            margin-top: 20px;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 170px;
+            border: 2px solid #ff4081;
         }
-
-        /* Responsive Video */
-        video {
-            width: 100%;
-            height: 100%;
-            border-radius: 15px;
+        .qr-box img {
+            width: 150px;
         }
-
-        /* Author Link */
-        .author-link {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            font-size: 12px;
-            color: #f48fb1;
+        .qr-box p {
+            font-size: 14px;
+            color: #333;
+            margin-top: 10px;
+        }
+        .qr-box a {
             text-decoration: none;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            color: #e91e63;
+            font-weight: bold;
         }
-
-        .author-link:hover {
-            color: #f06292;
-        }
-
-        /* Button Styling */
-        .btn-see-more {
-            padding: 10px 20px;
-            background-color: #f48fb1;
-            color: white;
-            font-size: 18px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-top: 20px;
-        }
-
-        .btn-see-more:hover {
-            background-color: #f06292;
-        }
-
     </style>
 </head>
 <body>
-
-    <!-- Title Message -->
-    <div class="title-message">
-        Happy New Year 2025, My Sweetheart!
+    <div class="album-box">
+        <h2>Pratyush's Special Birthday Countdown</h2>
+        <p>The album section will be available on <strong>22nd February 2025</strong>.</p>
+        <div class="countdown" id="countdown"></div>
     </div>
-
-    <!-- Video Section -->
-    <div class="video-container">
-        <video controls autoplay>
-            <source src="my love.mp4" type="video/mp4"> <!-- Replace with your video file -->
-        </video>
+    <div class="qr-box">
+        <img src="qr-code.png" alt="QR Code">
+        <p>The album will be available in Google Drive format.<br>Scan the QR code or <a href="#">click here</a>.</p>
     </div>
-
-    <!-- Sweetheart Message -->
-    <div class="sweetheart-message">
-        My love, as we step into the new year together, I am filled with joy and gratitude for having you by my side. I can't wait to create more memories with you in 2025. Happy New Year to the love of my life! 💖
-    </div>
-
-  
-
-
-
-    <!-- Author Link (optional) -->
-    <a href="#" class="author-link">Made with love by peu</a>
-
+    <script>
+        function updateCountdown() {
+            const birthday = new Date("Feb 21, 2025 00:00:00").getTime();
+            const now = new Date().getTime();
+            const distance = birthday - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            
+            if (distance < 0) {
+                document.getElementById("countdown").innerHTML = "Happy Birthday, Pratyush! 🎉";
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 </body>
 </html>
