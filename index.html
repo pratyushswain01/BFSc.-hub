@@ -3,454 +3,360 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>For My Beloved ❤️</title>
+<title>My Forever Love ❤️</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Parisienne&display=swap');
 
   /* Reset */
   * {
-    margin: 0; padding: 0;
-    box-sizing: border-box;
+    margin: 0; padding: 0; box-sizing: border-box;
   }
   html, body {
     height: 100%;
     overflow: hidden;
-    font-family: 'Montserrat', sans-serif;
-    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-    color: #f7e8e8;
-    user-select: none;
-  }
-  body {
-    max-width: 350px;
-    max-height: 600px;
-    margin: auto;
-    position: relative;
-    overflow: hidden;
-    padding: 1rem 1.2rem;
+    font-family: 'Parisienne', cursive;
+    background: linear-gradient(-45deg, #ffafbd, #ffc3a0, #ffdde1, #fecdca);
+    background-size: 400% 400%;
+    animation: gradientBG 20s ease infinite;
+    color: #7a1c1c;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
   }
 
-  /* Stars */
-  #stars, #stars2, #stars3 {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    display: block;
-    top: 0; left: 0;
-    right: 0; bottom: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-  #stars {
-    background: transparent url('https://cdn.pixabay.com/photo/2013/07/12/19/32/star-153660_960_720.png') repeat;
-    background-size: 20px 20px;
-    animation: moveStars 100s linear infinite;
-    opacity: 0.5;
-  }
-  #stars2 {
-    background: transparent url('https://cdn.pixabay.com/photo/2013/07/12/19/32/star-153667_960_720.png') repeat;
-    background-size: 50px 50px;
-    animation: moveStars 150s linear infinite;
-    opacity: 0.3;
-  }
-  #stars3 {
-    background: transparent url('https://cdn.pixabay.com/photo/2013/07/12/19/32/star-153659_960_720.png') repeat;
-    background-size: 100px 100px;
-    animation: moveStars 200s linear infinite;
-    opacity: 0.2;
-  }
-  @keyframes moveStars {
-    from {background-position: 0 0;}
-    to {background-position: -10000px 5000px;}
+  @keyframes gradientBG {
+    0% {background-position:0% 50%;}
+    50% {background-position:100% 50%;}
+    100% {background-position:0% 50%;}
   }
 
-  /* Moon */
-  #moon {
-    position: fixed;
-    top: 3rem;
-    right: 3rem;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #eef4f9, #abb8c3 60%);
-    box-shadow:
-      20px 10px 10px rgba(255, 255, 255, 0.15),
-      inset -10px -10px 20px rgba(200, 200, 210, 0.6),
-      inset 12px 12px 15px rgba(255, 255, 255, 0.75);
-    filter: drop-shadow(0 0 6px #dae3f3);
-    animation: moonGlow 6s ease-in-out infinite;
-  }
-  @keyframes moonGlow {
-    0%, 100% { filter: drop-shadow(0 0 4px #dae3f3);}
-    50% { filter: drop-shadow(0 0 10px #a5b8cc);}
-  }
-
-  /* Floating petals */
-  .petal {
-    position: fixed;
-    width: 14px;
-    height: 14px;
-    background: radial-gradient(ellipse at center, #ffadc3, #da0a2d);
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    opacity: 0.85;
-    animation-timing-function: ease-in-out;
-    filter: drop-shadow(0 0 3px #e83b64);
-  }
-
-  /* Container for main content with subtle parallax */
-  #main-content {
+  .container {
     position: relative;
-    z-index: 10;
-    max-width: 320px;
-    backdrop-filter: blur(5px);
-    background: rgba(31, 19, 32, 0.3);
-    border-radius: 25px;
-    padding: 20px 25px 25px 25px;
-    box-shadow: 0 0 20px rgba(255, 105, 135, 0.5);
+    width: 350px;
+    max-width: 95vw;
+    height: 600px;
+    background: rgba(255 255 255 / 0.8);
+    border-radius: 30px;
+    box-shadow:
+      0 0 30px rgba(255, 105, 180, 0.6),
+      inset 0 0 40px rgba(255, 182, 193, 0.4);
+    padding: 30px 25px 25px;
+    text-align: center;
+    overflow: hidden;
+    user-select: none;
   }
 
   h1 {
     font-family: 'Great Vibes', cursive;
-    font-size: 3.4rem;
-    font-weight: 400;
-    color: #ff7197;
+    font-size: 3.8rem;
+    margin-bottom: 10px;
+    color: #d63f5d;
     text-shadow:
-      0 0 8px #ff7197,
-      0 0 20px #ff3366,
-      0 0 30px #ff3366;
-    margin-bottom: 0.3rem;
-    user-select: none;
-  }
-  h2 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2.2rem;
-    color: #ffc0cbcc;
-    margin-bottom: 1.1rem;
-    user-select: none;
-  }
-  p.message {
-    font-size: 1.2rem;
-    color: #f7d1db;
-    font-style: italic;
-    line-height: 1.7;
-    letter-spacing: 0.02em;
-    user-select: none;
-    text-shadow: 0 0 6px #ff6699aa;
+      0 0 10px #ff4a75,
+      0 0 30px #ff4a75,
+      0 0 40px #ff3673,
+      0 0 60px #ff3673;
+    animation: pulseGlow 3s ease-in-out infinite alternate;
   }
 
-  /* Buttons container */
-  #buttons-container {
-    margin-top: 1.8rem;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-  }
-
-  /* Buttons */
-  button {
-    background: linear-gradient(135deg, #ff5f7e, #ff9aa2);
-    border: none;
-    padding: 0.8rem 2.2rem;
-    font-size: 1.15rem;
-    color: #fff;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow:
-      0 4px 12px #ff5f7e88,
-      0 0 30px #ff6a7c;
-    transition: transform 0.3s, box-shadow 0.3s;
-    user-select: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  button:hover {
-    transform: scale(1.07);
-    box-shadow: 0 6px 20px #ff6a7cdd;
-  }
-  button:active {
-    transform: scale(0.95);
-    box-shadow: 0 3px 12px #ff4a5aaa;
-  }
-  .icon {
-    font-size: 1.3rem;
-    line-height: 1;
-  }
-
-  /* Surprise modal */
-  #surpriseModal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 90%;
-    max-width: 320px;
-    background: linear-gradient(135deg, #ffcedd 0%, #ff9aae 100%);
-    padding: 1.8rem 2rem;
-    border-radius: 25px;
-    box-shadow: 0 0 40px #ff4d7ccc;
-    transform: translate(-50%, -50%) scale(0.8);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    z-index: 9999;
-    text-align: center;
-    font-family: 'Great Vibes', cursive;
-    color: #550020;
-  }
-  #surpriseModal.show {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  #surpriseModal p {
-    font-size: 1.6rem;
-    margin-bottom: 1.2rem;
-    user-select: none;
-  }
-  #closeModal {
-    background: #ff5f7e;
-    border: none;
-    color: #fff;
-    font-size: 1.1rem;
-    padding: 0.6rem 1.8rem;
-    border-radius: 30px;
-    cursor: pointer;
-    box-shadow: 0 4px 20px #d63556aa;
-    transition: background 0.3s;
-    user-select: none;
-  }
-  #closeModal:hover {
-    background: #ff4461;
-  }
-
-  /* Confetti */
-  .confetti {
-    position: fixed;
-    width: 8px;
-    height: 14px;
-    background-color: #ff6699;
-    opacity: 0.9;
-    z-index: 10000;
-    pointer-events: none;
-    transform-origin: center;
-    animation: confetti-fall linear forwards;
-    border-radius: 2px;
-  }
-  @keyframes confetti-fall {
+  @keyframes pulseGlow {
     0% {
-      opacity: 1;
-      transform: rotate(0deg) translateY(0) translateX(0);
+      text-shadow:
+        0 0 5px #ff5a92,
+        0 0 20px #ff5a92,
+        0 0 30px #ff3673,
+        0 0 50px #ff3673;
     }
     100% {
-      opacity: 0;
-      transform: rotate(720deg) translateY(600px) translateX(100px);
+      text-shadow:
+        0 0 20px #ff0011,
+        0 0 40px #ff0044,
+        0 0 60px #ff0066,
+        0 0 80px #ff0088;
     }
   }
 
-  /* Responsive */
-  @media (max-width: 360px) {
-    body {
-      padding: 0.8rem 0.5rem;
+  p.subtitle {
+    font-size: 1.25rem;
+    color: #a82a3d;
+    font-weight: 600;
+    margin-bottom: 25px;
+    letter-spacing: 0.03em;
+  }
+
+  .message {
+    font-size: 1.15rem;
+    font-family: 'Parisienne', cursive;
+    font-style: italic;
+    color: #7a1c1c;
+    text-shadow: 0 0 6px #f3a6b5;
+    margin: 15px auto 10px;
+    max-width: 90%;
+    line-height: 1.5;
+  }
+
+  footer {
+    margin-top: auto;
+    font-family: 'Parisienne', cursive;
+    font-size: 1.1rem;
+    color: #9c2033;
+    user-select: none;
+    text-shadow: 0 0 10px #bf365a;
+  }
+
+  /* Floating hearts animation layers */
+  .hearts, .small-hearts {
+    position: absolute;
+    pointer-events: none;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .heart {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-color: #ff3e6c;
+    transform: rotate(-45deg);
+    animation: floatUp linear infinite;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 2px #ff2c55);
+    will-change: transform;
+  }
+  .heart:before, .heart:after {
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-color: #ff3e6c;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 2px #ff2c55);
+  }
+  .heart:before {
+    top: -12px;
+    left: 0;
+  }
+  .heart:after {
+    left: 12px;
+    top: 0;
+  }
+
+  .small-heart {
+    width: 12px;
+    height: 12px;
+    background-color: #ff7ba9;
+    transform: rotate(-45deg);
+    animation: floatUpSlow linear infinite;
+    opacity: 0.7;
+    filter: drop-shadow(0 0 1.5px #ff5a8c);
+  }
+  .small-heart:before, .small-heart:after {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: #ff7ba9;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 1.5px #ff5a8c);
+  }
+  .small-heart:before {
+    top: -6px;
+    left: 0;
+  }
+  .small-heart:after {
+    left: 6px;
+    top: 0;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) rotate(-45deg) scale(1);
+      opacity: 0.9;
+    }
+    100% {
+      transform: translateY(-620px) rotate(-45deg) scale(1.1);
+      opacity: 0;
+    }
+  }
+
+  @keyframes floatUpSlow {
+    0% {
+      transform: translateY(0) rotate(-45deg) scale(0.85);
+      opacity: 0.6;
+    }
+    100% {
+      transform: translateY(-600px) rotate(-45deg) scale(0.75);
+      opacity: 0;
+    }
+  }
+
+  /* Confetti hearts falling */
+  .confetti-heart {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: #ff2244;
+    opacity: 0.85;
+    transform: rotate(-45deg);
+    border-radius: 0;
+    animation-name: confettiFall;
+    animation-timing-function: ease-in;
+    animation-iteration-count: infinite;
+    filter: drop-shadow(0 0 2px #ff1122);
+    will-change: transform;
+  }
+  .confetti-heart:before, .confetti-heart:after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: #ff2244;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 2px #ff1122);
+  }
+  .confetti-heart:before {
+    top: -7px;
+    left: 0;
+  }
+  .confetti-heart:after {
+    left: 7px;
+    top: 0;
+  }
+
+  @keyframes confettiFall {
+    0% {
+      transform: translateY(-20px) translateX(0) rotate(-45deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(620px) translateX(30px) rotate(0deg);
+      opacity: 0;
+    }
+  }
+
+  /* Glow pulse for footer */
+  footer {
+    animation: footerGlow 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes footerGlow {
+    0% {
+      text-shadow: 0 0 6px #c04848, 0 0 12px #f43b5e;
+    }
+    100% {
+      text-shadow: 0 0 12px #eb3a5a, 0 0 18px #f76a83;
+    }
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 400px) {
+    .container {
+      width: 95vw;
+      height: 95vh;
+      padding: 25px 15px 20px 15px;
     }
     h1 {
-      font-size: 2.6rem;
+      font-size: 3rem;
     }
-    h2 {
-      font-size: 1.8rem;
-    }
-    p.message {
-      font-size: 1.1rem;
-    }
-    button {
+    p.subtitle {
       font-size: 1rem;
-      padding: 0.7rem 1.8rem;
     }
-    #surpriseModal p {
-      font-size: 1.3rem;
+    .message {
+      font-size: 1rem;
+      max-width: 95%;
     }
   }
 </style>
 </head>
 <body>
+  <div class="container" role="main" aria-label="Romantic message for my wife">
+    <h1>My Forever Love ❤️</h1>
+    <p class="subtitle">You are my heart's sweetest song, my soul's eternal flame.</p>
+    <p class="message" aria-live="polite">
+      In every beat of my heart, I find your name — endless, enchanting, and divine. 
+      You color my world with love’s most beautiful hues, and in your smile, I discover my home.
+      You are my forever, my always, my everything.
+    </p>
+    <footer>With all my love, now and forevermore 💖</footer>
 
-<!-- Star background layers -->
-<div id="stars" aria-hidden="true"></div>
-<div id="stars2" aria-hidden="true"></div>
-<div id="stars3" aria-hidden="true"></div>
-
-<!-- Moon -->
-<div id="moon" aria-hidden="true"></div>
-
-<!-- Main content -->
-<div id="main-content" role="main" aria-label="Romantic message for my beloved wife">
-  <h1>Hello My Love</h1>
-  <h2>You Are My Everything</h2>
-  <p class="message">
-    Like the stars shine in the night sky, <br/>
-    and the moon lights up the darkest hours, <br/>
-    your love brightens my life with endless happiness.<br/><br/>
-    Forever and always, <br/>
-    I cherish you from the deepest core of my heart.
-  </p>
-  <div id="buttons-container">
-    <button id="surpriseBtn" aria-haspopup="dialog" aria-controls="surpriseModal" aria-expanded="false" title="Open surprise message">
-      <span class="icon">🎁</span> Open Your Surprise
-    </button>
-    <button id="musicToggleBtn" aria-pressed="false" title="Toggle romantic music">
-      <span id="musicIcon" class="icon">🔈</span> Play Music
-    </button>
+    <div class="hearts" aria-hidden="true"></div>
+    <div class="small-hearts" aria-hidden="true"></div>
+    <div class="confetti" aria-hidden="true"></div>
   </div>
-</div>
 
-<!-- Surprise modal -->
-<div id="surpriseModal" role="dialog" aria-modal="true" aria-labelledby="surpriseTitle" aria-describedby="surpriseDesc">
-  <p id="surpriseDesc">My dearest, you are my heart's home. I love you beyond words. 💖</p>
-  <button id="closeModal" aria-label="Close surprise message">Close</button>
-</div>
+  <audio id="backgroundSong" autoplay loop muted preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_684f5bc67a.mp3?filename=romantic-piano-9514.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
 
 <script>
-  // Floating petals
-  const petalsCount = 20;
-  const petals = [];
-  function random(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-  for (let i=0; i < petalsCount; i++) {
-    const petal = document.createElement('div');
-    petal.classList.add('petal');
-    document.body.appendChild(petal);
-    resetPetal(petal);
-    petals.push(petal);
-  }
-  function resetPetal(petal) {
-    petal.style.left = `${random(0, window.innerWidth - 20)}px`;
-    petal.style.top = `${random(-600, 0)}px`;
-    petal.style.animationDuration = `${random(6, 15)}s`;
-    petal.style.animationName = `petalFloat${Math.ceil(random(1, 2))}`;
-    petal.style.opacity = random(0.5, 0.9);
-    petal.style.width = `${random(12, 18)}px`;
-    petal.style.height = petal.style.width;
-  }
-  function animatePetals() {
-    petals.forEach(petal => {
-      let top = parseFloat(petal.style.top);
-      top += 1 + Math.random() * 1.7;
-      if (top > window.innerHeight) resetPetal(petal);
-      else petal.style.top = top + 'px';
-    });
-    requestAnimationFrame(animatePetals);
-  }
-  animatePetals();
+  const heartsContainer = document.querySelector('.hearts');
+  const smallHeartsContainer = document.querySelector('.small-hearts');
+  const confettiContainer = document.querySelector('.confetti');
+  const containerWidth = 350;
+  const containerHeight = 600;
 
-  // Surprise Modal and button
-  const surpriseBtn = document.getElementById('surpriseBtn');
-  const surpriseModal = document.getElementById('surpriseModal');
-  const closeModalBtn = document.getElementById('closeModal');
+  // Generate big hearts floating up
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = (Math.random() * (containerWidth - 30)) + 'px';
+    heart.style.animationDuration = (5 + Math.random() * 3) + 's';
+    heart.style.opacity = (0.6 + Math.random() * 0.4).toFixed(2);
+    heartsContainer.appendChild(heart);
 
-  function showModal() {
-    surpriseModal.classList.add('show');
-    surpriseBtn.setAttribute('aria-expanded', 'true');
-    createConfettiBurst();
+    setTimeout(() => {
+      heart.remove();
+    }, parseFloat(heart.style.animationDuration) * 1000);
   }
-  function hideModal() {
-    surpriseModal.classList.remove('show');
-    surpriseBtn.setAttribute('aria-expanded', 'false');
-  }
-  surpriseBtn.addEventListener('click', showModal);
-  closeModalBtn.addEventListener('click', hideModal);
 
-  // Confetti burst
-  const confettiColors = ['#ff4477', '#f8a1b3', '#ff82a9', '#ff6699', '#ff3366'];
+  // Generate small hearts floating slower
+  function createSmallHeart() {
+    const sHeart = document.createElement('div');
+    sHeart.classList.add('small-heart');
+    sHeart.style.left = (Math.random() * (containerWidth - 15)) + 'px';
+    sHeart.style.animationDuration = (7 + Math.random() * 5) + 's';
+    sHeart.style.opacity = (0.4 + Math.random() * 0.5).toFixed(2);
+    smallHeartsContainer.appendChild(sHeart);
+
+    setTimeout(() => {
+      sHeart.remove();
+    }, parseFloat(sHeart.style.animationDuration) * 1000);
+  }
+
+  // Generate confetti hearts falling diagonally
   function createConfetti() {
-    const confetti = document.createElement('div');
-    confetti.classList.add('confetti');
-    confetti.style.backgroundColor = confettiColors[Math.floor(random(0, confettiColors.length))];
-    confetti.style.left = `${random(50, window.innerWidth - 50)}px`;
-    confetti.style.top = `-10px`;
-    confetti.style.animationDuration = `${random(2, 4)}s`;
-    confetti.style.transform = `rotate(${random(0, 360)}deg)`;
-    document.body.appendChild(confetti);
-    setTimeout(() => confetti.remove(), 4000);
-  }
-  function createConfettiBurst() {
-    for(let i=0; i<30; i++){
-      setTimeout(() => createConfetti(), i*60);
-    }
+    const confettiHeart = document.createElement('div');
+    confettiHeart.classList.add('confetti-heart');
+    confettiHeart.style.left = (Math.random() * (containerWidth - 20)) + 'px';
+    confettiHeart.style.top = '-20px';
+    confettiHeart.style.animationDuration = (6 + Math.random() * 4) + 's';
+    confettiHeart.style.animationDelay = (Math.random() * 5) + 's';
+    confettiContainer.appendChild(confettiHeart);
+
+    setTimeout(() => {
+      confettiHeart.remove();
+    }, (parseFloat(confettiHeart.style.animationDuration) + parseFloat(confettiHeart.style.animationDelay)) * 1000);
   }
 
-  // Piano background
-  const audio = new Audio("https://cdn.pixabay.com/download/audio/2021/11/15/audio_73215a93c5.mp3?filename=romantic-piano-6224.mp3");
-  audio.loop = true;
-  audio.volume = 0.15; // subtle volume
+  setInterval(createHeart, 500);
+  setInterval(createSmallHeart, 600);
+  setInterval(createConfetti, 800);
 
-  // Music toggle button
-  const musicToggleBtn = document.getElementById('musicToggleBtn');
-  const musicIcon = document.getElementById('musicIcon');
-  let musicPlaying = false;
-
-  function playMusic(){
-    audio.play();
-    musicToggleBtn.setAttribute('aria-pressed', 'true');
-    musicToggleBtn.innerHTML = '<span class="icon">🔊</span> Pause Music';
-    musicPlaying = true;
+  // Enable unmute on first user interaction (required by many browsers)
+  const bgMusic = document.getElementById('backgroundSong');
+  function unmuteMusic() {
+    if(bgMusic.muted) {
+      bgMusic.muted = false;
+      window.removeEventListener('click', unmuteMusic);
+      window.removeEventListener('touchstart', unmuteMusic);
+    }
   }
-  function pauseMusic(){
-    audio.pause();
-    musicToggleBtn.setAttribute('aria-pressed', 'false');
-    musicToggleBtn.innerHTML = '<span class="icon">🔈</span> Play Music';
-    musicPlaying = false;
-  }
-  musicToggleBtn.addEventListener('click', () => {
-    if (musicPlaying) {
-      pauseMusic();
-    } else {
-      playMusic();
-    }
-  });
-
-  // Double-click main content toggles music as an easter egg
-  const mainContent = document.getElementById('main-content');
-  mainContent.addEventListener('dblclick', () => {
-    if (!musicPlaying) {
-      playMusic();
-    } else {
-      pauseMusic();
-    }
-  });
-
-  // Accessibility: close modal on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && surpriseModal.classList.contains('show')) {
-      hideModal();
-    }
-  });
-
-  // Petal float animations (different float patterns)
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes petalFloat1 {
-      0% {transform: translateX(0) translateY(0) rotateZ(0);}
-      50% {transform: translateX(15px) translateY(50px) rotateZ(50deg);}
-      100% {transform: translateX(0) translateY(100px) rotateZ(0);}
-    }
-    @keyframes petalFloat2 {
-      0% {transform: translateX(0) translateY(0) rotateZ(0);}
-      50% {transform: translateX(-12px) translateY(60px) rotateZ(-40deg);}
-      100% {transform: translateX(0) translateY(120px) rotateZ(0);}
-    }
-  `;
-  document.head.appendChild(style);
-
-  // Prevent scroll on mobile to keep everything visible
-  window.addEventListener('touchmove', e => {
-    e.preventDefault();
-  }, { passive: false });
+  window.addEventListener('click', unmuteMusic);
+  window.addEventListener('touchstart', unmuteMusic);
 </script>
-
 </body>
 </html>
+
