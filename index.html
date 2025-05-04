@@ -3,196 +3,454 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>Devotion to Radha Krishna - For My Beloved</title>
+<title>For My Beloved ❤️</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Merriweather&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap');
 
   /* Reset */
   * {
-    margin: 0; padding: 0; box-sizing: border-box;
+    margin: 0; padding: 0;
+    box-sizing: border-box;
   }
-
   html, body {
     height: 100%;
     overflow: hidden;
-    background: radial-gradient(circle at center, #0a2e4b 0%, #010d1f 100%);
-    font-family: 'Merriweather', serif;
-    color: #ffe5b4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    color: #f7e8e8;
     user-select: none;
   }
-
-  header {
-    padding: 30px 15px 10px;
-    text-align: center;
-    user-select: text;
-  }
-
-  header h1 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 3.6rem;
-    color: #ffd966;
-    text-shadow: 0 0 18px #ffdd77cc;
-  }
-
-  header h2 {
-    font-style: italic;
-    margin-top: 8px;
-    font-weight: 400;
-    color: #ffeab7cc;
-    font-size: 1.5rem;
-  }
-
-  main {
+  body {
+    max-width: 350px;
+    max-height: 600px;
+    margin: auto;
     position: relative;
-    width: 100vw;
-    max-width: 380px;
-    flex-grow: 1;
     overflow: hidden;
+    padding: 1rem 1.2rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    padding: 0 15px 30px;
+    align-items: center;
+    text-align: center;
   }
 
-  /* Peacock Feather Container */
-  .pankha-container {
-    position: relative;
-    width: 140px;
-    height: 260px;
-    margin-bottom: 30px;
-    filter: drop-shadow(0 0 12px #a9e4ff99);
-    animation: gentleWave 4s ease-in-out infinite;
-    transform-origin: bottom center;
-  }
-
-  /* Feather image style */
-  .pankha-container img {
+  /* Stars */
+  #stars, #stars2, #stars3 {
+    position: fixed;
     width: 100%;
     height: 100%;
-    object-fit: contain;
-    user-select: none;
-  }
-
-  /* Wave animation to simulate pankha moving */
-  @keyframes gentleWave {
-    0%, 100% {
-      transform: rotate(-4deg);
-      filter: drop-shadow(0 0 14px #89cfffcc);
-    }
-    50% {
-      transform: rotate(4deg);
-      filter: drop-shadow(0 0 18px #a9d8ffdd);
-    }
-  }
-
-  /* Glowing halo ring behind feather */
-  .halo {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 180px;
-    height: 280px;
-    background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.35) 20%, transparent 80%);
-    border-radius: 50% / 60%;
-    transform: translate(-50%, -50%);
-    animation: pulseGlow 6s ease-in-out infinite;
-    filter: blur(5px);
+    display: block;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    z-index: 0;
     pointer-events: none;
   }
-  @keyframes pulseGlow {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 0.7; }
+  #stars {
+    background: transparent url('https://cdn.pixabay.com/photo/2013/07/12/19/32/star-153660_960_720.png') repeat;
+    background-size: 20px 20px;
+    animation: moveStars 100s linear infinite;
+    opacity: 0.5;
+  }
+  #stars2 {
+    background: transparent url('https://cdn.pixabay.com/photo/2013/07/12/19/32/star-153667_960_720.png') repeat;
+    background-size: 50px 50px;
+    animation: moveStars 150s linear infinite;
+    opacity: 0.3;
+  }
+  #stars3 {
+    background: transparent url('https://cdn.pixabay.com/photo/2013/07/12/19/32/star-153659_960_720.png') repeat;
+    background-size: 100px 100px;
+    animation: moveStars 200s linear infinite;
+    opacity: 0.2;
+  }
+  @keyframes moveStars {
+    from {background-position: 0 0;}
+    to {background-position: -10000px 5000px;}
   }
 
-  /* Message box */
-  .message-box {
-    background: rgba(255, 215, 0, 0.15);
-    border: 2px solid #fbe8a6cc;
-    border-radius: 18px;
-    padding: 20px 18px;
-    max-width: 94%;
-    font-size: 1.1rem;
-    line-height: 1.5;
-    color: #fff8dc;
-    text-align: center;
-    box-shadow: 0 0 24px #ffd96699 inset;
+  /* Moon */
+  #moon {
+    position: fixed;
+    top: 3rem;
+    right: 3rem;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #eef4f9, #abb8c3 60%);
+    box-shadow:
+      20px 10px 10px rgba(255, 255, 255, 0.15),
+      inset -10px -10px 20px rgba(200, 200, 210, 0.6),
+      inset 12px 12px 15px rgba(255, 255, 255, 0.75);
+    filter: drop-shadow(0 0 6px #dae3f3);
+    animation: moonGlow 6s ease-in-out infinite;
+  }
+  @keyframes moonGlow {
+    0%, 100% { filter: drop-shadow(0 0 4px #dae3f3);}
+    50% { filter: drop-shadow(0 0 10px #a5b8cc);}
   }
 
-  /* Flute icon with glow and animation */
-  .flute-container {
-    margin-top: 25px;
-    width: 64px;
-    height: 64px;
-    filter: drop-shadow(0 0 6px #c2a94dcc);
-    animation: fluteGlow 3s ease-in-out infinite;
+  /* Floating petals */
+  .petal {
+    position: fixed;
+    width: 14px;
+    height: 14px;
+    background: radial-gradient(ellipse at center, #ffadc3, #da0a2d);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    opacity: 0.85;
+    animation-timing-function: ease-in-out;
+    filter: drop-shadow(0 0 3px #e83b64);
+  }
+
+  /* Container for main content with subtle parallax */
+  #main-content {
+    position: relative;
+    z-index: 10;
+    max-width: 320px;
+    backdrop-filter: blur(5px);
+    background: rgba(31, 19, 32, 0.3);
+    border-radius: 25px;
+    padding: 20px 25px 25px 25px;
+    box-shadow: 0 0 20px rgba(255, 105, 135, 0.5);
+  }
+
+  h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3.4rem;
+    font-weight: 400;
+    color: #ff7197;
+    text-shadow:
+      0 0 8px #ff7197,
+      0 0 20px #ff3366,
+      0 0 30px #ff3366;
+    margin-bottom: 0.3rem;
     user-select: none;
   }
+  h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.2rem;
+    color: #ffc0cbcc;
+    margin-bottom: 1.1rem;
+    user-select: none;
+  }
+  p.message {
+    font-size: 1.2rem;
+    color: #f7d1db;
+    font-style: italic;
+    line-height: 1.7;
+    letter-spacing: 0.02em;
+    user-select: none;
+    text-shadow: 0 0 6px #ff6699aa;
+  }
 
-  /* Flute glow animation */
-  @keyframes fluteGlow {
-    0%, 100% { filter: drop-shadow(0 0 6px #c2a94d0); }
-    50% { filter: drop-shadow(0 0 12px #f5e960cc); }
+  /* Buttons container */
+  #buttons-container {
+    margin-top: 1.8rem;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  /* Buttons */
+  button {
+    background: linear-gradient(135deg, #ff5f7e, #ff9aa2);
+    border: none;
+    padding: 0.8rem 2.2rem;
+    font-size: 1.15rem;
+    color: #fff;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow:
+      0 4px 12px #ff5f7e88,
+      0 0 30px #ff6a7c;
+    transition: transform 0.3s, box-shadow 0.3s;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  button:hover {
+    transform: scale(1.07);
+    box-shadow: 0 6px 20px #ff6a7cdd;
+  }
+  button:active {
+    transform: scale(0.95);
+    box-shadow: 0 3px 12px #ff4a5aaa;
+  }
+  .icon {
+    font-size: 1.3rem;
+    line-height: 1;
+  }
+
+  /* Surprise modal */
+  #surpriseModal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    max-width: 320px;
+    background: linear-gradient(135deg, #ffcedd 0%, #ff9aae 100%);
+    padding: 1.8rem 2rem;
+    border-radius: 25px;
+    box-shadow: 0 0 40px #ff4d7ccc;
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    z-index: 9999;
+    text-align: center;
+    font-family: 'Great Vibes', cursive;
+    color: #550020;
+  }
+  #surpriseModal.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  #surpriseModal p {
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+    user-select: none;
+  }
+  #closeModal {
+    background: #ff5f7e;
+    border: none;
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 0.6rem 1.8rem;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px #d63556aa;
+    transition: background 0.3s;
+    user-select: none;
+  }
+  #closeModal:hover {
+    background: #ff4461;
+  }
+
+  /* Confetti */
+  .confetti {
+    position: fixed;
+    width: 8px;
+    height: 14px;
+    background-color: #ff6699;
+    opacity: 0.9;
+    z-index: 10000;
+    pointer-events: none;
+    transform-origin: center;
+    animation: confetti-fall linear forwards;
+    border-radius: 2px;
+  }
+  @keyframes confetti-fall {
+    0% {
+      opacity: 1;
+      transform: rotate(0deg) translateY(0) translateX(0);
+    }
+    100% {
+      opacity: 0;
+      transform: rotate(720deg) translateY(600px) translateX(100px);
+    }
   }
 
   /* Responsive */
-  @media (max-width: 350px) {
-    header h1 {
-      font-size: 2.9rem;
+  @media (max-width: 360px) {
+    body {
+      padding: 0.8rem 0.5rem;
     }
-    header h2 {
-      font-size: 1.3rem;
+    h1 {
+      font-size: 2.6rem;
     }
-    .pankha-container {
-      width: 110px;
-      height: 205px;
-      margin-bottom: 20px;
+    h2 {
+      font-size: 1.8rem;
     }
-    .message-box {
+    p.message {
+      font-size: 1.1rem;
+    }
+    button {
       font-size: 1rem;
-      padding: 16px 14px;
+      padding: 0.7rem 1.8rem;
     }
-    .flute-container {
-      width: 54px;
-      height: 54px;
-      margin-top: 18px;
+    #surpriseModal p {
+      font-size: 1.3rem;
     }
   }
 </style>
 </head>
 <body>
-<header>
-  <h1>Radha Krishna</h1>
-  <h2>My Eternal Devotion and Love for You</h2>
-</header>
-<main>
-  <div class="pankha-container" aria-label="Animated peacock feather mayur pankha">
-    <div class="halo"></div>
-    <img src="https://www.amazon.in/RADHA-KRISHNA-25x45-ADHERSIVE-Poster-without/dp/B0CYX2XPVT" alt="Peacock Feather Animated" />
-  </div>
-  <div class="message-box" aria-label="Devotional love message">
-    <p>Beloved, like Radha's eternal love for Krishna, my devotion and heart belong only to you.<br /><br />
-    May the divine melodies of Krishna's flute fill your soul with peace and joy,<br />
-    and may our love be as timeless and enchanting as their sacred bond.</p>
-  </div>
-  <div class="flute-container" aria-hidden="true" title="Krishna's Flute Icon">
-    <svg height="64" viewBox="0 0 64 64" width="64" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#ffda44" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
-      <rect x="15" y="25" width="34" height="14" rx="4" ry="4" fill="#ffdb4d66"/>
-      <line x1="20" y1="19" x2="20" y2="45" />
-      <line x1="27" y1="19" x2="27" y2="45" />
-      <line x1="34" y1="19" x2="34" y2="45" />
-      <line x1="41" y1="19" x2="41" y2="45" />
-    </svg>
-  </div>
-</main>
 
-<!-- Soft Krishna flute ambient music - CC0 from Pixabay -->
-<audio id="fluteAudio" autoplay loop preload="auto" controls style="display:none"
-src="https://cdn.pixabay.com/download/audio/2022/03/22/audio_14aab4a939.mp3?filename=indian-flute-spiritual-ambient-10816.mp3"></audio>
+<!-- Star background layers -->
+<div id="stars" aria-hidden="true"></div>
+<div id="stars2" aria-hidden="true"></div>
+<div id="stars3" aria-hidden="true"></div>
+
+<!-- Moon -->
+<div id="moon" aria-hidden="true"></div>
+
+<!-- Main content -->
+<div id="main-content" role="main" aria-label="Romantic message for my beloved wife">
+  <h1>Hello My Love</h1>
+  <h2>You Are My Everything</h2>
+  <p class="message">
+    Like the stars shine in the night sky, <br/>
+    and the moon lights up the darkest hours, <br/>
+    your love brightens my life with endless happiness.<br/><br/>
+    Forever and always, <br/>
+    I cherish you from the deepest core of my heart.
+  </p>
+  <div id="buttons-container">
+    <button id="surpriseBtn" aria-haspopup="dialog" aria-controls="surpriseModal" aria-expanded="false" title="Open surprise message">
+      <span class="icon">🎁</span> Open Your Surprise
+    </button>
+    <button id="musicToggleBtn" aria-pressed="false" title="Toggle romantic music">
+      <span id="musicIcon" class="icon">🔈</span> Play Music
+    </button>
+  </div>
+</div>
+
+<!-- Surprise modal -->
+<div id="surpriseModal" role="dialog" aria-modal="true" aria-labelledby="surpriseTitle" aria-describedby="surpriseDesc">
+  <p id="surpriseDesc">My dearest, you are my heart's home. I love you beyond words. 💖</p>
+  <button id="closeModal" aria-label="Close surprise message">Close</button>
+</div>
+
+<script>
+  // Floating petals
+  const petalsCount = 20;
+  const petals = [];
+  function random(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+  for (let i=0; i < petalsCount; i++) {
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+    document.body.appendChild(petal);
+    resetPetal(petal);
+    petals.push(petal);
+  }
+  function resetPetal(petal) {
+    petal.style.left = `${random(0, window.innerWidth - 20)}px`;
+    petal.style.top = `${random(-600, 0)}px`;
+    petal.style.animationDuration = `${random(6, 15)}s`;
+    petal.style.animationName = `petalFloat${Math.ceil(random(1, 2))}`;
+    petal.style.opacity = random(0.5, 0.9);
+    petal.style.width = `${random(12, 18)}px`;
+    petal.style.height = petal.style.width;
+  }
+  function animatePetals() {
+    petals.forEach(petal => {
+      let top = parseFloat(petal.style.top);
+      top += 1 + Math.random() * 1.7;
+      if (top > window.innerHeight) resetPetal(petal);
+      else petal.style.top = top + 'px';
+    });
+    requestAnimationFrame(animatePetals);
+  }
+  animatePetals();
+
+  // Surprise Modal and button
+  const surpriseBtn = document.getElementById('surpriseBtn');
+  const surpriseModal = document.getElementById('surpriseModal');
+  const closeModalBtn = document.getElementById('closeModal');
+
+  function showModal() {
+    surpriseModal.classList.add('show');
+    surpriseBtn.setAttribute('aria-expanded', 'true');
+    createConfettiBurst();
+  }
+  function hideModal() {
+    surpriseModal.classList.remove('show');
+    surpriseBtn.setAttribute('aria-expanded', 'false');
+  }
+  surpriseBtn.addEventListener('click', showModal);
+  closeModalBtn.addEventListener('click', hideModal);
+
+  // Confetti burst
+  const confettiColors = ['#ff4477', '#f8a1b3', '#ff82a9', '#ff6699', '#ff3366'];
+  function createConfetti() {
+    const confetti = document.createElement('div');
+    confetti.classList.add('confetti');
+    confetti.style.backgroundColor = confettiColors[Math.floor(random(0, confettiColors.length))];
+    confetti.style.left = `${random(50, window.innerWidth - 50)}px`;
+    confetti.style.top = `-10px`;
+    confetti.style.animationDuration = `${random(2, 4)}s`;
+    confetti.style.transform = `rotate(${random(0, 360)}deg)`;
+    document.body.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 4000);
+  }
+  function createConfettiBurst() {
+    for(let i=0; i<30; i++){
+      setTimeout(() => createConfetti(), i*60);
+    }
+  }
+
+  // Piano background
+  const audio = new Audio("https://cdn.pixabay.com/download/audio/2021/11/15/audio_73215a93c5.mp3?filename=romantic-piano-6224.mp3");
+  audio.loop = true;
+  audio.volume = 0.15; // subtle volume
+
+  // Music toggle button
+  const musicToggleBtn = document.getElementById('musicToggleBtn');
+  const musicIcon = document.getElementById('musicIcon');
+  let musicPlaying = false;
+
+  function playMusic(){
+    audio.play();
+    musicToggleBtn.setAttribute('aria-pressed', 'true');
+    musicToggleBtn.innerHTML = '<span class="icon">🔊</span> Pause Music';
+    musicPlaying = true;
+  }
+  function pauseMusic(){
+    audio.pause();
+    musicToggleBtn.setAttribute('aria-pressed', 'false');
+    musicToggleBtn.innerHTML = '<span class="icon">🔈</span> Play Music';
+    musicPlaying = false;
+  }
+  musicToggleBtn.addEventListener('click', () => {
+    if (musicPlaying) {
+      pauseMusic();
+    } else {
+      playMusic();
+    }
+  });
+
+  // Double-click main content toggles music as an easter egg
+  const mainContent = document.getElementById('main-content');
+  mainContent.addEventListener('dblclick', () => {
+    if (!musicPlaying) {
+      playMusic();
+    } else {
+      pauseMusic();
+    }
+  });
+
+  // Accessibility: close modal on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && surpriseModal.classList.contains('show')) {
+      hideModal();
+    }
+  });
+
+  // Petal float animations (different float patterns)
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes petalFloat1 {
+      0% {transform: translateX(0) translateY(0) rotateZ(0);}
+      50% {transform: translateX(15px) translateY(50px) rotateZ(50deg);}
+      100% {transform: translateX(0) translateY(100px) rotateZ(0);}
+    }
+    @keyframes petalFloat2 {
+      0% {transform: translateX(0) translateY(0) rotateZ(0);}
+      50% {transform: translateX(-12px) translateY(60px) rotateZ(-40deg);}
+      100% {transform: translateX(0) translateY(120px) rotateZ(0);}
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Prevent scroll on mobile to keep everything visible
+  window.addEventListener('touchmove', e => {
+    e.preventDefault();
+  }, { passive: false });
+</script>
 
 </body>
 </html>
-
