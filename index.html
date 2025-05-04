@@ -30,12 +30,13 @@
     100% {background-position:0% 50%;}
   }
 
+  /* Container with breathing heartbeat animation */
   .container {
     position: relative;
     width: 350px;
     max-width: 95vw;
     height: 600px;
-    background: rgba(255 255 255 / 0.8);
+    background: rgba(255 255 255 / 0.85);
     border-radius: 30px;
     box-shadow:
       0 0 30px rgba(255, 105, 180, 0.6),
@@ -44,8 +45,16 @@
     text-align: center;
     overflow: hidden;
     user-select: none;
+    animation: heartbeat 4s ease-in-out infinite;
+    z-index: 10;
   }
 
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+  }
+
+  /* Heading glowing pulse */
   h1 {
     font-family: 'Great Vibes', cursive;
     font-size: 3.8rem;
@@ -84,6 +93,7 @@
     letter-spacing: 0.03em;
   }
 
+  /* Shimmer effect on message text */
   .message {
     font-size: 1.15rem;
     font-family: 'Parisienne', cursive;
@@ -93,6 +103,23 @@
     margin: 15px auto 10px;
     max-width: 90%;
     line-height: 1.5;
+    position: relative;
+    overflow: hidden;
+  }
+  .message::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 100%);
+    animation: shimmer 3.5s infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+  @keyframes shimmer {
+    0% { left: -50%; }
+    100% { left: 150%; }
   }
 
   footer {
@@ -102,19 +129,34 @@
     color: #9c2033;
     user-select: none;
     text-shadow: 0 0 10px #bf365a;
+    animation: footerGlow 4s ease-in-out infinite alternate;
+    position: relative;
+    z-index: 12;
+  }
+
+  @keyframes footerGlow {
+    0% {
+      text-shadow: 0 0 6px #c04848, 0 0 12px #f43b5e;
+    }
+    100% {
+      text-shadow: 0 0 12px #eb3a5a, 0 0 18px #f76a83;
+    }
   }
 
   /* Floating hearts animation layers */
-  .hearts, .small-hearts {
+  .hearts, .small-hearts, .confetti, .particles, .sparkles {
     position: absolute;
     pointer-events: none;
     top: 0; left: 0;
     width: 100%;
     height: 100%;
     overflow: visible;
+    z-index: 1;
   }
 
-  .heart {
+  /* Heart styles */
+
+  .heart, .heart.drift {
     position: absolute;
     width: 24px;
     height: 24px;
@@ -143,6 +185,27 @@
     top: 0;
   }
 
+  /* Drift hearts, horizontal oscillation */
+  .heart.drift {
+    animation-name: floatUpDrift;
+  }
+
+  @keyframes floatUpDrift {
+    0% {
+      transform: translateX(0) translateY(0) rotate(-45deg) scale(1);
+      opacity: 0.9;
+    }
+    50% {
+      transform: translateX(12px) translateY(-300px) rotate(-40deg) scale(1.05);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateX(0) translateY(-620px) rotate(-45deg) scale(1.1);
+      opacity: 0;
+    }
+  }
+
+  /* Small hearts */
   .small-heart {
     width: 12px;
     height: 12px;
@@ -192,7 +255,7 @@
     }
   }
 
-  /* Confetti hearts falling */
+  /* Confetti hearts falling diagonally */
   .confetti-heart {
     position: absolute;
     width: 14px;
@@ -236,17 +299,47 @@
     }
   }
 
-  /* Glow pulse for footer */
-  footer {
-    animation: footerGlow 4s ease-in-out infinite alternate;
+  /* Sparkles to twinkle softly */
+  .sparkle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: radial-gradient(circle, #ffd9e8 0%, #ff4a75 70%, transparent 100%);
+    opacity: 0.6;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 3px #ff4664);
+    animation: twinkle 3s infinite ease-in-out;
+    will-change: opacity, transform;
   }
 
-  @keyframes footerGlow {
+  /* Multiple sparkles animate with random delay */
+  @keyframes twinkle {
+    0%, 100% {opacity: 0.6; transform: scale(1);}
+    50% {opacity: 1; transform: scale(1.3);}
+  }
+
+  /* Floating glowing particles behind */
+  .particle {
+    position: absolute;
+    background: rgba(255, 200, 220, 0.3);
+    border-radius: 50%;
+    filter: drop-shadow(0 0 4px #ff639a);
+    animation: floatParticle linear infinite;
+    will-change: transform, opacity;
+  }
+
+  @keyframes floatParticle {
     0% {
-      text-shadow: 0 0 6px #c04848, 0 0 12px #f43b5e;
+      transform: translateY(0) translateX(0);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translateY(-30px) translateX(30px);
+      opacity: 0.4;
     }
     100% {
-      text-shadow: 0 0 12px #eb3a5a, 0 0 18px #f76a83;
+      transform: translateY(0) translateX(0);
+      opacity: 0.7;
     }
   }
 
@@ -281,6 +374,8 @@
     </p>
     <footer>With all my love, now and forevermore 💖</footer>
 
+    <div class="sparkles" aria-hidden="true"></div>
+    <div class="particles" aria-hidden="true"></div>
     <div class="hearts" aria-hidden="true"></div>
     <div class="small-hearts" aria-hidden="true"></div>
     <div class="confetti" aria-hidden="true"></div>
@@ -292,16 +387,21 @@
   </audio>
 
 <script>
-  const heartsContainer = document.querySelector('.hearts');
-  const smallHeartsContainer = document.querySelector('.small-hearts');
-  const confettiContainer = document.querySelector('.confetti');
   const containerWidth = 350;
   const containerHeight = 600;
 
-  // Generate big hearts floating up
+  const heartsContainer = document.querySelector('.hearts');
+  const smallHeartsContainer = document.querySelector('.small-hearts');
+  const confettiContainer = document.querySelector('.confetti');
+  const sparklesContainer = document.querySelector('.sparkles');
+  const particlesContainer = document.querySelector('.particles');
+
+  // Create floating hearts, some with horizontal drift
   function createHeart() {
     const heart = document.createElement('div');
     heart.classList.add('heart');
+    // 50% chance to add drift animation variant
+    if (Math.random() < 0.5) heart.classList.add('drift');
     heart.style.left = (Math.random() * (containerWidth - 30)) + 'px';
     heart.style.animationDuration = (5 + Math.random() * 3) + 's';
     heart.style.opacity = (0.6 + Math.random() * 0.4).toFixed(2);
@@ -312,7 +412,7 @@
     }, parseFloat(heart.style.animationDuration) * 1000);
   }
 
-  // Generate small hearts floating slower
+  // Create small hearts floating slower
   function createSmallHeart() {
     const sHeart = document.createElement('div');
     sHeart.classList.add('small-heart');
@@ -326,7 +426,7 @@
     }, parseFloat(sHeart.style.animationDuration) * 1000);
   }
 
-  // Generate confetti hearts falling diagonally
+  // Confetti hearts falling diagonally
   function createConfetti() {
     const confettiHeart = document.createElement('div');
     confettiHeart.classList.add('confetti-heart');
@@ -341,9 +441,47 @@
     }, (parseFloat(confettiHeart.style.animationDuration) + parseFloat(confettiHeart.style.animationDelay)) * 1000);
   }
 
-  setInterval(createHeart, 500);
+  // Sparkles twinkling randomly in the background
+  function createSparkle() {
+    const sparkle = document.createElement('div');
+    sparkle.classList.add('sparkle');
+    sparkle.style.left = (Math.random() * containerWidth) + 'px';
+    sparkle.style.top = (Math.random() * containerHeight) + 'px';
+    sparkle.style.animationDuration = (2 + Math.random() * 2) + 's';
+    sparkle.style.animationDelay = (Math.random() * 3) + 's';
+    sparkle.style.width = (3 + Math.random() * 3) + 'px';
+    sparkle.style.height = sparkle.style.width;
+    sparklesContainer.appendChild(sparkle);
+
+    setTimeout(() => {
+      sparkle.remove();
+    }, (parseFloat(sparkle.style.animationDuration) + parseFloat(sparkle.style.animationDelay)) * 1000);
+  }
+
+  // Floating glowing particles behind container for depth
+  function createParticle() {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    const size = 10 + Math.random() * 15;
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    particle.style.borderRadius = size / 2 + 'px';
+    particle.style.left = (Math.random() * containerWidth) + 'px';
+    particle.style.top = (Math.random() * containerHeight) + 'px';
+    particle.style.animationDuration = (6 + Math.random() * 5) + 's';
+    particle.style.animationDelay = (Math.random() * 3) + 's';
+    particlesContainer.appendChild(particle);
+
+    setTimeout(() => {
+      particle.remove();
+    }, (parseFloat(particle.style.animationDuration) + parseFloat(particle.style.animationDelay)) * 1000);
+  }
+
+  setInterval(createHeart, 400);
   setInterval(createSmallHeart, 600);
   setInterval(createConfetti, 800);
+  setInterval(createSparkle, 500);
+  setInterval(createParticle, 1500);
 
   // Enable unmute on first user interaction (required by many browsers)
   const bgMusic = document.getElementById('backgroundSong');
