@@ -1,456 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>For My Beloved ❤️</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap');
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Little Comfort For You, [Her Name] ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #ffdde1, #ee9ca7); /* Soft pink gradient */
+            color: #5D4037; /* Warm brown text */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            line-height: 1.6;
+        }
 
-  /* Reset */
-  * {
-    margin: 0; padding: 0;
-    box-sizing: border-box;
-  }
-  html, body {
-    height: 100%;
-    overflow: hidden;
-    font-family: 'Montserrat', sans-serif;
-    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-    color: #f7e8e8;
-    user-select: none;
-  }
-  body {
-    max-width: 350px;
-    max-height: 600px;
-    margin: auto;
-    position: relative;
-    overflow: hidden;
-    padding: 1rem 1.2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
+        .container {
+            background-color: #fff0f5; /* Lavender blush - very light pink */
+            padding: 30px 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+        }
 
-  /* Stars */
-  #stars, #stars2, #stars3 {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    display: block;
-    top: 0; left: 0;
-    right: 0; bottom: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
-  #stars {
-    background: transparent url('https://cdn.pixabay.com/photo/2013/07/12/19/32/star-153660_960_720.png') repeat;
-    background-size: 20px 20px;
-    animation: moveStars 100s linear infinite;
-    opacity: 0.5;
-  }
-  #stars2 {
-    background: transparent url('https://cdn.pixabay.com/photo/2013/07/12/19/32/star-153667_960_720.png') repeat;
-    background-size: 50px 50px;
-    animation: moveStars 150s linear infinite;
-    opacity: 0.3;
-  }
-  #stars3 {
-    background: transparent url('https://cdn.pixabay.com/photo/2013/07/12/19/32/star-153659_960_720.png') repeat;
-    background-size: 100px 100px;
-    animation: moveStars 200s linear infinite;
-    opacity: 0.2;
-  }
-  @keyframes moveStars {
-    from {background-position: 0 0;}
-    to {background-position: -10000px 5000px;}
-  }
+        header h1 {
+            font-family: 'Pacifico', cursive;
+            color: #d13f6b; /* Deeper pink for main heading */
+            font-size: 2.8em;
+            margin-bottom: 10px;
+        }
 
-  /* Moon */
-  #moon {
-    position: fixed;
-    top: 3rem;
-    right: 3rem;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #eef4f9, #abb8c3 60%);
-    box-shadow:
-      20px 10px 10px rgba(255, 255, 255, 0.15),
-      inset -10px -10px 20px rgba(200, 200, 210, 0.6),
-      inset 12px 12px 15px rgba(255, 255, 255, 0.75);
-    filter: drop-shadow(0 0 6px #dae3f3);
-    animation: moonGlow 6s ease-in-out infinite;
-  }
-  @keyframes moonGlow {
-    0%, 100% { filter: drop-shadow(0 0 4px #dae3f3);}
-    50% { filter: drop-shadow(0 0 10px #a5b8cc);}
-  }
+        .subheader {
+            font-size: 1.1em;
+            color: #795548; /* Softer brown */
+            margin-bottom: 30px;
+        }
 
-  /* Floating petals */
-  .petal {
-    position: fixed;
-    width: 14px;
-    height: 14px;
-    background: radial-gradient(ellipse at center, #ffadc3, #da0a2d);
-    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    opacity: 0.85;
-    animation-timing-function: ease-in-out;
-    filter: drop-shadow(0 0 3px #e83b64);
-  }
+        section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
 
-  /* Container for main content with subtle parallax */
-  #main-content {
-    position: relative;
-    z-index: 10;
-    max-width: 320px;
-    backdrop-filter: blur(5px);
-    background: rgba(31, 19, 32, 0.3);
-    border-radius: 25px;
-    padding: 20px 25px 25px 25px;
-    box-shadow: 0 0 20px rgba(255, 105, 135, 0.5);
-  }
+        h2 {
+            font-family: 'Pacifico', cursive;
+            color: #e57373; /* Soft red/pink */
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
 
-  h1 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 3.4rem;
-    font-weight: 400;
-    color: #ff7197;
-    text-shadow:
-      0 0 8px #ff7197,
-      0 0 20px #ff3366,
-      0 0 30px #ff3366;
-    margin-bottom: 0.3rem;
-    user-select: none;
-  }
-  h2 {
-    font-family: 'Great Vibes', cursive;
-    font-size: 2.2rem;
-    color: #ffc0cbcc;
-    margin-bottom: 1.1rem;
-    user-select: none;
-  }
-  p.message {
-    font-size: 1.2rem;
-    color: #f7d1db;
-    font-style: italic;
-    line-height: 1.7;
-    letter-spacing: 0.02em;
-    user-select: none;
-    text-shadow: 0 0 6px #ff6699aa;
-  }
+        .virtual-hug .heart-container {
+            font-size: 4em;
+            margin: 20px 0;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
 
-  /* Buttons container */
-  #buttons-container {
-    margin-top: 1.8rem;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-  }
+        .heart {
+            display: inline-block;
+        }
 
-  /* Buttons */
-  button {
-    background: linear-gradient(135deg, #ff5f7e, #ff9aa2);
-    border: none;
-    padding: 0.8rem 2.2rem;
-    font-size: 1.15rem;
-    color: #fff;
-    border-radius: 50px;
-    cursor: pointer;
-    box-shadow:
-      0 4px 12px #ff5f7e88,
-      0 0 30px #ff6a7c;
-    transition: transform 0.3s, box-shadow 0.3s;
-    user-select: none;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  button:hover {
-    transform: scale(1.07);
-    box-shadow: 0 6px 20px #ff6a7cdd;
-  }
-  button:active {
-    transform: scale(0.95);
-    box-shadow: 0 3px 12px #ff4a5aaa;
-  }
-  .icon {
-    font-size: 1.3rem;
-    line-height: 1;
-  }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
 
-  /* Surprise modal */
-  #surpriseModal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 90%;
-    max-width: 320px;
-    background: linear-gradient(135deg, #ffcedd 0%, #ff9aae 100%);
-    padding: 1.8rem 2rem;
-    border-radius: 25px;
-    box-shadow: 0 0 40px #ff4d7ccc;
-    transform: translate(-50%, -50%) scale(0.8);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    z-index: 9999;
-    text-align: center;
-    font-family: 'Great Vibes', cursive;
-    color: #550020;
-  }
-  #surpriseModal.show {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  #surpriseModal p {
-    font-size: 1.6rem;
-    margin-bottom: 1.2rem;
-    user-select: none;
-  }
-  #closeModal {
-    background: #ff5f7e;
-    border: none;
-    color: #fff;
-    font-size: 1.1rem;
-    padding: 0.6rem 1.8rem;
-    border-radius: 30px;
-    cursor: pointer;
-    box-shadow: 0 4px 20px #d63556aa;
-    transition: background 0.3s;
-    user-select: none;
-  }
-  #closeModal:hover {
-    background: #ff4461;
-  }
+        .cute-gif {
+            max-width: 80%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 10px;
+            border: 3px solid #ffc0cb; /* Pink border */
+        }
 
-  /* Confetti */
-  .confetti {
-    position: fixed;
-    width: 8px;
-    height: 14px;
-    background-color: #ff6699;
-    opacity: 0.9;
-    z-index: 10000;
-    pointer-events: none;
-    transform-origin: center;
-    animation: confetti-fall linear forwards;
-    border-radius: 2px;
-  }
-  @keyframes confetti-fall {
-    0% {
-      opacity: 1;
-      transform: rotate(0deg) translateY(0) translateX(0);
-    }
-    100% {
-      opacity: 0;
-      transform: rotate(720deg) translateY(600px) translateX(100px);
-    }
-  }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
 
-  /* Responsive */
-  @media (max-width: 360px) {
-    body {
-      padding: 0.8rem 0.5rem;
-    }
-    h1 {
-      font-size: 2.6rem;
-    }
-    h2 {
-      font-size: 1.8rem;
-    }
-    p.message {
-      font-size: 1.1rem;
-    }
-    button {
-      font-size: 1rem;
-      padding: 0.7rem 1.8rem;
-    }
-    #surpriseModal p {
-      font-size: 1.3rem;
-    }
-  }
-</style>
+        ul li {
+            background-color: #fff9fa; /* Very light pink list items */
+            margin: 8px 0;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 5px solid #f06292; /* Pink accent border */
+            text-align: left;
+        }
+
+        a {
+            color: #d13f6b;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: #b71c1c; /* Darker pink on hover */
+        }
+
+        .note-box {
+            background-color: #fffde7; /* Creamy yellow for the note */
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px dashed #ffcc80; /* Dashed orange border */
+            text-align: left;
+            font-size: 1.05em;
+        }
+
+        .note-box p {
+            margin-bottom: 12px;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #795548;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2.2em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .container {
+                padding: 20px;
+            }
+            .cute-gif {
+                max-width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>Thinking of You, my lovely Wife...</h1>
+            <p class="subheader">I know you're not feeling your best right now, so I made this little corner of the internet just for you.</p>
+        </header>
 
-<!-- Star background layers -->
-<div id="stars" aria-hidden="true"></div>
-<div id="stars2" aria-hidden="true"></div>
-<div id="stars3" aria-hidden="true"></div>
+        <section class="virtual-hug">
+            <h2>Sending a Giant Virtual Hug!</h2>
+            <div class="heart-container">
+                <div class="heart">❤️</div>
+            </div>
+            <p>Imagine me wrapping you in the warmest, coziest hug ever.</p>
+        </section>
 
-<!-- Moon -->
-<div id="moon" aria-hidden="true"></div>
+        <section class="comfort-zone">
+            <h2>Your Personal Comfort Zone</h2>
+            <div class="comfort-item">
+                <h3>A Moment of Cuteness</h3>
+                <!-- Find a cute GIF online (e.g., from Giphy) and replace the src -->
+                <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTY4aXBkMjV0c21kbTVmdnZrN2xtdG1idW5paTNwaHNyYjZpZjFtbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9d3LQ6TdV2Flo8ODTU/giphy.gif" alt="Cute animal comforting you" class="cute-gif">
+               
+            </div>
 
-<!-- Main content -->
-<div id="main-content" role="main" aria-label="Romantic message for my beloved wife">
-  <h1>Hello My Love</h1>
-  <h2>You Are My Everything</h2>
-  <p class="message">
-    Like the stars shine in the night sky, <br/>
-    and the moon lights up the darkest hours, <br/>
-    your love brightens my life with endless happiness.<br/><br/>
-    Forever and always, <br/>
-    I cherish you from the deepest core of my heart.
-  </p>
-  <div id="buttons-container">
-    <button id="surpriseBtn" aria-haspopup="dialog" aria-controls="surpriseModal" aria-expanded="false" title="Open surprise message">
-      <span class="icon">🎁</span> Open Your Surprise
-    </button>
-    <button id="musicToggleBtn" aria-pressed="false" title="Toggle romantic music">
-      <span id="musicIcon" class="icon">🔈</span> Play Music
-    </button>
-  </div>
-</div>
+                       <div class="comfort-item">
+                <h3>Relaxing Sounds</h3>
+                <p>Take a deep breath and listen to something calming (click the play button):</p>
+                <div class="video-container">
+                    <h4>Peaceful Piano Music</h4>
+                    <iframe width="100%" height="180" src="https://www.youtube.com/embed/lFcSrYw-ARY" title="YouTube video player - Peaceful Piano" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                
+                <div class="video-container">
+                    <h4>Gentle Rain Sounds</h4>
+                    <iframe width="100%" height="180" src="https://www.youtube.com/embed/eKFTSSKCzWA" title="YouTube video player - Gentle Rain" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+                <div class="video-container">
+                    <h4>Calming Ocean Waves</h4>
+                    <iframe width="100%" height="180" src="https://www.youtube.com/embed/q76bMs-NwRk" title="YouTube video player - Ocean Waves" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
 
-<!-- Surprise modal -->
-<div id="surpriseModal" role="dialog" aria-modal="true" aria-labelledby="surpriseTitle" aria-describedby="surpriseDesc">
-  <p id="surpriseDesc">My dearest, you are my heart's home. I love you beyond words. 💖</p>
-  <button id="closeModal" aria-label="Close surprise message">Close</button>
-</div>
+            <div class="comfort-item">
+                <h3>My Little Comfort Kit For You:</h3>
+                <p>(Things I'd bring you if I could teleport!)</p>
+                <ul>
+                    <li>☕ A warm cup of your favorite tea/cocoa</li>
+                    <li>🍫 Your go-to comfort chocolate</li>
+                    <li>🧸 A soft blanket & a cuddly plushie</li>
+                    <li>🔥 A cozy hot water bottle</li>
+                    <li>🎬 Your favorite movie or show queued up</li>
+                </ul>
+                <p>Let me know if you need anything at all!</p>
+            </div>
+        </section>
 
-<script>
-  // Floating petals
-  const petalsCount = 20;
-  const petals = [];
-  function random(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-  for (let i=0; i < petalsCount; i++) {
-    const petal = document.createElement('div');
-    petal.classList.add('petal');
-    document.body.appendChild(petal);
-    resetPetal(petal);
-    petals.push(petal);
-  }
-  function resetPetal(petal) {
-    petal.style.left = `${random(0, window.innerWidth - 20)}px`;
-    petal.style.top = `${random(-600, 0)}px`;
-    petal.style.animationDuration = `${random(6, 15)}s`;
-    petal.style.animationName = `petalFloat${Math.ceil(random(1, 2))}`;
-    petal.style.opacity = random(0.5, 0.9);
-    petal.style.width = `${random(12, 18)}px`;
-    petal.style.height = petal.style.width;
-  }
-  function animatePetals() {
-    petals.forEach(petal => {
-      let top = parseFloat(petal.style.top);
-      top += 1 + Math.random() * 1.7;
-      if (top > window.innerHeight) resetPetal(petal);
-      else petal.style.top = top + 'px';
-    });
-    requestAnimationFrame(animatePetals);
-  }
-  animatePetals();
+        <section class="love-notes">
+            <h2>Just a Few Things I Love About You, [Her Name]:</h2>
+            <ul>
+                <li>Your incredible kindness</li>
+                <li>Your beautiful smile that lights up my world</li>
+                <li>How strong and resilient you are</li>
+                <li>Your amazing sense of humor</li>
+                <li> Your Smooth silky hair </li>
+                <li>You are the best wife of this world </li>
+            </ul>
+        </section>
 
-  // Surprise Modal and button
-  const surpriseBtn = document.getElementById('surpriseBtn');
-  const surpriseModal = document.getElementById('surpriseModal');
-  const closeModalBtn = document.getElementById('closeModal');
+        <section class="personal-message">
+            <h2>A Special Note From Me:</h2>
+            <div class="note-box">
+                <p>My dearest [Her Name],</p>
+                <p>I'm so sorry you're going through this discomfort. You're one of the strongest and most wonderful people I know. Remember to be gentle with yourself and take all the time you need to rest and recover.</p>
+                <p>I'm always here for you, whether you need a distraction, someone to vent to, or just quiet company. You're not alone in this.</p>
+                <p>Sending you all my love, positive vibes, and a million more virtual cuddles.</p>
+                <p>You are so loved.</p>
+                <p>With all my heart,<br>Your Husband ❤️</p>
+            </div>
+        </section>
 
-  function showModal() {
-    surpriseModal.classList.add('show');
-    surpriseBtn.setAttribute('aria-expanded', 'true');
-    createConfettiBurst();
-  }
-  function hideModal() {
-    surpriseModal.classList.remove('show');
-    surpriseBtn.setAttribute('aria-expanded', 'false');
-  }
-  surpriseBtn.addEventListener('click', showModal);
-  closeModalBtn.addEventListener('click', hideModal);
-
-  // Confetti burst
-  const confettiColors = ['#ff4477', '#f8a1b3', '#ff82a9', '#ff6699', '#ff3366'];
-  function createConfetti() {
-    const confetti = document.createElement('div');
-    confetti.classList.add('confetti');
-    confetti.style.backgroundColor = confettiColors[Math.floor(random(0, confettiColors.length))];
-    confetti.style.left = `${random(50, window.innerWidth - 50)}px`;
-    confetti.style.top = `-10px`;
-    confetti.style.animationDuration = `${random(2, 4)}s`;
-    confetti.style.transform = `rotate(${random(0, 360)}deg)`;
-    document.body.appendChild(confetti);
-    setTimeout(() => confetti.remove(), 4000);
-  }
-  function createConfettiBurst() {
-    for(let i=0; i<30; i++){
-      setTimeout(() => createConfetti(), i*60);
-    }
-  }
-
-  // Piano background
-  const audio = new Audio("https://cdn.pixabay.com/download/audio/2021/11/15/audio_73215a93c5.mp3?filename=romantic-piano-6224.mp3");
-  audio.loop = true;
-  audio.volume = 0.15; // subtle volume
-
-  // Music toggle button
-  const musicToggleBtn = document.getElementById('musicToggleBtn');
-  const musicIcon = document.getElementById('musicIcon');
-  let musicPlaying = false;
-
-  function playMusic(){
-    audio.play();
-    musicToggleBtn.setAttribute('aria-pressed', 'true');
-    musicToggleBtn.innerHTML = '<span class="icon">🔊</span> Pause Music';
-    musicPlaying = true;
-  }
-  function pauseMusic(){
-    audio.pause();
-    musicToggleBtn.setAttribute('aria-pressed', 'false');
-    musicToggleBtn.innerHTML = '<span class="icon">🔈</span> Play Music';
-    musicPlaying = false;
-  }
-  musicToggleBtn.addEventListener('click', () => {
-    if (musicPlaying) {
-      pauseMusic();
-    } else {
-      playMusic();
-    }
-  });
-
-  // Double-click main content toggles music as an easter egg
-  const mainContent = document.getElementById('main-content');
-  mainContent.addEventListener('dblclick', () => {
-    if (!musicPlaying) {
-      playMusic();
-    } else {
-      pauseMusic();
-    }
-  });
-
-  // Accessibility: close modal on Escape key
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && surpriseModal.classList.contains('show')) {
-      hideModal();
-    }
-  });
-
-  // Petal float animations (different float patterns)
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes petalFloat1 {
-      0% {transform: translateX(0) translateY(0) rotateZ(0);}
-      50% {transform: translateX(15px) translateY(50px) rotateZ(50deg);}
-      100% {transform: translateX(0) translateY(100px) rotateZ(0);}
-    }
-    @keyframes petalFloat2 {
-      0% {transform: translateX(0) translateY(0) rotateZ(0);}
-      50% {transform: translateX(-12px) translateY(60px) rotateZ(-40deg);}
-      100% {transform: translateX(0) translateY(120px) rotateZ(0);}
-    }
-  `;
-  document.head.appendChild(style);
-
-  // Prevent scroll on mobile to keep everything visible
-  window.addEventListener('touchmove', e => {
-    e.preventDefault();
-  }, { passive: false });
-</script>
-
+        <footer>
+            <p>Remember: You are amazing, strong, and deeply loved. This too shall pass. ✨</p>
+        </footer>
+    </div>
 </body>
 </html>
