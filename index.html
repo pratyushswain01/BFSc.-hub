@@ -3,231 +3,416 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Little Comfort For You, My wife ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <title>A Special Universe For You, My Love ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Quicksand', sans-serif;
-            background: linear-gradient(135deg, #ffdde1, #ee9ca7); /* Soft pink gradient */
-            color: #5D4037; /* Warm brown text */
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-            line-height: 1.6;
+        :root {
+            --bg-dark-blue: #0f0c29;
+            --bg-mid-purple: #302b63;
+            --bg-light-purple: #24243e;
+            --accent-gold: #ffaf40;
+            --accent-lavender: #e6e6fa;
+            --text-light: #f0f0f0;
+            --text-mid: #c0c0c0;
+            --card-bg: rgba(48, 43, 99, 0.6); /* Semi-transparent card */
+            --glow-effect: 0 0 15px rgba(230, 230, 250, 0.5), 0 0 25px rgba(230, 230, 250, 0.3);
         }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(to bottom right, var(--bg-dark-blue), var(--bg-mid-purple), var(--bg-light-purple));
+            color: var(--text-light);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 30px 15px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Starry Background */
+        #stars, #stars2, #stars3 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-repeat: repeat;
+            background-size: cover;
+        }
+        #stars {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><circle cx="1" cy="1" r="0.5" fill="%23aaa" /><circle cx="5" cy="7" r="0.3" fill="%23bbb" /><circle cx="8" cy="3" r="0.4" fill="%23ccc" /></svg>');
+            animation: twinkle 60s linear infinite;
+        }
+        #stars2 {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="3" cy="15" r="0.6" fill="%23ccc" /><circle cx="12" cy="5" r="0.4" fill="%23ddd" /><circle cx="18" cy="18" r="0.5" fill="%23eee" /></svg>');
+            animation: twinkle 90s linear infinite reverse;
+        }
+        @keyframes twinkle {
+            from { background-position: 0 0; }
+            to { background-position: -1000px 500px; }
+        }
+
+
         .container {
-            background-color: #fff0f5; /* Lavender blush - very light pink */
-            padding: 30px 40px;
+            background-color: rgba(0,0,0,0.2); /* Darker, more transparent container */
+            backdrop-filter: blur(5px);
+            padding: 30px 25px;
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            max-width: 800px;
-            width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 750px;
+            width: 100%;
             text-align: center;
+            z-index: 1;
+            border: 1px solid rgba(230, 230, 250, 0.1);
         }
 
         header h1 {
-            font-family: 'Pacifico', cursive;
-            color: #d13f6b; /* Deeper pink for main heading */
-            font-size: 2.8em;
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-lavender);
+            font-size: 2.6em;
             margin-bottom: 10px;
+            text-shadow: var(--glow-effect);
+            letter-spacing: 1px;
         }
 
         .subheader {
             font-size: 1.1em;
-            color: #795548; /* Softer brown */
-            margin-bottom: 30px;
+            color: var(--text-mid);
+            margin-bottom: 35px;
+            font-style: italic;
         }
 
         section {
-            margin-bottom: 40px;
-            padding: 20px;
-            background-color: #ffffff;
+            margin-bottom: 35px;
+            padding: 25px;
+            background-color: var(--card-bg);
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 1px solid rgba(230, 230, 250, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3), var(--glow-effect);
         }
 
+
         h2 {
-            font-family: 'Pacifico', cursive;
-            color: #e57373; /* Soft red/pink */
-            font-size: 2em;
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-gold);
+            font-size: 1.9em;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+        h3 {
+            font-family: 'Dancing Script', cursive;
+            color: var(--accent-lavender);
+            font-size: 1.8em;
+            margin-top: 0;
             margin-bottom: 15px;
         }
 
-        .virtual-hug .heart-container {
+        .virtual-hug .heart-icon {
             font-size: 4em;
-            margin: 20px 0;
-            animation: pulse 1.5s infinite ease-in-out;
+            margin: 15px 0;
+            color: #ff6b81; /* A brighter pink for the heart */
+            animation: pulse-heart 1.8s infinite ease-in-out;
+            text-shadow: 0 0 10px #ff6b81, 0 0 20px #ff6b81;
         }
-
-        .heart {
-            display: inline-block;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
+        @keyframes pulse-heart {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
         }
 
         .cute-gif {
-            max-width: 80%;
+            max-width: 60%;
             height: auto;
-            border-radius: 10px;
+            border-radius: 12px;
             margin-top: 10px;
-            border: 3px solid #ffc0cb; /* Pink border */
+            border: 3px solid var(--accent-lavender);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
-        ul {
+        /* Reasons I Love You Carousel */
+        .love-reasons-carousel {
+            min-height: 60px; /* Adjust as needed */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            background-color: rgba(0,0,0,0.2);
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        #reason-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.7em;
+            color: var(--accent-lavender);
+            text-shadow: 0 0 8px var(--accent-lavender);
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .video-container {
+            margin-bottom: 20px;
+        }
+        .video-container h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1.1em;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
+            text-align: left;
+        }
+        .video-container iframe {
+            border-radius: 10px;
+            max-width: 500px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid rgba(230, 230, 250, 0.2);
+        }
+
+        .comfort-kit-list {
             list-style-type: none;
             padding-left: 0;
-        }
-
-        ul li {
-            background-color: #fff9fa; /* Very light pink list items */
-            margin: 8px 0;
-            padding: 10px 15px;
-            border-radius: 8px;
-            border-left: 5px solid #f06292; /* Pink accent border */
             text-align: left;
         }
-
-        a {
-            color: #d13f6b;
-            text-decoration: none;
-            font-weight: 500;
+        .comfort-kit-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed rgba(230, 230, 250, 0.2);
+            color: var(--text-mid);
+            font-size: 0.95em;
+        }
+        .comfort-kit-list li::before {
+            content: "✨ "; /* Sparkle icon */
+            color: var(--accent-gold);
+            margin-right: 10px;
+        }
+        .comfort-kit-list li:last-child {
+            border-bottom: none;
         }
 
-        a:hover {
-            text-decoration: underline;
-            color: #b71c1c; /* Darker pink on hover */
-        }
-
-        .note-box {
-            background-color: #fffde7; /* Creamy yellow for the note */
-            padding: 20px;
+        /* Care Coupons */
+        .care-coupons .coupon {
+            background-color: rgba(255, 175, 64, 0.1); /* Light gold transparent */
+            border: 1px solid var(--accent-gold);
+            padding: 15px;
+            margin: 12px auto;
             border-radius: 10px;
-            border: 2px dashed #ffcc80; /* Dashed orange border */
-            text-align: left;
-            font-size: 1.05em;
+            max-width: 90%;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5em;
+            color: var(--accent-gold);
+            text-shadow: 0 0 5px var(--accent-gold);
+            transition: background-color 0.3s ease;
+        }
+        .care-coupons .coupon:hover {
+            background-color: rgba(255, 175, 64, 0.2);
         }
 
+        /* Personal Message - Tap to Reveal */
+        .personal-message-container {
+            cursor: pointer;
+            border: 2px dashed var(--accent-lavender);
+            border-radius: 15px;
+            padding: 20px;
+            background-color: rgba(0,0,0,0.3);
+            transition: background-color 0.3s ease;
+        }
+        .personal-message-container:hover {
+            background-color: rgba(0,0,0,0.4);
+        }
+        #reveal-prompt {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8em;
+            color: var(--accent-lavender);
+            margin-bottom: 0; /* Remove margin if message is hidden */
+        }
+        .note-box {
+            background-color: transparent; /* Note box itself is transparent */
+            padding: 10px 0 0 0; /* Adjust padding */
+            text-align: left;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1em; /* More readable size */
+            line-height: 1.7;
+            color: var(--text-light);
+            display: none; /* Initially hidden */
+        }
         .note-box p {
-            margin-bottom: 12px;
+            margin-bottom: 15px;
+        }
+        .note-box .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5em;
+            color: var(--accent-gold);
+            text-align: right;
         }
 
         footer {
             margin-top: 30px;
             font-size: 0.9em;
-            color: #795548;
+            color: var(--text-mid);
+        }
+        footer strong {
+            color: var(--accent-gold);
         }
 
         /* Responsive adjustments */
         @media (max-width: 600px) {
-            header h1 {
-                font-size: 2.2em;
-            }
-            h2 {
-                font-size: 1.8em;
-            }
-            .container {
-                padding: 20px;
-            }
-            .cute-gif {
-                max-width: 100%;
-            }
+            body { padding: 20px 10px; }
+            header h1 { font-size: 2.1em; }
+            h2 { font-size: 1.7em; }
+            h3 { font-size: 1.6em; }
+            .container { padding: 25px 20px; }
+            .cute-gif { max-width: 80%; }
+            #reason-text { font-size: 1.4em; }
+            .care-coupons .coupon { font-size: 1.3em; }
+            #reveal-prompt { font-size: 1.5em; }
+            .note-box { font-size: 1em; }
         }
     </style>
 </head>
 <body>
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <!-- <div id="stars3"></div> You can add more layers for denser stars -->
+
     <div class="container">
         <header>
-            <h1>Thinking of You, my lovely Wife...</h1>
-            <p class="subheader">I know you're not feeling your best right now, so I made this little corner of the internet just for you.</p>
+            <h1>A Universe of Comfort for My Dearest </h1>
+            <p class="subheader">When the world feels heavy, know that my love for you is a galaxy, vast and constant.</p>
         </header>
 
         <section class="virtual-hug">
-            <h2>Sending a Giant Virtual Hug!</h2>
-            <div class="heart-container">
-                <div class="heart">❤️</div>
+            <h2>A Cosmic Embrace</h2>
+            <div class="heart-icon">❤️</div>
+            <p>Imagine my arms around you, a hug as warm and infinite as the stars. You are cherished.</p>
+        </section>
+
+        <section class="love-reasons">
+            <h2>Whispers from My Heart</h2>
+            <div class="love-reasons-carousel">
+                <p id="reason-text">Loading reasons I adore you...</p>
             </div>
-            <p>Imagine me wrapping you in the warmest, coziest hug ever.</p>
         </section>
 
         <section class="comfort-zone">
-            <h2>Your Personal Comfort Zone</h2>
+            <h2>Your Serenity Nebula</h2>
             <div class="comfort-item">
-                <h3>A Moment of Cuteness</h3>
-                <!-- Find a cute GIF online (e.g., from Giphy) and replace the src -->
-                <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTY4aXBkMjV0c21kbTVmdnZrN2xtdG1idW5paTNwaHNyYjZpZjFtbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9d3LQ6TdV2Flo8ODTU/giphy.gif" alt="Cute animal comforting you" class="cute-gif">
-               
+                <h3>A Glimmer of Joy</h3>
+                <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTY4aXBkMjV0c21kbTVmdnZrN2xtdG1idW5paTNwaHNyYjZpZjFtbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9d3LQ6TdV2Flo8ODTU/giphy.gif" alt="Cute and comforting GIF" class="cute-gif">
+                <p style="font-size: 0.9em; color: var(--text-mid); margin-top:10px;">(A little something to make you smile)</p>
             </div>
 
-                       <div class="comfort-item">
-                <h3>Relaxing Sounds</h3>
-                <p>Take a deep breath and listen to something calming (click the play button):</p>
-                <p>Play one..then pause that before playing another video...:</p>
+            <div class="comfort-item" style="margin-top: 30px;">
+                <h3>Harmonies of the Cosmos (Relaxing Sounds)</h3>
+                <p style="color: var(--text-mid); margin-bottom:15px;">Let these sounds soothe you. Play one, pause, then another...</p>
                 <div class="video-container">
-                    <h4>Peaceful Piano Music</h4>
-                    <iframe width="100%" height="180" src="https://www.youtube.com/embed/lFcSrYw-ARY" title="YouTube video player - Peaceful Piano" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                </div>
-                
-                <div class="video-container">
-                    <h4>Gentle Rain Sounds</h4>
-                    <iframe width="100%" height="180" src="https://www.youtube.com/embed/eKFTSSKCzWA" title="YouTube video player - Gentle Rain" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <h4>Celestial Piano</h4>
+                    <iframe width="100%" height="160" src="https://www.youtube.com/embed/lFcSrYw-ARY" title="YouTube video player - Peaceful Piano" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
                 <div class="video-container">
-                    <h4>Calming Ocean Waves</h4>
-                    <iframe width="100%" height="180" src="https://www.youtube.com/embed/q76bMs-NwRk" title="YouTube video player - Ocean Waves" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <h4>Stardust Rain</h4>
+                    <iframe width="100%" height="160" src="https://www.youtube.com/embed/eKFTSSKCzWA" title="YouTube video player - Gentle Rain" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                 </div>
             </div>
 
-            <div class="comfort-item">
-                <h3>My Little Comfort Kit For You:</h3>
-                <p>(Things I'd bring you if I could teleport!)</p>
-                <ul>
-                    <li>☕ A warm cup of your favorite tea/cocoa</li>
-                    <li>🍫 Your go-to comfort chocolate</li>
-                    <li>🧸 A soft blanket & a cuddly plushie</li>
-                    <li>🔥 A cozy hot water bottle</li>
-                    <li>🎬 Your favorite movie or show queued up</li>
+            <div class="comfort-item" style="margin-top: 30px;">
+                <h3>Your Personal Comfort Constellation:</h3>
+                <ul class="comfort-kit-list">
+                    <li>A warm nebula of your favorite tea/cocoa</li>
+                    <li>Galaxy-sized bar of your go-to comfort chocolate</li>
+                    <li>The softest stardust blanket & a cuddly moon plushie</li>
+                    <li>A gently warming meteor (aka hot water bottle)</li>
+                    <li>Your favorite star-studded movie or show ready to launch</li>
                 </ul>
-                <p>Let me know if you need anything at all!</p>
+                <p style="color: var(--text-mid); margin-top:15px;">Anything you need, my star, just ask.</p>
             </div>
         </section>
 
-        <section class="love-notes">
-            <h2>Just a Few Things I Love About You:</h2>
-            
-            <ul>
-                <li>Your incredible kindness</li>
-                <li>Your beautiful smile that lights up my world</li>
-                <li>How strong and resilient you are</li>
-                <li>Your amazing sense of humor</li>
-                <li> Your Smooth silky hair </li>
-                <li>You are the best wife of this world </li>
-            </ul>
+        <section class="care-coupons">
+            <h2>Galactic Love Vouchers</h2>
+            <div class="coupon">💫 One Wish Granted (within reason, my love!) 💫</div>
+            <div class="coupon">🌌 Uninterrupted Quiet Time in Your Own Orbit 🌌</div>
+            <div class="coupon">🌠 Your Choice of Takeout, Delivered at Lightspeed 🌠</div>
+            <div class="coupon">💖 A Hug That Lasts as Long as a Supernova 💖</div>
+            <p style="font-size:0.9em; margin-top:15px; color: var(--text-mid);">(Valid across all space and time!)</p>
         </section>
 
         <section class="personal-message">
-            <h2>A Special Note From Me:</h2>
-            <div class="note-box">
-                <p>My Cutipie,</p>
-                <p>I'm so sorry you're going through this discomfort. You're one of the strongest and most wonderful people I know. Remember to be gentle with yourself and take all the time you need to rest and recover.</p>
-                <p>I'm always here for you, whether you need a distraction, someone to vent to, or just quiet company. You're not alone in this.</p>
-                <p>Sending you all my love, positive vibes, and a million more virtual cuddles.</p>
-                <p>You are so loved.</p>
-                <p>With all my heart,<br>Your Husband ❤️</p>
+            <h2>A Message from My Universe to Yours</h2>
+            <div class="personal-message-container" id="message-container">
+                <p id="reveal-prompt">(Tap or Click Here to Read My Heart)</p>
+                <div class="note-box" id="personal-note-content">
+                    <p>My Lovely wife , my shining star,</p>
+                    <p>I know these moments of discomfort feel like navigating an asteroid field. But please remember, you are more brilliant and resilient than any celestial body. Your strength amazes me every single day.</p>
+                    <p>Be gentle with yourself, allow yourself to rest and recharge. I am here, your constant North Star, ready to offer warmth, support, or just a quiet presence. You don't have to face anything alone.</p>
+                    <p>This pain is temporary, like a passing comet, but my love for you is as enduring as the universe itself. You are my everything.</p>
+                    <p class="signature">With all the love in the cosmos,<br>Your Husband ❤️</p>
+                </div>
             </div>
         </section>
 
         <footer>
-            <p>Remember: You are amazing, strong, and deeply loved. This too shall pass. ✨</p>
+            <p>You are <strong>Luminous</strong>, <strong>Strong</strong>, and <strong>Infinitely Loved</strong>. ✨</p>
         </footer>
     </div>
+
+    <script>
+        // Reasons I Love You Carousel
+        const reasons = [
+            "Your smile lights up my universe.",
+            "Your kindness is a guiding star.",
+            "You're stronger than a supernova.",
+            "Your laughter is my favorite cosmic melody.",
+            "Being with you feels like home among the stars.",
+            "You make ordinary moments extraordinary.",
+            "Your intelligence shines so brightly.",
+            "You are my greatest adventure.",
+            "Your [mention a specific quality, e.g., 'creativity'] is out of this world!"
+            // Add more personal reasons here!
+        ];
+        let currentReasonIndex = 0;
+        const reasonTextElement = document.getElementById('reason-text');
+
+        function showNextReason() {
+            if (reasonTextElement) {
+                reasonTextElement.style.opacity = 0;
+                setTimeout(() => {
+                    currentReasonIndex = (currentReasonIndex + 1) % reasons.length;
+                    reasonTextElement.textContent = reasons[currentReasonIndex];
+                    reasonTextElement.style.opacity = 1;
+                }, 500); // Match CSS transition
+            }
+        }
+        if (reasonTextElement) {
+            reasonTextElement.textContent = reasons[0]; // Show first reason immediately
+            setInterval(showNextReason, 5000); // Change reason every 5 seconds
+        }
+
+
+        // Tap to Reveal Personal Message
+        const messageContainer = document.getElementById('message-container');
+        const revealPrompt = document.getElementById('reveal-prompt');
+        const personalNoteContent = document.getElementById('personal-note-content');
+
+        if (messageContainer && revealPrompt && personalNoteContent) {
+            messageContainer.addEventListener('click', function() {
+                revealPrompt.style.display = 'none';
+                personalNoteContent.style.display = 'block';
+                // Optional: Remove the event listener after first click
+                // messageContainer.removeEventListener('click', arguments.callee);
+            });
+        }
+    </script>
 </body>
 </html>
