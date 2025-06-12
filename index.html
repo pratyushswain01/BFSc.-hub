@@ -3,69 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ★★ CUSTOMIZE THIS TITLE ★★ -->
-    <title>Our Forever Chapter | [Your Name] & [Her Name]</title>
+    <title>Our Forever Chapter | A Love Story</title>
+    <!-- Adding Boxicons for elegant icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
-        /* --- FONTS --- */
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap');
+        /* --- FONTS (Added an elegant cursive font for signatures) --- */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&family=Great+Vibes&display=swap');
 
-        /* --- BASIC SETUP --- */
+        /* --- ENHANCED DESIGN SYSTEM --- */
         :root {
-            --primary-color: #333;
-            --secondary-color: #6a0dad; /* A romantic purple */
-            --background-color: #fdfaf6;
-            --text-color: #444;
+            --primary-color: #2c2c2c;
+            --secondary-color: #8a4baf; /* Kept the beautiful romantic purple */
+            --accent-color: #c5a572;   /* A soft, elegant gold for highlights */
+            --background-color: #fdfbf9;
+            --text-color: #4a4a4a;
             --heading-font: 'Playfair Display', serif;
             --body-font: 'Montserrat', sans-serif;
+            --signature-font: 'Great Vibes', cursive;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: var(--body-font);
             color: var(--text-color);
             background-color: var(--background-color);
             line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- GORGEOUS ANIMATIONS --- */
+        @keyframes zoomIn {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         section {
-            padding: 100px 5%;
+            padding: 120px 5%;
             text-align: center;
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            overflow: hidden;
         }
-        
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        section.visible { opacity: 1; transform: translateY(0); }
 
-        h1, h2, h3 {
+        h2 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
             font-family: var(--heading-font);
             color: var(--primary-color);
         }
+        p { max-width: 700px; margin: 0 auto 20px auto; font-size: 1.1rem; }
 
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        p {
-            max-width: 700px;
-            margin: 0 auto 20px auto;
-            font-size: 1.1rem;
-        }
-
-        /* --- SECTION 1: HERO WELCOME --- */
+        /* --- SECTION 1: CINEMATIC HERO WELCOME --- */
         .hero {
             display: flex;
             flex-direction: column;
@@ -75,392 +70,322 @@
             color: white;
             padding: 20px;
             position: relative;
-            /* ★★ REPLACE THIS BACKGROUND IMAGE ★★ */
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
+            overflow: hidden; /* Important for zoom effect */
+        }
+        .hero-background {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1512330646210-39a1917ac0a9?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            animation: zoomIn 20s ease-out infinite alternate;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
         .hero h1 {
-            font-size: 4.5rem;
+            font-size: 5rem;
             color: white;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+            animation: fadeInUp 1.2s ease-out 0.5s both;
         }
         .hero h3 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             font-family: var(--body-font);
             font-weight: 400;
             color: white;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+            animation: fadeInUp 1.2s ease-out 1s both;
         }
 
-        /* --- SECTION 2: THE LETTER --- */
-        #letter {
-            background: var(--background-color);
-        }
-        #letter p {
-            font-size: 1.2rem;
+        /* --- SECTION 2: THE LETTER WITH SIGNATURE --- */
+        #letter { background: var(--background-color); }
+        #letter p { font-size: 1.2rem; text-align: left; }
+        .signature {
+            font-family: var(--signature-font);
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-top: 20px;
             text-align: left;
         }
 
-        /* --- SECTION 3: TIMELINE OF US --- */
-        #timeline {
-            background: #fff;
-        }
-        .timeline-container {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .timeline-container::after {
-            content: '';
-            position: absolute;
-            width: 3px;
-            background-color: #e0e0e0;
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -1.5px;
-        }
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            background-color: inherit;
-            width: 50%;
-        }
-        .timeline-item.left {
-            left: 0;
-        }
-        .timeline-item.right {
-            left: 50%;
-        }
-        .timeline-item::after {
-            content: ' ';
-            position: absolute;
-            width: 25px;
-            height: 25px;
-            right: -14px;
-            background-color: white;
-            border: 4px solid var(--secondary-color);
-            top: 25px;
-            border-radius: 50%;
-            z-index: 1;
-        }
-        .timeline-item.right::after {
-            left: -12px;
-        }
-        .timeline-content {
-            padding: 20px 30px;
-            background-color: white;
-            position: relative;
-            border-radius: 6px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        .timeline-content h3 { font-size: 1.5rem; color: var(--secondary-color); }
-        .timeline-content span { font-weight: 500; }
+        /* --- SECTION 3: ELEGANT TIMELINE --- */
+        #timeline { background: #fff; border-radius: 20px; margin: 0 5%; padding: 120px 5%; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
+        .timeline-container { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline-container::after { content: ''; position: absolute; width: 3px; background-color: #eee; top: 0; bottom: 0; left: 50%; margin-left: -1.5px; }
+        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
+        .timeline-item.left { left: 0; }
+        .timeline-item.right { left: 50%; }
+        .timeline-item::after { content: ' '; position: absolute; width: 25px; height: 25px; right: -14px; background-color: white; border: 4px solid var(--secondary-color); top: 25px; border-radius: 50%; z-index: 1; transition: transform 0.3s ease; }
+        .timeline-item:hover::after { transform: scale(1.2); }
+        .timeline-item.right::after { left: -12px; }
+        .timeline-content { padding: 25px 35px; background-color: white; position: relative; border-radius: 8px; border-left: 5px solid var(--accent-color); text-align: left; box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+        .timeline-content h3 { font-size: 1.6rem; color: var(--secondary-color); }
 
-        /* --- SECTION 4: AI MAGIC --- */
-        #ai-magic {
-            background: linear-gradient(135deg, #1e1e1e, #2d2d2d);
-            color: #e0e0e0;
-        }
-        #ai-magic h2 {
-            color: #fff;
-        }
-        #ai-magic h3 {
-            font-family: var(--body-font);
-            font-weight: 400;
-            color: #ccc;
-        }
-        .ai-box {
-            margin-top: 40px;
-            padding: 30px;
-            border: 1px solid var(--secondary-color);
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 1.1rem;
-            text-align: left;
-            line-height: 2;
-        }
-        .ai-box::before {
-            content: ">> INCOMING TRANSMISSION...";
-            color: #0f0;
-            display: block;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
+        /* --- SECTION 4: INTERACTIVE AI MAGIC --- */
+        #ai-magic { background: linear-gradient(135deg, #1e1e1e, #2d2d2d); color: #e0e0e0; border-radius: 20px; margin: 0 5%; }
+        #ai-magic h2 { color: #fff; }
+        #ai-magic h3 { font-family: var(--body-font); font-weight: 400; color: #ccc; }
+        .ai-box { margin-top: 40px; padding: 35px; border: 1px solid var(--secondary-color); border-radius: 10px; background: rgba(255, 255, 255, 0.05); max-width: 700px; margin-left: auto; margin-right: auto; font-family: 'Courier New', Courier, monospace; font-size: 1.2rem; text-align: left; line-height: 2; }
+        #typewriter::after { content: '_'; animation: blink 0.7s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+        .ai-box::before { content: ">> INCOMING TRANSMISSION..."; color: #00ff7f; display: block; margin-bottom: 15px; font-weight: bold; }
 
-        /* --- SECTION 5: GALLERY OF US --- */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            margin-top: 40px;
-        }
-        .gallery-grid img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .gallery-grid img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
+        /* --- SECTION 5: FULL-SCREEN GALLERY --- */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 40px; }
+        .gallery-item { position: relative; overflow: hidden; border-radius: 8px; cursor: pointer; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.4s ease; }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-overlay i { font-size: 40px; color: white; }
+        /* Lightbox styling */
+        .lightbox { display: none; position: fixed; z-index: 1000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; }
+        .lightbox img { max-width: 90%; max-height: 80%; }
+        .lightbox-close { position: absolute; top: 30px; right: 40px; color: white; font-size: 40px; cursor: pointer; }
 
-        /* --- SECTION 6: WHY I LOVE YOU --- */
-        #reasons {
-            background: #fff;
-        }
-        .reasons-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 40px;
-        }
-        .reason-card {
-            background: var(--background-color);
-            padding: 30px;
-            border-radius: 10px;
-            width: 300px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-        .reason-card h4 { font-size: 1.2rem; margin-bottom: 10px; color: var(--secondary-color); }
+        /* --- SECTION 6: ICON-ENHANCED REASONS --- */
+        #reasons { background: #fff; }
+        .reasons-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 40px; }
+        .reason-card { background: var(--background-color); padding: 35px; border-radius: 10px; width: 320px; text-align: left; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .reason-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .reason-icon { font-size: 2.5rem; color: var(--secondary-color); margin-bottom: 15px; }
+        .reason-card h4 { font-family: var(--heading-font); font-size: 1.4rem; margin-bottom: 10px; color: var(--primary-color); }
 
-        /* --- SECTION 7: FINAL PROMISE --- */
-        .footer {
-            height: 80vh;
-            color: white;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            /* ★★ REPLACE THIS BACKGROUND IMAGE ★★ */
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.pexels.com/photos/3299903/pexels-photo-3299903.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
-        }
-        .footer h1 { font-size: 3.5rem; color: white; margin-bottom: 10px; }
-        .footer h2 { font-size: 2.5rem; color: white; }
-        .footer .credits {
-            position: absolute;
-            bottom: 20px;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.7);
-        }
+        /* --- SECTION 7: EPIC FINAL PROMISE --- */
+        .footer { height: 80vh; color: white; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow: hidden; }
+        .footer-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover; animation: zoomIn 22s ease-out infinite alternate-reverse; }
+        .footer-content { position: relative; z-index: 2; }
+        .footer h1 { font-size: 4rem; color: white; margin-bottom: 10px; text-shadow: 2px 2px 10px rgba(0,0,0,0.7); }
+        .footer h2 { font-size: 2.8rem; color: white; text-shadow: 1px 1px 5px rgba(0,0,0,0.7); }
+        .footer .credits { position: absolute; bottom: 20px; font-size: 0.9rem; color: rgba(255,255,255,0.7); }
 
-        /* --- RESPONSIVE DESIGN --- */
+        /* --- MOBILE RESPONSIVE DESIGN --- */
         @media (max-width: 768px) {
-            h1 { font-size: 3rem; }
+            .hero h1 { font-size: 2.8rem; }
+            .hero h3 { font-size: 1.2rem; }
             h2 { font-size: 2rem; }
-            .hero h1 { font-size: 3.5rem; }
-            
-            .timeline-container::after { left: 31px; }
-            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .footer h1 { font-size: 2.2rem; }
+            .footer h2 { font-size: 1.6rem; }
+            section, #timeline { padding: 80px 5%; }
+            .timeline-container::after { left: 20px; }
+            .timeline-item { width: 100%; padding-left: 55px; padding-right: 15px; }
             .timeline-item.left, .timeline-item.right { left: 0; }
-            .timeline-item::after { left: 15px; }
+            .timeline-item::after { left: 6px; }
+            .reason-card { width: 100%; }
+            .ai-box { font-size: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ============================================= -->
-    <!-- SECTION 1: THE HERO WELCOME                   -->
-    <!-- ============================================= -->
     <header class="hero" id="hero">
-        <!-- ★★ CUSTOMIZE WITH HER NAME ★★ -->
-        <h1>To My Future, My Forever, My Lovely wife </h1>
-        <h3>A little corner of the internet, dedicated entirely to the love of my life.</h3>
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <h1>To My Future, My Forever, My Lovely wife</h1>
+            <h3>A little corner of the internet, dedicated entirely to the love of my life.</h3>
+        </div>
     </header>
 
     <main>
-        <!-- ============================================= -->
-        <!-- SECTION 2: A LETTER FROM MY HEART             -->
-        <!-- ============================================= -->
         <section id="letter">
             <h2>A Promise Written in Pixels</h2>
-            <!-- ★★ CUSTOMIZE THE NAMES AND THE LETTER ★★ -->
             <p>
                 My Dearest Lovely baby,
                 <br><br>
-                The world knows us as two different persons  . But in my heart, we are already a single story. They might say we aren't husband and wife *yet*, but my soul has known you as its partner for a lifetime.
+                The world knows us as two different persons. But in my heart, we are already a single story. They might say we aren't husband and wife *yet*, but my soul has known you as its partner for a lifetime.
                 <br><br>
                 Before you, my life was a series of moments. With you, it became a story filled with color, laughter, and a sense of purpose I never knew was missing. You are the calm in my storm, the spark in my day, and the beautiful, steady rhythm my heart beats to.
                 <br><br>
                 This page isn't just a collection of memories; it's a testament. It's a promise, written for the world to see but meant only for your eyes, that my commitment to you is as real and as vast as the sky. Every day with you is a gift, and every thought of our future is my greatest happiness.
                 <br><br>
                 With all my love, now and for all our tomorrows,
-                <br>
-                <strong>Your Husband </strong>
             </p>
+            <p class="signature">Your Husband</p>
         </section>
 
-        <!-- ============================================= -->
-        <!-- SECTION 3: OUR STORY: A TIMELINE OF US        -->
-        <!-- ============================================= -->
         <section id="timeline">
-    <h2>The Moments That Made Us</h2>
-    <div class="timeline-container">
-
-        <div class="timeline-item left">
-            <div class="timeline-content">
-                <h3>✨ When We Met</h3>
-                <p>A simple conversation, a spark we didn’t see coming. From strangers to something unexplainably special — it all began right there.</p>
+            <h2>The Moments That Made Us</h2>
+            <div class="timeline-container">
+                <!-- Timeline items remain the same -->
+                 <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>✨ When We Met</h3>
+                        <p>A simple conversation, a spark we didn’t see coming. From strangers to something unexplainably special — it all began right there.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>🌱 When We Truly Saw Each Other</h3>
+                        <p>We began to understand each other deeply — not just the smiles, but the silences, the fears, and the dreams. Our souls started speaking.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>🌧️ Through the Storms</h3>
+                        <p>Every tough moment, every low phase — we didn’t run, we held on. We learned to turn pain into strength, and doubts into deeper trust.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>❤️ Choosing Each Other</h3>
+                        <p>Through the chaos and calm, the easy and the hard — we made one choice again and again: us. No matter what, we never let go.</p>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h3>🌸 The Little Big Moments</h3>
+                        <p>From late-night talks to surprise smiles, every little thing became a memory. We found magic in the ordinary just by being together.</p>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h3>🏡 Where We Stand Now</h3>
+                        <p>One year, countless memories. Stronger, closer, and more in love than ever — building something real, something forever, together.</p>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <div class="timeline-item right">
-            <div class="timeline-content">
-                <h3>🌱 When We Truly Saw Each Other</h3>
-                <p>We began to understand each other deeply — not just the smiles, but the silences, the fears, and the dreams. Our souls started speaking.</p>
-            </div>
-        </div>
-
-        <div class="timeline-item left">
-            <div class="timeline-content">
-                <h3>🌧️ Through the Storms</h3>
-                <p>Every tough moment, every low phase — we didn’t run, we held on. We learned to turn pain into strength, and doubts into deeper trust.</p>
-            </div>
-        </div>
-
-        <div class="timeline-item right">
-            <div class="timeline-content">
-                <h3>❤️ Choosing Each Other</h3>
-                <p>Through the chaos and calm, the easy and the hard — we made one choice again and again: us. No matter what, we never let go.</p>
-            </div>
-        </div>
-
-        <div class="timeline-item left">
-            <div class="timeline-content">
-                <h3>🌸 The Little Big Moments</h3>
-                <p>From late-night talks to surprise smiles, every little thing became a memory. We found magic in the ordinary just by being together.</p>
-            </div>
-        </div>
-
-        <div class="timeline-item right">
-            <div class="timeline-content">
-                <h3>🏡 Where We Stand Now</h3>
-                <p>One year, countless memories. Stronger, closer, and more in love than ever — building something real, something forever, together.</p>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-
-        <!-- ============================================= -->
-        <!-- SECTION 4: THE AI MAGIC                       -->
-        <!-- ============================================= -->
         <section id="ai-magic">
             <h2>A Message From Our Future</h2>
             <h3>I asked an AI to simulate a message from me, ten years from now, to you. This is what it sent back.</h3>
             <div class="ai-box">
-                "Hello my love, it's me. Or, the me from your future. I’m writing this sitting in the garden of the home we built together. The sun is setting, and I can hear your laughter from the kitchen. Don't worry, I won't spoil all the surprises, but I want you to know something: everything you're dreaming of for us? It's even better. The challenges we faced made us stronger, the joys we shared became legendary family stories, and the love... that love you feel right now? It just deepens, like a beautiful, endless ocean. I still look at you and feel like the luckiest man in the world. I'll see you soon. Love, Your Husband."
+                <span id="typewriter" data-text="Hello my love, it's me. Or, the me from your future. I’m writing this sitting in the garden of the home we built together. The sun is setting, and I can hear your laughter from the kitchen. Don't worry, I won't spoil all the surprises, but I want you to know something: everything you're dreaming of for us? It's even better. The challenges we faced made us stronger, the joys we shared became legendary family stories, and the love... that love you feel right now? It just deepens, like a beautiful, endless ocean. I still look at you and feel like the luckiest man in the world. I'll see you soon. Love, Your Husband."></span>
             </div>
         </section>
         
-        <!-- ============================================= -->
-        <!-- SECTION 5: GALLERY OF US                      -->
-        <!-- ============================================= -->
         <section id="gallery">
             <h2>Our Little Infinities</h2>
             <p>A collection of moments, big and small, we must plan shortly</p>
             <div class="gallery-grid">
-                <!-- ★★ REPLACE THESE WITH YOUR PHOTOS. ADD MORE IF YOU LIKE! ★★ -->
-                            <div class="gallery-grid">
-                <!-- Images representing our love story -->
-                
-                <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80" alt="The beautiful journey we are on together">
-                <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=1200&q=80" alt="Cozy mornings and a lifetime of coffee with you">
-                <img src="https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?auto=format&fit=crop&w=1200&q=80" alt="Our love, written in the stars">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80" alt="The beautiful journey we are on together">
+                    <div class="gallery-overlay"><i class='bx bx-expand'></i></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=1200&q=80" alt="Cozy mornings and a lifetime of coffee with you">
+                    <div class="gallery-overlay"><i class='bx bx-expand'></i></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1532677610-184555100852?auto=format&fit=crop&w=1200&q=80" alt="The magic and sparkle you bring to my life">
+                    <div class="gallery-overlay"><i class='bx bx-expand'></i></div>
+                </div>
             </div>
         </section>
 
-        <!-- ============================================= -->
-        <!-- SECTION 6: WHY I LOVE YOU                     -->
-        <!-- ============================================= -->
         <section id="reasons">
-    <h2>Just a Few of a Million Reasons Why I Love You</h2>
-    <div class="reasons-container">
-        <div class="reason-card">
-            <h4>Your Smile</h4>
-            <p>Your smile isn’t just beautiful — it’s magic. It brightens my darkest days, calms my storms, and reminds me why love exists.</p>
-        </div>
-        <div class="reason-card">
-            <h4>Your Strength</h4>
-            <p>You carry your pain with elegance and wear your courage like a crown. Watching you persevere inspires me to never give up.</p>
-        </div>
-        <div class="reason-card">
-            <h4>Your Mind</h4>
-            <p>The way you think, question, and dream fascinates me. Your thoughts are a galaxy I could get lost in forever.</p>
-        </div>
-        <div class="reason-card">
-            <h4>Your Heart</h4>
-            <p>Your kindness isn’t just rare — it’s extraordinary. You love selflessly, give endlessly, and make this world softer by being in it.</p>
-        </div>
-        <div class="reason-card">
-            <h4>Your Laugh</h4>
-            <p>That laugh — it's a melody I never tire of. It's happiness, freedom, and pure joy wrapped in a sound that feels like home.</p>
-        </div>
-        <div class="reason-card">
-            <h4>The Way You Make Me *Me*</h4>
-            <p>With you, I don’t have to pretend. You accept me, challenge me, and make me feel like the best version of myself is already within reach.</p>
-        </div>
-        <div class="reason-card">
-            <h4>Your Presence</h4>
-            <p>Even in silence, your presence speaks volumes. I feel safest, most seen, and most loved just by being near you.</p>
-        </div>
-        <div class="reason-card">
-            <h4>Your Passion</h4>
-            <p>The way you chase your dreams, speak about your interests, and pour your soul into what you love makes me fall deeper every day.</p>
-        </div>
-        <div class="reason-card">
-            <h4>Your Eyes</h4>
-            <p>They’re more than beautiful — they’re honest. In your eyes, I see trust, warmth, and a future I want to walk into forever.</p>
-        </div>
-        <div class="reason-card">
-            <h4>Your Love</h4>
-            <p>The way you love — fiercely, fully, and fearlessly — has redefined what love means to me. It’s all I ever hoped for and more.</p>
-        </div>
-    </div>
-</section>
+            <h2>A Few of a Million Reasons I Love You</h2>
+            <div class="reasons-container">
+                <div class="reason-card">
+                    <i class='bx bxs-heart-circle reason-icon'></i>
+                    <h4>Your Smile</h4>
+                    <p>Your smile isn’t just beautiful — it’s magic. It brightens my darkest days and reminds me why love exists.</p>
+                </div>
+                <div class="reason-card">
+                    <i class='bx bxs-shield-alt-2 reason-icon'></i>
+                    <h4>Your Strength</h4>
+                    <p>You carry pain with elegance and wear courage like a crown. Watching you persevere inspires me to never give up.</p>
+                </div>
+                <div class="reason-card">
+                    <i class='bx bxs-brain reason-icon'></i>
+                    <h4>Your Mind</h4>
+                    <p>The way you think, question, and dream fascinates me. Your thoughts are a galaxy I could get lost in forever.</p>
+                </div>
+                <div class="reason-card">
+                    <i class='bx bxs-florist reason-icon'></i>
+                    <h4>Your Heart</h4>
+                    <p>Your kindness is extraordinary. You love selflessly, give endlessly, and make this world softer by being in it.</p>
+                </div>
+                <div class="reason-card">
+                    <i class='bx bxs-happy-heart-eyes reason-icon'></i>
+                    <h4>Your Laugh</h4>
+                    <p>That laugh is a melody I never tire of. It's pure joy wrapped in a sound that feels like home.</p>
+                </div>
+                <div class="reason-card">
+                    <i class='bx bxs-star reason-icon'></i>
+                    <h4>The Way You Make Me *Me*</h4>
+                    <p>With you, I don’t have to pretend. You make me feel like the best version of myself is already within reach.</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
-
-    <!-- ============================================= -->
-    <!-- SECTION 7: THE FINAL PROMISE                  -->
-    <!-- ============================================= -->
     <footer class="footer">
-        <h1>You are my today and all of my tomorrows.</h1>
-        <!-- ★★ CUSTOMIZE WITH HER NAME ★★ -->
-        <h2>I Love You, My sweet wife .</h2>
-        <div class="credits">
-            <!-- ★★ CUSTOMIZE WITH YOUR NAME & YEAR ★★ -->
-            Made with a lifetime of love by Your Husband 
+        <div class="footer-background"></div>
+        <div class="footer-content">
+            <h1>You are my today and all of my tomorrows.</h1>
+            <h2>I Love You, My sweet wife.</h2>
+            <div class="credits">
+                Made with a lifetime of love by Your Husband 
+            </div>
         </div>
     </footer>
 
+    <!-- Lightbox Structure -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close">×</span>
+        <img src="" alt="Full-screen view" id="lightbox-img">
+    </div>
+
     <script>
-        // Simple script for fade-in animation on scroll
+        // --- 1. SCROLL FADE-IN ANIMATION ---
         const sections = document.querySelectorAll('section');
-
-        const options = {
-            root: null,
-            threshold: 0.1,
-            rootMargin: "0px"
-        };
-
-        const observer = new IntersectionObserver(function(entries, observer) {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    return;
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Check if it's the typewriter section to start typing
+                    if(entry.target.id === 'ai-magic') {
+                        startTypewriter();
+                    }
+                    observer.unobserve(entry.target);
                 }
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
             });
-        }, options);
+        }, { threshold: 0.1 });
+        sections.forEach(section => { observer.observe(section); });
 
-        sections.forEach(section => {
-            observer.observe(section);
+        // --- 2. INTERACTIVE TYPEWRITER EFFECT ---
+        let typewriterStarted = false;
+        function startTypewriter() {
+            if (typewriterStarted) return;
+            typewriterStarted = true;
+            const target = document.getElementById('typewriter');
+            const text = target.getAttribute('data-text');
+            let i = 0;
+            target.innerHTML = ""; // Clear existing text
+            const typing = setInterval(() => {
+                if (i < text.length) {
+                    target.innerHTML += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typing);
+                }
+            }, 50); // Speed of typing
+        }
+
+        // --- 3. FULL-SCREEN GALLERY LIGHTBOX ---
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const closeBtn = document.querySelector('.lightbox-close');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const imgSrc = item.querySelector('img').src;
+                lightboxImg.src = imgSrc;
+                lightbox.style.display = 'flex';
+            });
+        });
+
+        const closeLightbox = () => {
+            lightbox.style.display = 'none';
+        }
+        closeBtn.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) { // Close only if clicking on the background
+                closeLightbox();
+            }
         });
     </script>
 </body>
