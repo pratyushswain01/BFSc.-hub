@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Universe For You, My Love ❤️</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600&family=Dancing+Script:wght@500;700&display=swap" rel="stylesheet">
+    <!-- ★★ CUSTOMIZE THIS TITLE ★★ -->
+    <title>Our Forever Chapter | [Your Name] & [Her Name]</title>
     <style>
+        /* --- FONTS --- */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500&display=swap');
+
+        /* --- BASIC SETUP --- */
         :root {
-            --bg-dark-blue: #0f0c29;
-            --bg-mid-purple: #302b63;
-            --bg-light-purple: #24243e;
-            --accent-gold: #ffaf40;
-            --accent-lavender: #e6e6fa;
-            --text-light: #f0f0f0;
-            --text-mid: #c0c0c0;
-            --card-bg: rgba(48, 43, 99, 0.6); /* Semi-transparent card */
-            --glow-effect: 0 0 15px rgba(230, 230, 250, 0.5), 0 0 25px rgba(230, 230, 250, 0.3);
+            --primary-color: #333;
+            --secondary-color: #6a0dad; /* A romantic purple */
+            --background-color: #fdfaf6;
+            --text-color: #444;
+            --heading-font: 'Playfair Display', serif;
+            --body-font: 'Montserrat', sans-serif;
         }
 
         * {
@@ -24,395 +25,443 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(to bottom right, var(--bg-dark-blue), var(--bg-mid-purple), var(--bg-light-purple));
-            color: var(--text-light);
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            min-height: 100vh;
-            padding: 30px 15px;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Starry Background */
-        #stars, #stars2, #stars3 {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background-repeat: repeat;
-            background-size: cover;
-        }
-        #stars {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><circle cx="1" cy="1" r="0.5" fill="%23aaa" /><circle cx="5" cy="7" r="0.3" fill="%23bbb" /><circle cx="8" cy="3" r="0.4" fill="%23ccc" /></svg>');
-            animation: twinkle 60s linear infinite;
-        }
-        #stars2 {
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="3" cy="15" r="0.6" fill="%23ccc" /><circle cx="12" cy="5" r="0.4" fill="%23ddd" /><circle cx="18" cy="18" r="0.5" fill="%23eee" /></svg>');
-            animation: twinkle 90s linear infinite reverse;
-        }
-        @keyframes twinkle {
-            from { background-position: 0 0; }
-            to { background-position: -1000px 500px; }
-        }
-
-
-        .container {
-            background-color: rgba(0,0,0,0.2); /* Darker, more transparent container */
-            backdrop-filter: blur(5px);
-            padding: 30px 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            max-width: 750px;
-            width: 100%;
-            text-align: center;
-            z-index: 1;
-            border: 1px solid rgba(230, 230, 250, 0.1);
-        }
-
-        header h1 {
-            font-family: 'Playfair Display', serif;
-            color: var(--accent-lavender);
-            font-size: 2.6em;
-            margin-bottom: 10px;
-            text-shadow: var(--glow-effect);
-            letter-spacing: 1px;
-        }
-
-        .subheader {
-            font-size: 1.1em;
-            color: var(--text-mid);
-            margin-bottom: 35px;
-            font-style: italic;
+            font-family: var(--body-font);
+            color: var(--text-color);
+            background-color: var(--background-color);
+            line-height: 1.8;
         }
 
         section {
-            margin-bottom: 35px;
-            padding: 25px;
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            border: 1px solid rgba(230, 230, 250, 0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 100px 5%;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-        section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3), var(--glow-effect);
+        
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
+        h1, h2, h3 {
+            font-family: var(--heading-font);
+            color: var(--primary-color);
+        }
 
         h2 {
-            font-family: 'Playfair Display', serif;
-            color: var(--accent-gold);
-            font-size: 1.9em;
+            font-size: 2.5rem;
             margin-bottom: 20px;
-            letter-spacing: 0.5px;
-        }
-        h3 {
-            font-family: 'Dancing Script', cursive;
-            color: var(--accent-lavender);
-            font-size: 1.8em;
-            margin-top: 0;
-            margin-bottom: 15px;
         }
 
-        .virtual-hug .heart-icon {
-            font-size: 4em;
-            margin: 15px 0;
-            color: #ff6b81; /* A brighter pink for the heart */
-            animation: pulse-heart 1.8s infinite ease-in-out;
-            text-shadow: 0 0 10px #ff6b81, 0 0 20px #ff6b81;
-        }
-        @keyframes pulse-heart {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.15); }
+        p {
+            max-width: 700px;
+            margin: 0 auto 20px auto;
+            font-size: 1.1rem;
         }
 
-        .cute-gif {
-            max-width: 60%;
-            height: auto;
-            border-radius: 12px;
-            margin-top: 10px;
-            border: 3px solid var(--accent-lavender);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
-        /* Reasons I Love You Carousel */
-        .love-reasons-carousel {
-            min-height: 60px; /* Adjust as needed */
+        /* --- SECTION 1: HERO WELCOME --- */
+        .hero {
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
-            padding: 10px;
-            background-color: rgba(0,0,0,0.2);
-            border-radius: 10px;
-            margin: 15px 0;
+            align-items: center;
+            height: 100vh;
+            color: white;
+            padding: 20px;
+            position: relative;
+            /* ★★ REPLACE THIS BACKGROUND IMAGE ★★ */
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.pexels.com/photos/1024960/pexels-photo-1024960.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
         }
-        #reason-text {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.7em;
-            color: var(--accent-lavender);
-            text-shadow: 0 0 8px var(--accent-lavender);
-            transition: opacity 0.5s ease-in-out;
+        .hero h1 {
+            font-size: 4.5rem;
+            color: white;
+        }
+        .hero h3 {
+            font-size: 1.5rem;
+            font-family: var(--body-font);
+            font-weight: 400;
+            color: white;
         }
 
-        .video-container {
-            margin-bottom: 20px;
+        /* --- SECTION 2: THE LETTER --- */
+        #letter {
+            background: var(--background-color);
         }
-        .video-container h4 {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
-            font-size: 1.1em;
-            color: var(--accent-gold);
-            margin-bottom: 8px;
+        #letter p {
+            font-size: 1.2rem;
             text-align: left;
         }
-        .video-container iframe {
+
+        /* --- SECTION 3: TIMELINE OF US --- */
+        #timeline {
+            background: #fff;
+        }
+        .timeline-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: #e0e0e0;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        .timeline-item.left {
+            left: 0;
+        }
+        .timeline-item.right {
+            left: 50%;
+        }
+        .timeline-item::after {
+            content: ' ';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -14px;
+            background-color: white;
+            border: 4px solid var(--secondary-color);
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .timeline-item.right::after {
+            left: -12px;
+        }
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .timeline-content h3 { font-size: 1.5rem; color: var(--secondary-color); }
+        .timeline-content span { font-weight: 500; }
+
+        /* --- SECTION 4: AI MAGIC --- */
+        #ai-magic {
+            background: linear-gradient(135deg, #1e1e1e, #2d2d2d);
+            color: #e0e0e0;
+        }
+        #ai-magic h2 {
+            color: #fff;
+        }
+        #ai-magic h3 {
+            font-family: var(--body-font);
+            font-weight: 400;
+            color: #ccc;
+        }
+        .ai-box {
+            margin-top: 40px;
+            padding: 30px;
+            border: 1px solid var(--secondary-color);
             border-radius: 10px;
-            max-width: 500px;
-            display: block;
+            background: rgba(255, 255, 255, 0.05);
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            border: 1px solid rgba(230, 230, 250, 0.2);
-        }
-
-        .comfort-kit-list {
-            list-style-type: none;
-            padding-left: 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1rem;
             text-align: left;
+            line-height: 2;
         }
-        .comfort-kit-list li {
-            padding: 8px 0;
-            border-bottom: 1px dashed rgba(230, 230, 250, 0.2);
-            color: var(--text-mid);
-            font-size: 0.95em;
-        }
-        .comfort-kit-list li::before {
-            content: "✨ "; /* Sparkle icon */
-            color: var(--accent-gold);
-            margin-right: 10px;
-        }
-        .comfort-kit-list li:last-child {
-            border-bottom: none;
-        }
-
-        /* Care Coupons */
-        .care-coupons .coupon {
-            background-color: rgba(255, 175, 64, 0.1); /* Light gold transparent */
-            border: 1px solid var(--accent-gold);
-            padding: 15px;
-            margin: 12px auto;
-            border-radius: 10px;
-            max-width: 90%;
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.5em;
-            color: var(--accent-gold);
-            text-shadow: 0 0 5px var(--accent-gold);
-            transition: background-color 0.3s ease;
-        }
-        .care-coupons .coupon:hover {
-            background-color: rgba(255, 175, 64, 0.2);
-        }
-
-        /* Personal Message - Tap to Reveal */
-        .personal-message-container {
-            cursor: pointer;
-            border: 2px dashed var(--accent-lavender);
-            border-radius: 15px;
-            padding: 20px;
-            background-color: rgba(0,0,0,0.3);
-            transition: background-color 0.3s ease;
-        }
-        .personal-message-container:hover {
-            background-color: rgba(0,0,0,0.4);
-        }
-        #reveal-prompt {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.8em;
-            color: var(--accent-lavender);
-            margin-bottom: 0; /* Remove margin if message is hidden */
-        }
-        .note-box {
-            background-color: transparent; /* Note box itself is transparent */
-            padding: 10px 0 0 0; /* Adjust padding */
-            text-align: left;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.1em; /* More readable size */
-            line-height: 1.7;
-            color: var(--text-light);
-            display: none; /* Initially hidden */
-        }
-        .note-box p {
+        .ai-box::before {
+            content: ">> INCOMING TRANSMISSION...";
+            color: #0f0;
+            display: block;
             margin-bottom: 15px;
-        }
-        .note-box .signature {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.5em;
-            color: var(--accent-gold);
-            text-align: right;
+            font-weight: bold;
         }
 
-        footer {
-            margin-top: 30px;
-            font-size: 0.9em;
-            color: var(--text-mid);
+        /* --- SECTION 5: GALLERY OF US --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 40px;
         }
-        footer strong {
-            color: var(--accent-gold);
+        .gallery-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-grid img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        /* Responsive adjustments */
-        @media (max-width: 600px) {
-            body { padding: 20px 10px; }
-            header h1 { font-size: 2.1em; }
-            h2 { font-size: 1.7em; }
-            h3 { font-size: 1.6em; }
-            .container { padding: 25px 20px; }
-            .cute-gif { max-width: 80%; }
-            #reason-text { font-size: 1.4em; }
-            .care-coupons .coupon { font-size: 1.3em; }
-            #reveal-prompt { font-size: 1.5em; }
-            .note-box { font-size: 1em; }
+        /* --- SECTION 6: WHY I LOVE YOU --- */
+        #reasons {
+            background: #fff;
+        }
+        .reasons-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        .reason-card {
+            background: var(--background-color);
+            padding: 30px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .reason-card h4 { font-size: 1.2rem; margin-bottom: 10px; color: var(--secondary-color); }
+
+        /* --- SECTION 7: FINAL PROMISE --- */
+        .footer {
+            height: 80vh;
+            color: white;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* ★★ REPLACE THIS BACKGROUND IMAGE ★★ */
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.pexels.com/photos/3299903/pexels-photo-3299903.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center center/cover;
+        }
+        .footer h1 { font-size: 3.5rem; color: white; margin-bottom: 10px; }
+        .footer h2 { font-size: 2.5rem; color: white; }
+        .footer .credits {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            h2 { font-size: 2rem; }
+            .hero h1 { font-size: 3.5rem; }
+            
+            .timeline-container::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-item.left, .timeline-item.right { left: 0; }
+            .timeline-item::after { left: 15px; }
         }
     </style>
 </head>
 <body>
-    <div id="stars"></div>
-    <div id="stars2"></div>
-    <!-- <div id="stars3"></div> You can add more layers for denser stars -->
 
-    <div class="container">
-        <header>
-            <h1>A Universe of Comfort for My Dearest </h1>
-            <p class="subheader">When the world feels heavy, know that my love for you is a galaxy, vast and constant.</p>
-        </header>
+    <!-- ============================================= -->
+    <!-- SECTION 1: THE HERO WELCOME                   -->
+    <!-- ============================================= -->
+    <header class="hero" id="hero">
+        <!-- ★★ CUSTOMIZE WITH HER NAME ★★ -->
+        <h1>To My Future, My Forever, My Lovely wife </h1>
+        <h3>A little corner of the internet, dedicated entirely to the love of my life.</h3>
+    </header>
 
-        <section class="virtual-hug">
-            <h2>A Cosmic Embrace</h2>
-            <div class="heart-icon">❤️</div>
-            <p>Imagine my arms around you, a hug as warm and infinite as the stars. You are cherished.</p>
+    <main>
+        <!-- ============================================= -->
+        <!-- SECTION 2: A LETTER FROM MY HEART             -->
+        <!-- ============================================= -->
+        <section id="letter">
+            <h2>A Promise Written in Pixels</h2>
+            <!-- ★★ CUSTOMIZE THE NAMES AND THE LETTER ★★ -->
+            <p>
+                My Dearest Lovely baby,
+                <br><br>
+                The world knows us as two different persons  . But in my heart, we are already a single story. They might say we aren't husband and wife *yet*, but my soul has known you as its partner for a lifetime.
+                <br><br>
+                Before you, my life was a series of moments. With you, it became a story filled with color, laughter, and a sense of purpose I never knew was missing. You are the calm in my storm, the spark in my day, and the beautiful, steady rhythm my heart beats to.
+                <br><br>
+                This page isn't just a collection of memories; it's a testament. It's a promise, written for the world to see but meant only for your eyes, that my commitment to you is as real and as vast as the sky. Every day with you is a gift, and every thought of our future is my greatest happiness.
+                <br><br>
+                With all my love, now and for all our tomorrows,
+                <br>
+                <strong>Your Husband </strong>
+            </p>
         </section>
 
-        <section class="love-reasons">
-            <h2>Whispers from My Heart</h2>
-            <div class="love-reasons-carousel">
-                <p id="reason-text">Loading reasons I adore you...</p>
+        <!-- ============================================= -->
+        <!-- SECTION 3: OUR STORY: A TIMELINE OF US        -->
+        <!-- ============================================= -->
+        <section id="timeline">
+    <h2>The Moments That Made Us</h2>
+    <div class="timeline-container">
+
+        <div class="timeline-item left">
+            <div class="timeline-content">
+                <h3>✨ When We Met</h3>
+                <p>A simple conversation, a spark we didn’t see coming. From strangers to something unexplainably special — it all began right there.</p>
             </div>
-        </section>
+        </div>
 
-        <section class="comfort-zone">
-            <h2>Your Serenity Nebula</h2>
-            <div class="comfort-item">
-                <h3>A Glimmer of Joy</h3>
-                <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTY4aXBkMjV0c21kbTVmdnZrN2xtdG1idW5paTNwaHNyYjZpZjFtbSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/9d3LQ6TdV2Flo8ODTU/giphy.gif" alt="Cute and comforting GIF" class="cute-gif">
-                <p style="font-size: 0.9em; color: var(--text-mid); margin-top:10px;">(A little something to make you smile)</p>
+        <div class="timeline-item right">
+            <div class="timeline-content">
+                <h3>🌱 When We Truly Saw Each Other</h3>
+                <p>We began to understand each other deeply — not just the smiles, but the silences, the fears, and the dreams. Our souls started speaking.</p>
             </div>
+        </div>
 
-            <div class="comfort-item" style="margin-top: 30px;">
-                <h3>Harmonies of the Cosmos (Relaxing Sounds)</h3>
-                <p style="color: var(--text-mid); margin-bottom:15px;">Let these sounds soothe you. Play one, pause, then another...</p>
-                <div class="video-container">
-                    <h4>Celestial Piano</h4>
-                    <iframe width="100%" height="160" src="https://www.youtube.com/embed/lFcSrYw-ARY" title="YouTube video player - Peaceful Piano" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                </div>
-                <div class="video-container">
-                    <h4>Stardust Rain</h4>
-                    <iframe width="100%" height="160" src="https://www.youtube.com/embed/eKFTSSKCzWA" title="YouTube video player - Gentle Rain" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                </div>
+        <div class="timeline-item left">
+            <div class="timeline-content">
+                <h3>🌧️ Through the Storms</h3>
+                <p>Every tough moment, every low phase — we didn’t run, we held on. We learned to turn pain into strength, and doubts into deeper trust.</p>
             </div>
+        </div>
 
-            <div class="comfort-item" style="margin-top: 30px;">
-                <h3>Your Personal Comfort Constellation:</h3>
-                <ul class="comfort-kit-list">
-                    <li>A warm nebula of your favorite tea/cocoa</li>
-                    <li>Galaxy-sized bar of your go-to comfort chocolate</li>
-                    <li>The softest stardust blanket & a cuddly moon plushie</li>
-                    <li>A gently warming meteor (aka hot water bottle)</li>
-                    <li>Your favorite star-studded movie or show ready to launch</li>
-                </ul>
-                <p style="color: var(--text-mid); margin-top:15px;">Anything you need, my star, just ask.</p>
+        <div class="timeline-item right">
+            <div class="timeline-content">
+                <h3>❤️ Choosing Each Other</h3>
+                <p>Through the chaos and calm, the easy and the hard — we made one choice again and again: us. No matter what, we never let go.</p>
             </div>
-        </section>
+        </div>
 
-        <section class="care-coupons">
-            <h2>Galactic Love Vouchers</h2>
-            <div class="coupon">💫 One Wish Granted (within reason, my love!) 💫</div>
-            <div class="coupon">🌌 Uninterrupted Quiet Time in Your Own Orbit 🌌</div>
-            <div class="coupon">🌠 Your Choice of Takeout, Delivered at Lightspeed 🌠</div>
-            <div class="coupon">💖 A Hug That Lasts as Long as a Supernova 💖</div>
-            <p style="font-size:0.9em; margin-top:15px; color: var(--text-mid);">(Valid across all space and time!)</p>
-        </section>
-
-        <section class="personal-message">
-            <h2>A Message from My Universe to Yours</h2>
-            <div class="personal-message-container" id="message-container">
-                <p id="reveal-prompt">(Tap or Click Here to Read My Heart)</p>
-                <div class="note-box" id="personal-note-content">
-                    <p>My Lovely wife , my shining star,</p>
-                    <p>I know these moments of discomfort feel like navigating an asteroid field. But please remember, you are more brilliant and resilient than any celestial body. Your strength amazes me every single day.</p>
-                    <p>Be gentle with yourself, allow yourself to rest and recharge. I am here, your constant North Star, ready to offer warmth, support, or just a quiet presence. You don't have to face anything alone.</p>
-                    <p>This pain is temporary, like a passing comet, but my love for you is as enduring as the universe itself. You are my everything.</p>
-                    <p class="signature">With all the love in the cosmos,<br>Your Husband ❤️</p>
-                </div>
+        <div class="timeline-item left">
+            <div class="timeline-content">
+                <h3>🌸 The Little Big Moments</h3>
+                <p>From late-night talks to surprise smiles, every little thing became a memory. We found magic in the ordinary just by being together.</p>
             </div>
-        </section>
+        </div>
 
-        <footer>
-            <p>You are <strong>Luminous</strong>, <strong>Strong</strong>, and <strong>Infinitely Loved</strong>. ✨</p>
-        </footer>
+        <div class="timeline-item right">
+            <div class="timeline-content">
+                <h3>🏡 Where We Stand Now</h3>
+                <p>One year, countless memories. Stronger, closer, and more in love than ever — building something real, something forever, together.</p>
+            </div>
+        </div>
+
     </div>
+</section>
+
+
+        <!-- ============================================= -->
+        <!-- SECTION 4: THE AI MAGIC                       -->
+        <!-- ============================================= -->
+        <section id="ai-magic">
+            <h2>A Message From Our Future</h2>
+            <h3>I asked an AI to simulate a message from me, ten years from now, to you. This is what it sent back.</h3>
+            <div class="ai-box">
+                "Hello my love, it's me. Or, the me from your future. I’m writing this sitting in the garden of the home we built together. The sun is setting, and I can hear your laughter from the kitchen. Don't worry, I won't spoil all the surprises, but I want you to know something: everything you're dreaming of for us? It's even better. The challenges we faced made us stronger, the joys we shared became legendary family stories, and the love... that love you feel right now? It just deepens, like a beautiful, endless ocean. I still look at you and feel like the luckiest man in the world. I'll see you soon. Love, Your Husband."
+            </div>
+        </section>
+        
+        <!-- ============================================= -->
+        <!-- SECTION 5: GALLERY OF US                      -->
+        <!-- ============================================= -->
+        <section id="gallery">
+            <h2>Our Little Infinities</h2>
+            <p>A collection of moments, big and small, we must plan shortly</p>
+            <div class="gallery-grid">
+                <!-- ★★ REPLACE THESE WITH YOUR PHOTOS. ADD MORE IF YOU LIKE! ★★ -->
+                            <div class="gallery-grid">
+                <!-- Images representing our love story -->
+                
+                <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80" alt="The beautiful journey we are on together">
+                <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=1200&q=80" alt="Cozy mornings and a lifetime of coffee with you">
+                <img src="https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?auto=format&fit=crop&w=1200&q=80" alt="Our love, written in the stars">
+            </div>
+        </section>
+
+        <!-- ============================================= -->
+        <!-- SECTION 6: WHY I LOVE YOU                     -->
+        <!-- ============================================= -->
+        <section id="reasons">
+    <h2>Just a Few of a Million Reasons Why I Love You</h2>
+    <div class="reasons-container">
+        <div class="reason-card">
+            <h4>Your Smile</h4>
+            <p>Your smile isn’t just beautiful — it’s magic. It brightens my darkest days, calms my storms, and reminds me why love exists.</p>
+        </div>
+        <div class="reason-card">
+            <h4>Your Strength</h4>
+            <p>You carry your pain with elegance and wear your courage like a crown. Watching you persevere inspires me to never give up.</p>
+        </div>
+        <div class="reason-card">
+            <h4>Your Mind</h4>
+            <p>The way you think, question, and dream fascinates me. Your thoughts are a galaxy I could get lost in forever.</p>
+        </div>
+        <div class="reason-card">
+            <h4>Your Heart</h4>
+            <p>Your kindness isn’t just rare — it’s extraordinary. You love selflessly, give endlessly, and make this world softer by being in it.</p>
+        </div>
+        <div class="reason-card">
+            <h4>Your Laugh</h4>
+            <p>That laugh — it's a melody I never tire of. It's happiness, freedom, and pure joy wrapped in a sound that feels like home.</p>
+        </div>
+        <div class="reason-card">
+            <h4>The Way You Make Me *Me*</h4>
+            <p>With you, I don’t have to pretend. You accept me, challenge me, and make me feel like the best version of myself is already within reach.</p>
+        </div>
+        <div class="reason-card">
+            <h4>Your Presence</h4>
+            <p>Even in silence, your presence speaks volumes. I feel safest, most seen, and most loved just by being near you.</p>
+        </div>
+        <div class="reason-card">
+            <h4>Your Passion</h4>
+            <p>The way you chase your dreams, speak about your interests, and pour your soul into what you love makes me fall deeper every day.</p>
+        </div>
+        <div class="reason-card">
+            <h4>Your Eyes</h4>
+            <p>They’re more than beautiful — they’re honest. In your eyes, I see trust, warmth, and a future I want to walk into forever.</p>
+        </div>
+        <div class="reason-card">
+            <h4>Your Love</h4>
+            <p>The way you love — fiercely, fully, and fearlessly — has redefined what love means to me. It’s all I ever hoped for and more.</p>
+        </div>
+    </div>
+</section>
+
+
+    <!-- ============================================= -->
+    <!-- SECTION 7: THE FINAL PROMISE                  -->
+    <!-- ============================================= -->
+    <footer class="footer">
+        <h1>You are my today and all of my tomorrows.</h1>
+        <!-- ★★ CUSTOMIZE WITH HER NAME ★★ -->
+        <h2>I Love You, My sweet wife .</h2>
+        <div class="credits">
+            <!-- ★★ CUSTOMIZE WITH YOUR NAME & YEAR ★★ -->
+            Made with a lifetime of love by Your Husband 
+        </div>
+    </footer>
 
     <script>
-        // Reasons I Love You Carousel
-        const reasons = [
-            "Your smile lights up my universe.",
-            "Your kindness is a guiding star.",
-            "You're stronger than a supernova.",
-            "Your laughter is my favorite cosmic melody.",
-            "Being with you feels like home among the stars.",
-            "You make ordinary moments extraordinary.",
-            "Your intelligence shines so brightly.",
-            "You are my greatest adventure.",
+        // Simple script for fade-in animation on scroll
+        const sections = document.querySelectorAll('section');
 
-            // Add more personal reasons here!
-        ];
-        let currentReasonIndex = 0;
-        const reasonTextElement = document.getElementById('reason-text');
+        const options = {
+            root: null,
+            threshold: 0.1,
+            rootMargin: "0px"
+        };
 
-        function showNextReason() {
-            if (reasonTextElement) {
-                reasonTextElement.style.opacity = 0;
-                setTimeout(() => {
-                    currentReasonIndex = (currentReasonIndex + 1) % reasons.length;
-                    reasonTextElement.textContent = reasons[currentReasonIndex];
-                    reasonTextElement.style.opacity = 1;
-                }, 500); // Match CSS transition
-            }
-        }
-        if (reasonTextElement) {
-            reasonTextElement.textContent = reasons[0]; // Show first reason immediately
-            setInterval(showNextReason, 5000); // Change reason every 5 seconds
-        }
-
-
-        // Tap to Reveal Personal Message
-        const messageContainer = document.getElementById('message-container');
-        const revealPrompt = document.getElementById('reveal-prompt');
-        const personalNoteContent = document.getElementById('personal-note-content');
-
-        if (messageContainer && revealPrompt && personalNoteContent) {
-            messageContainer.addEventListener('click', function() {
-                revealPrompt.style.display = 'none';
-                personalNoteContent.style.display = 'block';
-                // Optional: Remove the event listener after first click
-                // messageContainer.removeEventListener('click', arguments.callee);
+        const observer = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
             });
-        }
+        }, options);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
     </script>
 </body>
 </html>
