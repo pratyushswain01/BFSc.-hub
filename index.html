@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aquatic Animal Health Study Guide</title>
+    <!-- ** NEW ** Font Awesome for lock icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         /* CSS styling is included directly in the HTML file for simplicity */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
@@ -17,6 +19,7 @@
             --correct-color: #2ddc71;
             --incorrect-color: #e74c3c;
             --light-grey: #ecf0f1;
+            --locked-color: #b0bec5;
         }
 
         * {
@@ -62,7 +65,7 @@
         
         #home-view {
             text-align: center;
-            padding: 4rem 0;
+            padding: 2rem 0;
         }
 
         #home-view h2 {
@@ -71,6 +74,19 @@
             margin-bottom: 1rem;
         }
         
+        /* ** NEW ** Styles for motivational message */
+        #motivational-message {
+            color: #c62828;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 2rem auto;
+            max-width: 650px;
+            padding: 1.25rem;
+            border: 2px dashed #c62828;
+            border-radius: 10px;
+            line-height: 1.5;
+        }
+
         /* Read View Styles */
         .pdf-section {
             background: var(--card-bg-color);
@@ -138,6 +154,15 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         
+        #poll-topic-title {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid var(--light-grey);
+            padding-bottom: 1rem;
+        }
+
         #progress-bar {
             text-align: right;
             font-size: 0.9rem;
@@ -152,7 +177,6 @@
             color: var(--text-color);
         }
         
-        /* ** NEW ** Styles for answer input container */
         .answer-input-wrapper {
             display: flex;
             align-items: center;
@@ -242,7 +266,7 @@
              margin-bottom: 1rem;
         }
         
-        footer {
+        .sticky-footer {
             background: var(--card-bg-color);
             display: flex;
             justify-content: center;
@@ -253,7 +277,7 @@
             gap: 1rem;
         }
 
-        footer button {
+        .sticky-footer button {
             background-color: var(--primary-color);
             color: white;
             border: none;
@@ -263,16 +287,30 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        footer button:hover {
+        .sticky-footer button:hover {
             background-color: var(--secondary-color);
             transform: scale(1.05);
         }
 
-        footer button.active {
+        .sticky-footer button.active {
             background-color: var(--secondary-color);
             box-shadow: 0 0 10px rgba(0, 180, 216, 0.7);
+        }
+
+        /* ** NEW ** Styles for locked button */
+        .sticky-footer button.locked {
+            background-color: var(--locked-color);
+            color: #fff;
+            cursor: not-allowed;
+        }
+        .sticky-footer button.locked:hover {
+            background-color: var(--locked-color);
+            transform: none;
         }
         
         .action-buttons {
@@ -296,8 +334,7 @@
         #submit-answer-btn:hover, #next-question-btn:hover, #restart-poll-btn:hover, #back-to-selection-btn:hover, #back-to-poll-selection-btn:hover {
              background-color: var(--secondary-color);
         }
-
-        /* ** NEW ** Style for the back button to be less prominent */
+        
         #back-to-poll-selection-btn {
             background-color: transparent;
             color: var(--primary-color);
@@ -309,6 +346,15 @@
         }
         
         .hidden { display: none; }
+
+        .credit-footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+            color: #888;
+            margin-top: 2rem;
+        }
+
     </style>
 </head>
 <body>
@@ -320,6 +366,8 @@
     <main id="main-content">
         <div id="home-view" class="view">
             <h2>Welcome!</h2>
+            <!-- ** NEW ** Motivational Message -->
+            <p id="motivational-message">Pratyush has made this page with a great love and care, so plz prepare like you will value his creativity</p>
             <p>Select 'Read' to review all questions, or 'Poll' for interactive practice.</p>
         </div>
 
@@ -333,6 +381,7 @@
                 <!-- Poll selection buttons populated by JS -->
             </div>
             <div id="poll-container" class="hidden">
+                <h3 id="poll-topic-title"></h3>
                 <p id="progress-bar"></p>
                 <div id="question-card">
                     <p id="poll-question"></p>
@@ -340,7 +389,6 @@
                     <div class="action-buttons">
                         <button id="submit-answer-btn">Check Answer</button>
                         <button id="next-question-btn" class="hidden">Next Question</button>
-                        <!-- ** NEW ** Back to topic selection button -->
                         <button id="back-to-poll-selection-btn">Back to Topic Selection</button>
                     </div>
                     <div id="feedback"></div>
@@ -357,9 +405,13 @@
         </div>
     </main>
 
-    <footer>
+    <footer class="sticky-footer">
         <button id="read-btn">Read</button>
         <button id="poll-btn">Poll</button>
+    </footer>
+
+    <footer class="credit-footer">
+        Created by Pratyush Swain
     </footer>
 
     <script>
@@ -671,6 +723,7 @@
             const pollView = document.getElementById('poll-view');
             const pollSelection = document.getElementById('poll-selection');
             const pollContainer = document.getElementById('poll-container');
+            const pollTopicTitleEl = document.getElementById('poll-topic-title');
             const pollQuestionEl = document.getElementById('poll-question');
             const answerInputsContainer = document.getElementById('answer-inputs');
             const submitAnswerBtn = document.getElementById('submit-answer-btn');
@@ -680,12 +733,12 @@
             const pollResults = document.getElementById('poll-results');
             const restartPollBtn = document.getElementById('restart-poll-btn');
             const backToSelectionBtn = document.getElementById('back-to-selection-btn');
-            const backToPollSelectionBtn = document.getElementById('back-to-poll-selection-btn'); // ** NEW **
+            const backToPollSelectionBtn = document.getElementById('back-to-poll-selection-btn');
 
             let currentPollIndex = -1;
             let currentQuestionIndex = 0;
             
-            // ** NEW ** Voice Recognition Setup
+            // Voice Recognition Setup
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             let recognition;
             if (SpeechRecognition) {
@@ -700,6 +753,12 @@
 
             // --- View Toggling ---
             const toggleView = (targetViewId) => {
+                // ** NEW ** Prevent switching to Read view if a poll is active.
+                if (targetViewId === 'read-view' && readBtn.classList.contains('locked')) {
+                    alert('Please complete the current poll first before reading.');
+                    return;
+                }
+
                 const targetView = document.getElementById(targetViewId);
                 const isActive = targetView.classList.contains('active');
 
@@ -736,7 +795,7 @@
                         html += `
                             <div class="qa-pair">
                                 <strong>Q${index + 1}: ${item.q.replaceAll('__________', '<u>        </u>')}</strong>
-                                <span>Answer: ${item.a.replaceAll('|', ', ')}</span>
+                                <span>Answer: ${item.a.replaceAll('|', ', ').replace(/\//g, ' / ')}</span>
                             </div>
                         `;
                     });
@@ -762,6 +821,12 @@
                 pollContainer.classList.remove('hidden');
                 pollResults.classList.add('hidden');
                 document.getElementById('question-card').classList.remove('hidden');
+                pollTopicTitleEl.textContent = studyData[currentPollIndex].title;
+                
+                // ** NEW ** Lock the read button
+                readBtn.classList.add('locked');
+                readBtn.innerHTML = '<i class="fas fa-lock"></i> Read';
+
                 displayQuestion();
             };
             
@@ -769,7 +834,6 @@
                 const questionData = studyData[currentPollIndex].questions[currentQuestionIndex];
                 const answers = questionData.a.split('|');
 
-                // Reset state
                 submitAnswerBtn.classList.remove('hidden');
                 nextQuestionBtn.classList.add('hidden');
                 feedbackEl.textContent = '';
@@ -782,7 +846,6 @@
                     </svg>`;
 
                 for(let i = 0; i < answers.length; i++){
-                    // Add voice recognition button if supported
                     const voiceBtnHTML = recognition ? `
                         <button class="voice-recognition-btn" data-target-index="${i}" title="Answer with voice">
                             ${micIconSVG}
@@ -806,7 +869,6 @@
                 let allCorrect = true;
 
                 userInputs.forEach((input, index) => {
-                    // Check if multiple correct options exist (e.g., "falls/declines")
                     const possibleCorrectAnswers = correctAnswers[index].split('/').map(ans => ans.trim().toLowerCase());
                     const userAnswer = input.value.trim().toLowerCase();
 
@@ -816,7 +878,7 @@
                         input.classList.add('incorrect');
                         allCorrect = false;
                     }
-                    input.disabled = true; // Lock the input after checking
+                    input.disabled = true;
                 });
                 
                 if (allCorrect) {
@@ -837,7 +899,6 @@
                  if (currentQuestionIndex < studyData[currentPollIndex].questions.length) {
                      displayQuestion();
                  } else {
-                     // End of poll
                      document.getElementById('question-card').classList.add('hidden');
                      pollResults.classList.remove('hidden');
                  }
@@ -847,6 +908,10 @@
                 pollResults.classList.add('hidden');
                 pollContainer.classList.add('hidden');
                 pollSelection.classList.remove('hidden');
+
+                // ** NEW ** Unlock the read button
+                readBtn.classList.remove('locked');
+                readBtn.innerHTML = 'Read';
             };
 
             // Event Listeners for Poll
@@ -857,7 +922,6 @@
                 }
             });
 
-            // ** NEW ** Delegated listener for voice buttons
             answerInputsContainer.addEventListener('click', e => {
                 const voiceBtn = e.target.closest('.voice-recognition-btn');
                 if (voiceBtn && recognition) {
@@ -872,12 +936,12 @@
                     
                     recognition.onresult = (event) => {
                         const transcript = event.results[0][0].transcript;
-                        targetInput.value = transcript.trim().replace('.', ''); // remove trailing period
+                        targetInput.value = transcript.trim().replace(/[.,?]/g, '');
                     };
 
                     recognition.onerror = (event) => {
                         console.error('Speech recognition error:', event.error);
-                        targetInput.placeholder = 'Mic error. Please type.';
+                        targetInput.placeholder = 'Mic error. Try again or type.';
                     };
                     
                     recognition.onend = () => {
@@ -895,7 +959,7 @@
             nextQuestionBtn.addEventListener('click', nextQuestion);
             restartPollBtn.addEventListener('click', () => startPoll(currentPollIndex));
             backToSelectionBtn.addEventListener('click', resetAndSelectPoll);
-            backToPollSelectionBtn.addEventListener('click', resetAndSelectPoll); // ** NEW **
+            backToPollSelectionBtn.addEventListener('click', resetAndSelectPoll);
 
             // Initializations
             populateReadView();
