@@ -3,390 +3,905 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SVG Interactive Boat Terminology Guide</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <title>Aquatic Animal Health Study Guide</title>
     <style>
-        /* General Body & Font Styling */
+        /* CSS styling is included directly in the HTML file for simplicity */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
         :root {
-            --primary-color: #005a9c;
-            --secondary-color: #e6f3ff;
-            --highlight-color: #ff4757;
-            --highlight-fill: rgba(255, 71, 87, 0.2);
-            --tooltip-bg: rgba(0, 0, 0, 0.85);
-            --tooltip-header: #ffde59;
-            --bg-color: #f0f4f8;
+            --primary-color: #0077b6;
+            --secondary-color: #00b4d8;
+            --background-color: #f0f8ff;
             --text-color: #333;
-            --card-bg: #ffffff;
-            --border-color: #d1d9e6;
+            --card-bg-color: #ffffff;
+            --correct-color: #2ddc71;
+            --incorrect-color: #e74c3c;
+            --light-grey: #ecf0f1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
             color: var(--text-color);
-            margin: 0;
-            padding: 20px;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         header {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 2rem 1rem;
             text-align: center;
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         header h1 {
-            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
         }
 
-        /* Main Layout */
-        .main-container {
+        main {
+            flex: 1;
+            padding: 2rem 1rem;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .view.hidden {
+            display: none;
+        }
+        
+        #home-view {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        #home-view h2 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Read View Styles */
+        .pdf-section {
+            background: var(--card-bg-color);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .pdf-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--light-grey);
+            padding-bottom: 0.5rem;
+        }
+
+        .qa-pair {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        
+        .qa-pair strong {
+            display: block;
+            color: #555;
+        }
+        
+        .qa-pair span {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        /* Poll View Styles */
+        #poll-selection {
+            text-align: center;
+        }
+        
+        #poll-selection h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .poll-select-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            margin: 0.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        .poll-select-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        #poll-container {
+            background: var(--card-bg-color);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        #progress-bar {
+            text-align: right;
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        #question-card p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+        
+        /* ** NEW ** Styles for answer input container */
+        .answer-input-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-grow: 1;
+            margin-bottom: 10px;
+        }
+
+        .voice-recognition-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .voice-recognition-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: #888;
+            transition: fill 0.3s;
+        }
+
+        .voice-recognition-btn:hover svg {
+            fill: var(--secondary-color);
+        }
+        
+        .voice-recognition-btn.listening svg {
+             fill: var(--incorrect-color);
+        }
+
+        #answer-inputs {
             display: flex;
             flex-wrap: wrap;
-            gap: 20px;
-            max-width: 1400px;
-            margin: auto;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+            align-items: center;
         }
 
-        /* Left Panel - Terminology List */
-        .left-panel {
-            flex: 1;
-            min-width: 300px;
-            background: var(--card-bg);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .left-panel h2 {
-            margin-top: 0;
-            color: var(--primary-color);
-        }
-
-        .terminology-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .terminology-list li {
-            padding: 12px 15px;
+        #answer-inputs input[type="text"] {
+            padding: 0.7rem;
+            border: 2px solid #ccc;
             border-radius: 5px;
-            margin-bottom: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            border: 1px solid var(--border-color);
-            user-select: none;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            flex: 1 1 150px;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
-        /* Active state for highlighted list item */
-        .terminology-list li.active, .terminology-list li:hover {
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            font-weight: 500;
-            transform: translateX(5px);
-            border-color: var(--primary-color);
+        #answer-inputs input[type="text"]:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 5px rgba(0, 180, 216, 0.5);
         }
         
-        /* Right Panel - Interactive Image */
-        .right-panel {
-            flex: 3;
-            min-width: 600px;
-        }
-
-        .svg-container {
-            background: var(--card-bg);
-            border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        #boat-svg {
-            width: 100%;
-            height: auto;
+        #answer-inputs input.correct {
+            border-color: var(--correct-color);
+            background-color: #e8f9f0;
         }
         
-        /* SVG Styling */
-        .boat-hull-profile { stroke: #34495e; stroke-width: 3; fill: #ecf0f1; }
-        .boat-hull-section { stroke: #34495e; stroke-width: 3; fill: #ecf0f1; }
-        .water-line { stroke: #3498db; stroke-width: 2; stroke-dasharray: 10, 5; }
-        .water-fill { fill: #a2d2ff; opacity: 0.4; }
-        .dimension-line { stroke: #7f8c8d; stroke-width: 1.5; }
-        .dimension-text { font-family: 'Roboto', sans-serif; font-size: 14px; font-weight: 500; fill: #2c3e50; }
-        
-        /* Interactive SVG Shapes */
-        .interactive-shape {
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-        }
-
-        /* Highlighting effect on SVG elements */
-        .interactive-shape.highlight {
-            stroke: var(--highlight-color);
-            stroke-width: 4;
-            fill: var(--highlight-fill);
+        #answer-inputs input.incorrect {
+            border-color: var(--incorrect-color);
+            background-color: #fcebeb;
         }
         
-        .interactive-shape.highlight .dimension-text,
-        .interactive-shape.highlight .dimension-line {
-            stroke: var(--highlight-color);
-            fill: var(--highlight-color);
+        #feedback {
+            margin-top: 1rem;
+            font-weight: 600;
         }
 
-        /* Tooltip Styling */
-        #tooltip {
-            position: absolute;
-            display: none;
-            background: var(--tooltip-bg);
+        #feedback.correct {
+            color: var(--correct-color);
+        }
+        #feedback.incorrect {
+            color: var(--incorrect-color);
+        }
+
+        #poll-results {
+            text-align: center;
+        }
+        
+        #poll-results h3 {
+             font-size: 2rem;
+             color: var(--primary-color);
+             margin-bottom: 1rem;
+        }
+        
+        footer {
+            background: var(--card-bg-color);
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+            box-shadow: 0 -4px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            bottom: 0;
+            gap: 1rem;
+        }
+
+        footer button {
+            background-color: var(--primary-color);
             color: white;
-            padding: 15px;
-            border-radius: 8px;
-            max-width: 300px;
-            z-index: 1000;
-            pointer-events: none; /* So the tooltip doesn't block hover events */
-            font-size: 15px;
-            line-height: 1.5;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            transition: opacity 0.2s;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        #tooltip h3 {
-            margin: 0 0 10px 0;
-            color: var(--tooltip-header);
-            font-size: 18px;
-            border-bottom: 1px solid #777;
-            padding-bottom: 5px;
+        footer button:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.05);
         }
 
-        #tooltip p {
-            margin: 0;
+        footer button.active {
+            background-color: var(--secondary-color);
+            box-shadow: 0 0 10px rgba(0, 180, 216, 0.7);
         }
         
-        /* Responsive adjustments for smaller screens */
-        @media (max-width: 900px) {
-            body { padding: 10px; }
-            .main-container { flex-direction: column; }
-            .left-panel, .right-panel { min-width: 100%; }
+        .action-buttons {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
         }
+        
+        #submit-answer-btn, #next-question-btn, #restart-poll-btn, #back-to-selection-btn, #back-to-poll-selection-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #submit-answer-btn:hover, #next-question-btn:hover, #restart-poll-btn:hover, #back-to-selection-btn:hover, #back-to-poll-selection-btn:hover {
+             background-color: var(--secondary-color);
+        }
+
+        /* ** NEW ** Style for the back button to be less prominent */
+        #back-to-poll-selection-btn {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            margin-left: auto; /* Pushes it to the right */
+        }
+        #back-to-poll-selection-btn:hover {
+            background-color: var(--light-grey);
+        }
+        
+        .hidden { display: none; }
     </style>
 </head>
 <body>
-
     <header>
-        <h1>SVG Interactive Boat Terminology Guide</h1>
-        <p>Hover over a term or its corresponding diagram part to learn more.</p>
+        <h1>Aquatic Animal Health Management</h1>
+        <p>Your Interactive Study Guide</p>
     </header>
 
-    <div class="main-container">
-        <!-- Left Panel: The list of terminology -->
-        <div class="left-panel">
-            <h2>Key Terminology</h2>
-            <ul class="terminology-list">
-                <li data-term="loa">Length Overall (LOA)</li>
-                <li data-term="lbp">Length Between Perpendiculars (LBP)</li>
-                <li data-term="beam">Moulded Breadth (Beam)</li>
-                <li data-term="depth">Moulded Depth</li>
-                <li data-term="draught">Draught (Draft)</li>
-                <li data-term="freeboard">Freeboard</li>
-                <li data-term="dwl">Design Waterline (DWL)</li>
-                <li data-term="sheer">Sheer</li>
-                <li data-term="camber">Camber</li>
-                <li data-term="rake">Rake of Stem</li>
-                <li data-term="rise">Rise of Floor</li>
-                <li data-term="bilge">Bilge Radius</li>
-                <li data-term="tumblehome">Tumblehome</li>
-            </ul>
+    <main id="main-content">
+        <div id="home-view" class="view">
+            <h2>Welcome!</h2>
+            <p>Select 'Read' to review all questions, or 'Poll' for interactive practice.</p>
         </div>
 
-        <!-- Right Panel: The interactive boat diagram -->
-        <div class="right-panel">
-            <div class="svg-container">
-                <svg id="boat-svg" viewBox="0 0 1200 600" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                            <path d="M 0 0 L 10 5 L 0 10 z" fill="#7f8c8d" />
-                        </marker>
-                    </defs>
+        <div id="read-view" class="view hidden">
+            <!-- Read content populated by JS -->
+        </div>
 
-                    <!-- Profile View -->
-                    <g transform="translate(50, 50)">
-                        <!-- Water Fill -->
-                        <path class="water-fill" d="M -10 320 H 910 V 500 H -10 Z"/>
-
-                        <!-- Boat Hull Profile -->
-                        <g class="interactive-shape" data-term="sheer">
-                           <path id="sheer-line" class="boat-hull-profile" d="M 100 320 C 300 320, 500 320, 700 320 L 800 280 C 850 250, 880 180, 880 150 M 100 320 C 50 250, 20 180, 20 150"/>
-                        </g>
-
-                        <!-- Design Waterline -->
-                        <g class="interactive-shape" data-term="dwl">
-                           <line id="dwl-line" class="water-line" x1="-10" y1="320" x2="910" y2="320"/>
-                           <text class="dimension-text" x="200" y="310">Design Waterline (DWL)</text>
-                        </g>
-                        
-                        <!-- Rake -->
-                        <g class="interactive-shape" data-term="rake">
-                            <line class="dimension-line" x1="20" y1="150" x2="20" y2="320"/>
-                            <text class="dimension-text" x="25" y="240">Rake</text>
-                        </g>
-                        
-                        <!-- Vertical Perpendiculars -->
-                        <line id="fp-line" class="dimension-line" x1="100" y1="300" x2="100" y2="380" stroke-dasharray="4 4" />
-                        <text class="dimension-text" x="80" y="395">FP</text>
-                        <line id="ap-line" class="dimension-line" x1="800" y1="260" x2="800" y2="380" stroke-dasharray="4 4" />
-                        <text class="dimension-text" x="790" y="395">AP</text>
-                    </g>
-                    
-                    <!-- Section View -->
-                     <g transform="translate(950, 80)">
-                        <!-- Boat Hull Section -->
-                         <path id="camber-line" class="boat-hull-section" d="M 20 150 C 125 120, 230 150, 230 150"/>
-                         <path id="tumblehome-line" class="boat-hull-section" d="M 0 250 C 10 180, 20 160, 20 150"/>
-                         <path class="boat-hull-section" d="M 250 250 C 240 180, 230 160, 230 150"/>
-                         <path id="rise-bilge-line" class="boat-hull-section" d="M 0 250 C 50 300, 100 310, 125 310 S 200 300, 250 250"/>
-                         <text class="dimension-text" x="110" y="80">Midship Section</text>
-                    </g>
-                    
-                    <!-- Dimension Annotations -->
-                    <!-- LOA -->
-                    <g class="interactive-shape" data-term="loa">
-                        <line class="dimension-line" marker-start="url(#arrow)" marker-end="url(#arrow)" x1="70" y1="420" x2="930" y2="420"/>
-                        <text class="dimension-text" x="450" y="440">Length Overall (LOA)</text>
-                    </g>
-                    
-                    <!-- LBP -->
-                    <g class="interactive-shape" data-term="lbp">
-                        <line class="dimension-line" marker-start="url(#arrow)" marker-end="url(#arrow)" x1="150" y1="460" x2="850" y2="460"/>
-                        <text class="dimension-text" x="450" y="480">Length Between Perpendiculars (LBP)</text>
-                    </g>
-                    
-                    <!-- Depth -->
-                    <g class="interactive-shape" data-term="depth">
-                        <line class="dimension-line" marker-start="url(#arrow)" marker-end="url(#arrow)" y1="195" x2="1180" y2="380" x1="1180"/>
-                        <text class="dimension-text" transform="translate(1190, 280) rotate(90)">Moulded Depth</text>
-                    </g>
-                    
-                    <!-- Draught -->
-                    <g class="interactive-shape" data-term="draught">
-                        <line class="dimension-line" marker-start="url(#arrow)" marker-end="url(#arrow)" y1="370" x2="1180" y2="480" x1="1180"/>
-                        <text class="dimension-text" transform="translate(1190, 420) rotate(90)">Draught</text>
-                    </g>
-
-                    <!-- Freeboard -->
-                    <g class="interactive-shape" data-term="freeboard">
-                         <line class="dimension-line" marker-start="url(#arrow)" marker-end="url(#arrow)" y1="230" x2="1100" y2="370" x1="1100"/>
-                        <text class="dimension-text" x="1050" y="300">Freeboard</text>
-                    </g>
-                    
-                    <!-- Beam -->
-                    <g class="interactive-shape" data-term="beam">
-                        <line class="dimension-line" marker-start="url(#arrow)" marker-end="url(#arrow)" x1="950" y1="410" x2="1200" y2="410"/>
-                        <text class="dimension-text" x="1025" y="430">Moulded Breadth (Beam)</text>
-                    </g>
-                    
-                    <!-- Camber -->
-                    <g class="interactive-shape" data-term="camber" transform="translate(950, 80)">
-                        <path class="dimension-line" d="M 125 125 V 150"/>
-                        <text class="dimension-text" x="130" y="140">Camber</text>
-                    </g>
-                    
-                    <!-- Tumblehome -->
-                    <g class="interactive-shape" data-term="tumblehome" transform="translate(950, 80)">
-                        <path class="dimension-line" d="M 20 150 H 0"/>
-                        <text class="dimension-text" x="25" y="145">Tumblehome</text>
-                    </g>
-
-                    <!-- Rise of Floor -->
-                    <g class="interactive-shape" data-term="rise" transform="translate(950, 80)">
-                        <line class="dimension-line" x1="125" y1="310" x2="125" y2="250" />
-                         <line class="dimension-line" x1="0" y1="250" x2="125" y2="250" />
-                        <text class="dimension-text" x="130" y="280">Rise</text>
-                    </g>
-
-                    <!-- Bilge Radius -->
-                    <g class="interactive-shape" data-term="bilge" transform="translate(950, 80)">
-                         <line class="dimension-line" x1="20" y1="250" x2="70" y2="290" />
-                        <text class="dimension-text" x="75" y="300">Bilge Radius</text>
-                    </g>
-                </svg>
+        <div id="poll-view" class="view hidden">
+            <div id="poll-selection">
+                <h3>Select a Poll to Practice</h3>
+                <!-- Poll selection buttons populated by JS -->
+            </div>
+            <div id="poll-container" class="hidden">
+                <p id="progress-bar"></p>
+                <div id="question-card">
+                    <p id="poll-question"></p>
+                    <div id="answer-inputs"></div>
+                    <div class="action-buttons">
+                        <button id="submit-answer-btn">Check Answer</button>
+                        <button id="next-question-btn" class="hidden">Next Question</button>
+                        <!-- ** NEW ** Back to topic selection button -->
+                        <button id="back-to-poll-selection-btn">Back to Topic Selection</button>
+                    </div>
+                    <div id="feedback"></div>
+                </div>
+                <div id="poll-results" class="hidden">
+                    <h3>Poll Complete!</h3>
+                    <p id="poll-score">Great work! You have finished this section.</p>
+                    <div class="action-buttons">
+                        <button id="restart-poll-btn">Practice This Section Again</button>
+                        <button id="back-to-selection-btn">Choose Another Section</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 
-    <!-- The Tooltip (initially hidden) -->
-    <div id="tooltip"></div>
+    <footer>
+        <button id="read-btn">Read</button>
+        <button id="poll-btn">Poll</button>
+    </footer>
 
     <script>
+        // JavaScript logic included directly in the HTML file
+        const studyData = [
+            {
+                "title": "Significance of finfish and shellfish diseases in aquaculture",
+                "id": "sig_full_1",
+                "questions": [
+                    { "q": "The title of the presentation highlights the significance of diseases in both __________ and ___________.", "a": "finfish|shellfish" },
+                    { "q": "The context for the importance of these diseases is the field of __________.", "a": "aquaculture" },
+                    { "q": "A key topic is the application of __________ health management strategies.", "a": "scientific" },
+                    { "q": "The presentation outlines both the strategies for and the __________ of scientific health management.", "a": "benefits" },
+                    { "q": "A structured plan for managing health in aquaculture is referred to as scientific health management __________.", "a": "strategies" },
+                    { "q": "The very first step in investigating a disease outbreak is to gather a thorough __________ __________.", "a": "Case|History" },
+                    { "q": "Observable changes in an animal's appearance or behavior are known as __________ and __________.", "a": "Signs|Symptoms" },
+                    { "q": "To accurately identify a disease, one must employ specific __________ __________.", "a": "Diagnostic|protocols" },
+                    { "q": "A primary goal of diagnostic protocols is the __________ and __________ of the pathogen.", "a": "Detection|identification" },
+                    { "q": "Improving the daily care and environmental conditions of the farmed animals falls under the recommendation of good __________ __________.", "a": "husbandry|practices" },
+                    { "q": "Strategies aimed at preventing diseases before they occur are known as __________ strategies.", "a": "Prophylaxis" },
+                    { "q": "Once a disease is identified, specific __________ __________ must be recommended.", "a": "Treatment|Strategies" },
+                    { "q": "The section on benefits is titled \"Benefits of __________ __________ __________ in aquaculture.\"", "a": "scientific|health|management" },
+                    { "q": "One major benefit of this approach is to prevent the __________ of drugs and chemicals.", "a": "misuse" },
+                    { "q": "By accurately diagnosing issues, farmers can avoid __________ __________ on incorrect treatments.", "a": "wasteful|expenditure" },
+                    { "q": "Scientific health management ensures that the chosen interventions are __________.", "a": "Effective" },
+                    { "q": "A benefit related to environmental impact is that these practices are -.", "a": "Eco-friendly" },
+                    { "q": "The ultimate long-term goal and benefit of these practices is to achieve __________ __________.", "a": "Sustainable|aquaculture" },
+                    { "q": "To create a full health plan, you need recommendations for husbandry, prophylaxis, and __________.", "a": "Treatment" },
+                    { "q": "The process of finding and naming the specific causative agent is called __________ and __________ of pathogen.", "a": "Detection|identification" },
+                    { "q": "Avoiding the overuse or incorrect use of medications is a key benefit, described as preventing the misuse of __________ and __________.", "a": "drug|chemical" },
+                    { "q": "The economic advantage of not spending money on useless treatments is to \"Avoid __________ expenditure.\"", "a": "wasteful" },
+                    { "q": "An approach that works as intended is described as being __________.", "a": "Effective" },
+                    { "q": "Practices that do not harm the surrounding ecosystem are known as -.", "a": "Eco-friendly" },
+                    { "q": "The ability of an aquaculture operation to continue long-term without depleting resources is called __________ aquaculture.", "a": "Sustainable" }
+                ]
+            },
+            {
+                "title": "HOST, PATHOGEN AND ENVIRONMENT INTERACTION",
+                "id": "interaction_full_1",
+                "questions": [
+                    { "q": "The occurrence of disease in aquaculture is explained by the interaction of the Host, __________, and __________.", "a": "Pathogen|Environment" },
+                    { "q": "The specific Venn diagram model that illustrates this three-way interaction is known as __________ model.", "a": "Snieszko's" },
+                    { "q": "In Snieszko's model, disease occurs in the central, overlapping area where the __________, __________, and __________ interact.", "a": "Host|Pathogen|Environment" },
+                    { "q": "In the context of aquaculture, the Host specifically refers to __________ and __________.", "a": "Fish|shellfish" },
+                    { "q": "A disease-causing agent is generally referred to as a __________.", "a": "Pathogen" },
+                    { "q": "Pathogens that are living organisms like bacteria or viruses are classified as __________.", "a": "Infectious" },
+                    { "q": "Pathogens caused by factors like poor diet or water quality are classified as -.", "a": "Non-infectious" },
+                    { "q": "The non-infectious causes of disease are subdivided into __________ and __________.", "a": "Nutritional|Environmental" },
+                    { "q": "The external conditions surrounding the host are known as the __________.", "a": "Environment" },
+                    { "q": "The environment consists of non-living (__________ factors) and living (__________ factors).", "a": "Abiotic|Biotic" },
+                    { "q": "The animal's internal defense system against disease is its __________.", "a": "IMMUNITY" },
+                    { "q": "The general, non-specific immunity found in both fish and shellfish is called __________ immunity.", "a": "Innate" },
+                    { "q": "The more advanced, specific immunity that develops after exposure to a pathogen is called __________ immunity.", "a": "Acquired" },
+                    { "q": "Only __________ are listed as having both innate and acquired immunity.", "a": "Fish" },
+                    { "q": "Shellfish are listed as having only __________ / Non-specific immunity.", "a": "Innate" },
+                    { "q": "The specific study of the immune system in fish is called __________ __________.", "a": "FISH|IMMUNOLOGY" },
+                    { "q": "The formal definition of a pathogen is a \"__________ __________ __________\".", "a": "Disease|causing|agent" },
+                    { "q": "Infectious pathogens for both fish and shellfish include Bacteria, __________, __________, and Fungi.", "a": "Virus|Parasites" },
+                    { "q": "The course code mentioned in relation to the study of fish and shellfish pathogens is -.", "a": "AAHM-223" },
+                    { "q": "Non-Infectious agents are divided into two categories: __________ and __________.", "a": "NUTRITIONAL|ENVIRONMENTAL" },
+                    { "q": "A nutritional imbalance caused by too many nutrients is called __________ nutrients.", "a": "Excess" },
+                    { "q": "A nutritional problem caused by a lack of essential nutrients is called __________ of nutrients.", "a": "Deficiencies" },
+                    { "q": "The overall composition and value of feed is referred to as the __________ of nutrients.", "a": "Quality" },
+                    { "q": "A critical environmental gas that, when deficient, can cause disease is __________.", "a": "Oxygen" },
+                    { "q": "A fundamental water quality parameter that measures acidity or alkalinity is __________.", "a": "pH" },
+                    { "q": "The third part of the disease triad, which includes physical and chemical factors, is the __________.", "a": "ENVIRONMENT" },
+                    { "q": "Non-living environmental factors are known as __________ Factors.", "a": "Abiotic" },
+                    { "q": "An abiotic factor measuring the salt content of water is __________.", "a": "Salinity" },
+                    { "q": "An abiotic factor that measures the water's buffering capacity is __________.", "a": "Alkalinity" },
+                    { "q": "The toxic nitrogenous waste product represented as NH₃ is __________.", "a": "Ammonia" },
+                    { "q": "The toxic intermediate in the nitrogen cycle, represented as NO₂, is __________.", "a": "Nitrite" },
+                    { "q": "The less toxic final product of nitrification, represented as NO₃, is __________.", "a": "Nitrate" },
+                    { "q": "A nutrient that can cause algal blooms, represented as PO₄, is __________.", "a": "Phosphate" },
+                    { "q": "Living components of the environment are known as __________ Factors.", "a": "Biotic" },
+                    { "q": "Microscopic organisms floating in the water column are known as __________.", "a": "Plankton" },
+                    { "q": "Photosynthetic organisms that can form blooms are called __________.", "a": "Algae" },
+                    { "q": "Organisms that live on the bottom of the water body are known as __________.", "a": "Benthos" },
+                    { "q": "Harmful chemical or physical contaminants in the environment are referred to as __________.", "a": "Pollutants" },
+                    { "q": "For disease to occur, a susceptible __________ must be exposed to a virulent __________ in a stressful __________.", "a": "Host|Pathogen|Environment" }
+                ]
+            },
+            {
+                "title": "DISEASE DEVELOPMENT PROCESS IN AQUACULTURE",
+                "id": "devprocess_full_1",
+                "questions": [
+                    { "q": "The very first step in the flow diagram of disease development is the presence of a __________.", "a": "Pathogen" },
+                    { "q": "The pathogen must then make contact with the __________.", "a": "Host" },
+                    { "q": "The third step is the pathogen's __________ into a target __________ / organ.", "a": "Entry|tissue" },
+                    { "q": "After entry, the pathogen begins __________ the __________ __________ of the host.", "a": "Affecting|defense|mechanism" },
+                    { "q": "This interference leads to the __________ __________ of the affected tissue or organ.", "a": "Functional|impairment" },
+                    { "q": "Impaired function causes __________ __________ in the target tissue, which are observable at a microscopic level.", "a": "Pathological|changes" },
+                    { "q": "These changes eventually lead to __________ __________, which are the observable symptoms and signs of disease.", "a": "Clinical|manifestation" },
+                    { "q": "The state of being severely diseased, just before death, is termed __________.", "a": "Morbidity" },
+                    { "q": "The final outcome of the disease process is __________, or death.", "a": "Mortality" },
+                    { "q": "Parasitic pathogens include Protozoans, __________, and Crustaceans.", "a": "Helminthes" },
+                    { "q": "Bacteria are classified based on their cell wall structure as Gram __________ or Gram __________.", "a": "positive|negative" },
+                    { "q": "A fungal infection that spreads throughout the body's systems is called a __________ infection.", "a": "Systemic" },
+                    { "q": "The three main steps in a pathogen's MODE OF ACTION are __________, __________, and __________.", "a": "Attachment|Entry|Establishment" },
+                    { "q": "Structures like flagella, pilli, hooks, and __________ are used by pathogens for attachment.", "a": "Suckers/Tentacles" },
+                    { "q": "Pathogen entry into host cells is often accomplished through the secretion of __________.", "a": "Enzymes" },
+                    { "q": "A pathogen achieves __________ in the host through processes like cell division and reproduction.", "a": "Establishment" },
+                    { "q": "The main portals of entry for pathogens in fish are the skin, __________, and __________.", "a": "Gill|Gut" },
+                    { "q": "In shellfish, common portals of entry include the __________ (outer shell) and __________ (swimming legs).", "a": "Carapace|Pleopodes" },
+                    { "q": "A key target organ for disease in shellfish like shrimp is the __________.", "a": "Hepatopancreas" },
+                    { "q": "The fish's defense system is divided into __________ (Non-specific) and __________ (Specific).", "a": "Innate|Acquired" },
+                    { "q": "The fish's non-specific cellular defense primarily involves __________ and Inflammation.", "a": "Phagocytosis" },
+                    { "q": "The specific immune system of fish uses __________ to produce antibodies.", "a": "B-cells" },
+                    { "q": "The cellular component of the fish's specific immunity is mediated by __________-cells.", "a": "T" },
+                    { "q": "The defense system of shellfish is described as being entirely __________ Immunity / Non-specific.", "a": "Innate" },
+                    { "q": "A key part of the shellfish immune response is the - oxidase system.", "a": "Pro-phenol" },
+                    { "q": "Functional impairment can lead to two types of infection: __________ (short and severe) or __________ (long-term).", "a": "Acute|Chronic" },
+                    { "q": "An acute infection can result in resolution, __________ formation, or __________.", "a": "Exudate|Necrosis" },
+                    { "q": "During loss of function, tissues like skin, gill, and __________ are often affected first.", "a": "gut" },
+                    { "q": "Pathological changes include __________ (cellular changes) and __________ (tissue-level changes).", "a": "Infection|Cellular|Changes" },
+                    { "q": "The mode of action in an acute infection involves capillary __________, which allows fluids and cells to leak out.", "a": "dialysis" },
+                    { "q": "The cells involved in acute inflammation include Neutrophils, __________, Lymphocytes, and Thrombocytes.", "a": "Monocytes" },
+                    { "q": "The type of exudate associated with Furunculosis is __________.", "a": "Suppurative" },
+                    { "q": "The type of exudate associated with Vibriosis is __________.", "a": "Fibrinous" },
+                    { "q": "The cell death process is known as __________, and it can have several forms like Coagulative or Liquifactive.", "a": "Necrosis" },
+                    { "q": "The three types of cellular changes seen in necrotic cells are Pyknosis, Karyohexis, and __________.", "a": "Karyolysis" },
+                    { "q": "A chronic infection is characterized as being __________ but __________.", "a": "Long|severe" },
+                    { "q": "The hallmark of many chronic infections is the formation of a __________.", "a": "Granulomma" },
+                    { "q": "A granulomma consists of layers of __________, fibroblast, and collagen surrounding a pathogen.", "a": "macrophage" },
+                    { "q": "An increase in the size of cells is called __________.", "a": "Hypertrophy" },
+                    { "q": "An increase in the number of cells is called __________.", "a": "Hyperplasia" },
+                    { "q": "A reduction in the size and function of a cell is called Cell __________.", "a": "Atrophy" },
+                    { "q": "When one type of cell changes into another type, this is called __________.", "a": "Metaplasia" },
+                    { "q": "Uncontrolled, abnormal cell growth is known as __________.", "a": "Neoplasia" },
+                    { "q": "Clinical manifestation of disease can be seen in the animal's __________ and physical __________.", "a": "Behaviour|Signs" },
+                    { "q": "A change in normal swimming or feeding patterns is a change in __________.", "a": "BEHAVIOUR" },
+                    { "q": "A visible lesion or change in body shape is a __________.", "a": "SIGN" },
+                    { "q": "The stage where the fish is about to die and health management is no longer effective is __________.", "a": "Morbidity" },
+                    { "q": "Any intervention to save the fish must be taken __________ the stage of morbidity.", "a": "before" },
+                    { "q": "The final step of the disease process, the death of the organism, is called __________.", "a": "Mortality" },
+                    { "q": "The course number associated with the study of host defense mechanisms is AAHM-__________.", "a": "211" }
+                ]
+            },
+            {
+                "title": "Significance of finfish and shellfish diseases in aquaculture (Set 2)",
+                "id": "sig_full_2",
+                "questions": [
+                    { "q": "The main subject is the __________ of finfish and shellfish diseases in aquaculture.", "a": "Significance" },
+                    { "q": "The presentation outlines three key topics: Definition of disease, __________ for disease outbreak, and the Need for __________.", "a": "Reason|health|management" },
+                    { "q": "Disease is defined as an outcome of any __________ in the interaction of the Host, Pathogen, and Environment.", "a": "imbalance" },
+                    { "q": "The definition of disease as an interaction between Host, Pathogen, and Environment was proposed by __________ in __________.", "a": "Sniezko|1974" },
+                    { "q": "The visual representation of how the Host, Pathogen, and Environment interact to cause disease is known as __________ __________.", "a": "Snieszko's|model" },
+                    { "q": "In Snieszko's model, disease occurs at the __________ of the three influencing circles.", "a": "intersection" },
+                    { "q": "The three primary components shown in the disease triad are __________, __________, and __________.", "a": "HOST|PATHOGEN|ENVIRONMENT" },
+                    { "q": "One of the main reasons for disease outbreaks in aquaculture is the __________ of aquaculture practice.", "a": "Intensification" },
+                    { "q": "Keeping too many fish in a small area, known as higher __________ __________, is a major reason for disease outbreaks.", "a": "stocking|density" },
+                    { "q": "The introduction of unhealthy young fish or larvae, described as __________ health status of __________, can cause disease.", "a": "Improper|seed" },
+                    { "q": "Poor environmental conditions, referred to as improper __________ __________, is a key reason for disease.", "a": "water|quality" },
+                    { "q": "The overuse of feed and chemicals, known as the application of higher __________, contributes to disease outbreaks.", "a": "inputs" },
+                    { "q": "Disease can break out due to a lack of knowledge on best aquaculture __________.", "a": "practice" },
+                    { "q": "A major reason for outbreaks is the lack of knowledge on __________ __________ Management.", "a": "Scientific|Health" },
+                    { "q": "One reason there is a need for health management is to safeguard the __________ __________ of fish/shrimp.", "a": "health|status" },
+                    { "q": "Health management is needed to safeguard against __________ __________ due to disease.", "a": "economic|loss" },
+                    { "q": "It is important to safeguard the quality of __________ for future use.", "a": "water" },
+                    { "q": "Health management aims to safeguard against the __________ of pathogen/disease to new areas or stocks.", "a": "transfer" },
+                    { "q": "Ultimately, health management is needed to safeguard the __________ of aquaculture.", "a": "sustainability" }
+                ]
+            },
+            {
+                "title": "Stress in aquaculture and its role in disease development",
+                "id": "stress_full_1",
+                "questions": [
+                    { "q": "This presentation covers stress in aquaculture and its role in __________ __________.", "a": "disease|development" },
+                    { "q": "According to Hans Selye (1950), stress is the sum total of all __________ responses by which an animal tries to maintain normal metabolism.", "a": "physiological" },
+                    { "q": "Selye's definition describes stress as a response to a __________ or __________ force.", "a": "physical|chemical" },
+                    { "q": "Brett (1958) defined stress as a stage where adaptive responses are extended beyond the __________ __________.", "a": "normal|range" },
+                    { "q": "Brett's definition states that stress reduces the chances of __________ significantly.", "a": "survival" },
+                    { "q": "The changes that occur in response to environmental stress are termed as the __________ __________ __________ (GAS).", "a": "General|Adaptation|System" },
+                    { "q": "The GAS consists of non-specific physiological and biochemical changes that take place in __________ phases.", "a": "THREE" },
+                    { "q": "The first stage of GAS, which involves the initial symptoms of stress, is the __________ __________.", "a": "alarm|reaction" },
+                    { "q": "The second stage of GAS, where the body begins to repair itself after the initial shock, is the stage of __________.", "a": "resistance" },
+                    { "q": "The final stage of GAS, resulting from prolonged or chronic stress, is the stage of __________.", "a": "exhaustion" },
+                    { "q": "On the GAS graph, \"Resistance to Stress\" is plotted on the Y-axis against __________ on the X-axis.", "a": "Time" },
+                    { "q": "During the alarm phase of the GAS graph, an animal's resistance to stress initially __________.", "a": "drops" },
+                    { "q": "During the resistance phase, the animal's resistance to stress __________ above normal levels.", "a": "rises" },
+                    { "q": "During the exhaustion phase, the animal's resistance to stress __________ sharply.", "a": "falls/declines" },
+                    { "q": "Handling, netting, and transport are examples of __________ Stress.", "a": "Physical" },
+                    { "q": "Contaminants, pollutants, and low dissolved oxygen (DO) are examples of __________ Stress.", "a": "Chemical" },
+                    { "q": "The fear of predation or acts of cannibalism are examples of __________ Stress.", "a": "Perceived" },
+                    { "q": "The presence of pathogens and active diseases are a form of __________ Stress.", "a": "Biological" },
+                    { "q": "Fish adaptations to stress involve physiological responses categorized as Primary, __________, and __________.", "a": "Secondary|Tertiary" },
+                    { "q": "The Primary Response to stress involves the activation and secretion of __________ like corticosteroids and catecholamines.", "a": "hormones" },
+                    { "q": "The Secondary Response includes the release of __________ into the blood and an increased __________ rate.", "a": "glucose|metabolic" },
+                    { "q": "A secondary response also involves an increase in blood flow in the __________ and changes in blood lactate.", "a": "gill" },
+                    { "q": "The Tertiary Response to stress leads to reduced __________ rate and reduced disease __________.", "a": "growth|resistance" },
+                    { "q": "A tertiary response also results in altered __________ and reduced survivability.", "a": "behaviour" },
+                    { "q": "The hormonal stress response pathway in fish is known as the Hypothalamic-__________-Inter-renal Axis.", "a": "Pituitary" },
+                    { "q": "In this axis, neural stimulation from higher brain centres acts on the __________.", "a": "Hypothalamus" },
+                    { "q": "The Hypothalamus releases __________ (Corticotropin-releasing hormone).", "a": "CRH" },
+                    { "q": "CRH stimulates the __________ gland.", "a": "Pituitary" },
+                    { "q": "The Pituitary gland releases __________ (Adrenocorticotropic hormone).", "a": "ACTH" },
+                    { "q": "ACTH stimulates the __________ tissue to release the stress hormone __________.", "a": "Interrenal|cortisol" },
+                    { "q": "The end result of the Hypothalamic-Pituitary-Inter-renal Axis is an increase of cortisol in the __________ __________.", "a": "Blood|plasma" },
+                    { "q": "In the disease flowchart, the tertiary response to stress leads to __________ immunity, which in turn leads to __________.", "a": "decreased|DISEASE" }
+                ]
+            },
+            {
+                "title": "Pathological Processes: I - INFECTION",
+                "id": "path_infection_1",
+                "questions": [
+                    { "q": "Infection is described as the most __________ way of relationship between host and pathogen.", "a": "intimate" },
+                    { "q": "Infection is defined as the __________ and __________ of microorganisms like bacteria, virus, parasite and fungi in fish.", "a": "invasion|growth" },
+                    { "q": "It is noted that infection is not a synonym for __________.", "a": "inflammation" },
+                    { "q": "The two main types of infection discussed are __________ INFECTION and __________ INFECTION.", "a": "ACUTE|CHRONIC" },
+                    { "q": "An acute infection is characterized by a __________ duration and a __________ course of action.", "a": "short|severe" },
+                    { "q": "Examples of acute infections in fish include __________ and __________.", "a": "Dropsy|Furunoculosis" },
+                    { "q": "A chronic infection is characterized by a __________ duration and a __________ course of action.", "a": "long|severe" },
+                    { "q": "Examples of chronic infections in fish include __________ and Fish __________.", "a": "BKD (Bacterial Kidney Disease)|Tuberoculosis" },
+                    { "q": "In an acute infection, the mode of action involves __________ __________, which is leakage from blood vessels.", "a": "Capillary|dialysis" },
+                    { "q": "The mode of action also includes __________ blood flow to the site of infection.", "a": "increased" },
+                    { "q": "An acute infection results in the presence of __________ and immunogen in the exudate.", "a": "Fibrinogen" },
+                    { "q": "The primary immune cells involved in responding to acute infections are __________, __________, Lymphocytes, and Thrombocytes.", "a": "Neutrophils|Monocytes" },
+                    { "q": "Besides immune cells, fish blood also contains red blood cells, which are called __________.", "a": "RBC (Erythrocytes)" },
+                    { "q": "The three possible results of an acute infection are complete __________, __________ formation, or __________.", "a": "resolution|Exudate|Necrosis" },
+                    { "q": "__________ are fluids emitted by the host through pores or wounds at an infection site.", "a": "Exudates" },
+                    { "q": "Exudates are composed of dead tissue, serum, fibrin, __________, pathogens, and pus.", "a": "leukocytes" },
+                    { "q": "__________ exudate is characterized by neutrophils and leucocytes and is seen in Furunoculosis.", "a": "Suppurative" },
+                    { "q": "__________ exudate is characterized by fibrinogen and is seen in Vibriosis.", "a": "Fibrinous" },
+                    { "q": "__________ exudate is a copious watery fluid, as seen in Dropsy.", "a": "Serous" },
+                    { "q": "__________ exudate involves underlying tissue damage, as seen in BKD.", "a": "Diphtheretic" },
+                    { "q": "__________ exudate is characterized by mucus on a surface, as seen in Gastroenteritis.", "a": "Catarrhal" },
+                    { "q": "__________ is the permanent death of cells in living tissues by autolysis.", "a": "Necrosis" },
+                    { "q": "Necrosis is caused by __________ factors like infection or trauma.", "a": "external" },
+                    { "q": "__________ Necrosis involves the enzymatic digestion of a cell (autolysis).", "a": "Liquifacative" },
+                    { "q": "__________ Necrosis results from a loss of blood supply to the tissues (coagulation).", "a": "Coagulative" },
+                    { "q": "__________ Necrosis is caused by damage to fatty cells or tissue (lipolysis).", "a": "Fat" },
+                    { "q": "The shrinking and darkening of a cell's nucleus during necrosis is called __________.", "a": "Pyknosis" },
+                    { "q": "An example of a disease where pyknosis occurs is __________ Granuloma.", "a": "Corynebacterial" },
+                    { "q": "The rupture and fragmentation of the nucleus during necrosis is called __________.", "a": "Karyohexis" },
+                    { "q": "An example of where Karyohexis occurs is __________ in kidney renal tubules.", "a": "IHN (Infectious Hematopoietic Necrosis)" },
+                    { "q": "The process where nucleic acids are hydrolyzed during cell death is called __________.", "a": "Karyolysis" },
+                    { "q": "An example of where karyolysis is observed is in __________ lesions.", "a": "Skin" },
+                    { "q": "A __________ infection is a type of persistent infection that is eventually cleared by the host.", "a": "chronic" },
+                    { "q": "The main result of a chronic infection is the formation of a __________.", "a": "GRANULOMA" },
+                    { "q": "A granuloma is a white or yellow lesion that can have a soft, hard, or even __________ structure.", "a": "calcified" },
+                    { "q": "A granuloma forms around a pathogen and is surrounded by __________, then fibroblast, and finally collagen.", "a": "macrophages" },
+                    { "q": "Two examples of fish diseases that are characterized by granuloma formation are __________ __________ Disease (BKD) and Fish __________.", "a": "Bacterial|Kidney|Tuberoculosis" }
+                ]
+            },
+            {
+                "title": "Basic Terminologies in AAHM",
+                "id": "terminology_1",
+                "questions": [
+                    { "q": "While a disease is any deviation from normal health, a __________ Disease is specifically one that can be transmitted between hosts.", "a": "Communicable" },
+                    { "q": "The continuous, low-level presence of a disease in a specific population, like Vibriosis being always present in a certain bay, is termed __________.", "a": "Enzootic" },
+                    { "q": "A sudden, widespread outbreak affecting many animals in a specific region, like an outbreak of Koi Herpes Virus in a single state, would be an __________.", "a": "Epizootic" },
+                    { "q": "If that same epizootic disease were to spread across continents and become a worldwide threat, its status would change to __________.", "a": "Panzootic" },
+                    { "q": "A fish cannot report its feelings; therefore, a diagnosis is made based on __________ __________ (objective evidence) and not on __________ (subjective feelings).", "a": "clinical signs|symptoms" },
+                    { "q": "The mere invasion and multiplication of a pathogen is called __________, whereas the resulting state of ill health is called __________.", "a": "Infection|Disease" },
+                    { "q": "A hidden or silent infection with no visible signs is known as a __________ or __________ infection.", "a": "Covert|Sub-acute" },
+                    { "q": "The scientific study of the causes and effects of diseases, including the structural and functional changes they produce, is __________.", "a": "Pathology" },
+                    { "q": "__________ describes how a disease develops from start to finish, while __________ describes a pathogen's ability to cause that disease.", "a": "Pathogenesis|Pathogenicity" },
+                    { "q": "The term __________ is used to quantify a pathogen's degree of harmfulness or its ability to cause severe disease.", "a": "Virulence" },
+                    { "q": "Pathological changes related to blood circulation include __________, which is a reduction in red blood cells.", "a": "Anemia" },
+                    { "q": "The specific pathological condition seen in \"Gas Bubble Disease\" where bubbles form in blood vessels is known as an __________.", "a": "Embolism" },
+                    { "q": "In cases of heart failure in fish, blood can back up in the veins, leading to a passive accumulation known as __________.", "a": "Congestion" },
+                    { "q": "The bulging, blood-filled capillaries that can give gills a clubbed or spotted appearance are an example of __________.", "a": "Telangiectasis" },
+                    { "q": "A post-mortem examination revealing a pale, fatty liver indicates __________ __________, a form of cellular degeneration.", "a": "Fatty|degeneration" },
+                    { "q": "The programmed, orderly process of cell death is called __________, whereas cell death resulting from acute injury is __________.", "a": "Apoptosis|Necrosis" },
+                    { "q": "The decrease in the size of a mature organ is __________, while the increase in its size due to cell enlargement is __________.", "a": "Atrophy|Hypertrophy" },
+                    { "q": "When an organ enlarges due to an increase in the number of cells, the condition is called __________, whereas a tumor resulting from uncontrolled cell division is __________.", "a": "Hyperplasia|Neoplasia" },
+                    { "q": "Inflammation is the body's response to tissue injury, initiated by the release of __________ factors that increase blood flow and capillary permeability.", "a": "vasoactive" },
+                    { "q": "In the process of inflammation, phagocytic cells like neutrophils are attracted to the site of injury by chemical signals, a process known as __________.", "a": "chemotaxis" },
+                    { "q": "Inflammation characterized by a thick, cloudy exudate containing dead cells and enzymes, commonly called pus, is __________.", "a": "Purulent" },
+                    { "q": "The presence of __________ is the key feature of granulomatous inflammation, which is the hallmark of chronic infections.", "a": "macrophages" }
+                ]
+            },
+            {
+                "title": "Pathological processes: II - CELLULAR RESPONSES",
+                "id": "path_cellular_1",
+                "questions": [
+                    { "q": "The five responses—Hyperplasia, Hypertrophy, Cell Atrophy, Metaplasia, and Neoplasia—are all types of __________ __________.", "a": "CELLULAR|RESPONSES" },
+                    { "q": "Hyperplasia is specifically described as an __________ cellular change, meaning the body is adapting to a stimulus.", "a": "adaptive" },
+                    { "q": "The defining characteristic of hyperplasia is an increase in the __________ of cells.", "a": "number" },
+                    { "q": "As shown in the image, hyperplasia in fish gills can lead to the __________ of the secondary lamellae, reducing the surface area for gas exchange.", "a": "fusion" },
+                    { "q": "According to the slide, hyperplasia in fish is often caused by chronic irritation from __________ and __________ infections.", "a": "parasitic|bacterial" },
+                    { "q": "Hypertrophy is defined as an increase in the __________ of an organ or tissue.", "a": "volume" },
+                    { "q": "The increase in organ volume during hypertrophy is due to the __________ of its component cells.", "a": "enlargement" },
+                    { "q": "The diagram comparing the two conditions shows that in __________, the cells get bigger, while in __________, there are more cells of the same size.", "a": "Hypertrophy|Hyperplasia" },
+                    { "q": "Cell Atrophy is a process of reduction in size, __________, and __________ of a cell or organ.", "a": "structure|function" },
+                    { "q": "A key part of the definition of atrophy is that this reduction occurs after the tissue has attained its __________ __________ growth.", "a": "normal|mature" },
+                    { "q": "While hyperplasia causes a thickening of gill tissue, Cell Atrophy would cause a __________ or wasting away of the gill lamellae.", "a": "thinning" },
+                    { "q": "Metaplasia is defined as a __________ change where one cell type changes its function to another.", "a": "reversible" },
+                    { "q": "The specific example given for metaplasia is the __________ taking on the function of the __________, a change that may not be permanent.", "a": "Liver|kidney" },
+                    { "q": "Unlike changes in cell size or number, metaplasia is a change in cell __________ and __________.", "a": "type|function" },
+                    { "q": "Neoplasia is an abnormal mass of tissue, commonly known as a __________.", "a": "tumor" },
+                    { "q": "The growth in neoplasia is distinctive because it proceeds in an __________ manner.", "a": "uncontrolled" },
+                    { "q": "The most critical difference between hyperplasia and neoplasia is that neoplastic growth continues even after the __________ of the __________ of infection.", "a": "cessation|stimuli" },
+                    { "q": "Of the five cellular responses, __________ is the one most directly associated with cancer.", "a": "Neoplasia" },
+                    { "q": "Which two cellular responses result in an increase in the size or mass of an organ? __________ and __________.", "a": "Hyperplasia|Hypertrophy" },
+                    { "q": "Which cellular response represents a decrease or \"wasting away\" of tissue? __________ __________.", "a": "Cell|Atrophy" },
+                    { "q": "Which response is a change in cell specialization and is potentially reversible? __________.", "a": "Metaplasia" },
+                    { "q": "The adaptive increase in the number of pillar cells and epithelial cells in response to a gill irritant is an example of __________.", "a": "Hyperplasia" },
+                    { "q": "If a fish's heart muscle cells get larger in response to high blood pressure, this would be an example of __________.", "a": "Hypertrophy" }
+                ]
+            }
+        ];
+        
         document.addEventListener('DOMContentLoaded', () => {
+            // DOM Elements
+            const readBtn = document.getElementById('read-btn');
+            const pollBtn = document.getElementById('poll-btn');
+            const views = document.querySelectorAll('.view');
+            const readView = document.getElementById('read-view');
+            const pollView = document.getElementById('poll-view');
+            const pollSelection = document.getElementById('poll-selection');
+            const pollContainer = document.getElementById('poll-container');
+            const pollQuestionEl = document.getElementById('poll-question');
+            const answerInputsContainer = document.getElementById('answer-inputs');
+            const submitAnswerBtn = document.getElementById('submit-answer-btn');
+            const nextQuestionBtn = document.getElementById('next-question-btn');
+            const feedbackEl = document.getElementById('feedback');
+            const progressBar = document.getElementById('progress-bar');
+            const pollResults = document.getElementById('poll-results');
+            const restartPollBtn = document.getElementById('restart-poll-btn');
+            const backToSelectionBtn = document.getElementById('back-to-selection-btn');
+            const backToPollSelectionBtn = document.getElementById('back-to-poll-selection-btn'); // ** NEW **
 
-            const definitions = {
-                loa: { title: 'Length Overall (LOA)', desc: "The boat's absolute maximum 'tip-to-tail' length. It's the total space the boat occupies, crucial for docking." },
-                lbp: { title: 'Length Between Perpendiculars (LBP)', desc: "The technical length of the hull's underwater body, measured between the FP and AP. Used for stability and displacement calculations." },
-                beam: { title: 'Moulded Breadth (Beam)', desc: "The widest point of the boat's hull. A key factor for stability and internal space." },
-                depth: { title: 'Moulded Depth', desc: "The vertical height of the hull structure itself, from the bottom (keel) to the main deck. It defines the hull's strength and volume." },
-                draught: { title: 'Draught (Draft)', desc: "The part of the hull that is UNDERWATER. This determines the minimum water depth a boat can safely navigate in." },
-                freeboard: { title: 'Freeboard', desc: "The part of the hull that is ABOVE water, from the deck to the waterline. More freeboard means more safety from waves washing over." },
-                dwl: { title: 'Design Waterline (DWL)', desc: "The line where water is expected to sit when the boat is properly loaded. All design calculations are based on this line." },
-                sheer: { title: 'Sheer', desc: "The gentle upward curve of the deck towards the bow and stern. It helps the boat lift over waves and shed water." },
-                camber: { title: 'Camber', desc: "The side-to-side curve of the deck, making it higher in the middle. It helps drain water off the deck, just like a crowned road." },
-                rake: { title: 'Rake of Stem', desc: "The angle or slant of the bow (stem). It affects how the boat cuts through waves and is a major design aesthetic." },
-                rise: { title: 'Rise of Floor', desc: "The slight V-shape of the hull's bottom at its mid-section. It helps the boat track straight and provides a softer ride." },
-                bilge: { title: 'Bilge Radius', desc: "The curve where the bottom of the hull smoothly meets the sides. It influences water flow and rolling motion." },
-                tumblehome: { title: 'Tumblehome', desc: "When the hull sides curve INWARD as they rise to the deck. A classic design feature that can improve stability." }
-            };
+            let currentPollIndex = -1;
+            let currentQuestionIndex = 0;
+            
+            // ** NEW ** Voice Recognition Setup
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            let recognition;
+            if (SpeechRecognition) {
+                recognition = new SpeechRecognition();
+                recognition.continuous = false;
+                recognition.lang = 'en-US';
+                recognition.interimResults = false;
+                recognition.maxAlternatives = 1;
+            } else {
+                console.log("Speech Recognition not supported in this browser.");
+            }
 
-            const termListItems = document.querySelectorAll('.terminology-list li');
-            const svgShapes = document.querySelectorAll('#boat-svg .interactive-shape');
-            const tooltip = document.getElementById('tooltip');
+            // --- View Toggling ---
+            const toggleView = (targetViewId) => {
+                const targetView = document.getElementById(targetViewId);
+                const isActive = targetView.classList.contains('active');
 
-            const showTooltip = (e, term) => {
-                const definition = definitions[term];
-                if (definition) {
-                    tooltip.innerHTML = `<h3>${definition.title}</h3><p>${definition.desc}</p>`;
-                    tooltip.style.display = 'block';
-                    updateTooltipPosition(e);
+                views.forEach(v => {
+                    v.classList.add('hidden');
+                    v.classList.remove('active');
+                });
+                
+                [readBtn, pollBtn].forEach(b => b.classList.remove('active'));
+
+                if (!isActive) {
+                    targetView.classList.remove('hidden');
+                    targetView.classList.add('active');
+                    document.getElementById(`${targetViewId.split('-')[0]}-btn`).classList.add('active');
+                } else {
+                    document.getElementById('home-view').classList.remove('hidden');
                 }
             };
             
-            const updateTooltipPosition = (e) => {
-                tooltip.style.left = (e.pageX + 15) + 'px';
-                tooltip.style.top = (e.pageY + 15) + 'px';
+            readBtn.addEventListener('click', () => toggleView('read-view'));
+            pollBtn.addEventListener('click', () => toggleView('poll-view'));
+
+
+            // --- Read Mode ---
+            const populateReadView = () => {
+                let html = '';
+                studyData.forEach(pdf => {
+                    html += `
+                        <div class="pdf-section">
+                            <h3>${pdf.title}</h3>
+                            <div class="qa-list">
+                    `;
+                    pdf.questions.forEach((item, index) => {
+                        html += `
+                            <div class="qa-pair">
+                                <strong>Q${index + 1}: ${item.q.replaceAll('__________', '<u>        </u>')}</strong>
+                                <span>Answer: ${item.a.replaceAll('|', ', ')}</span>
+                            </div>
+                        `;
+                    });
+                    html += `</div></div>`;
+                });
+                readView.innerHTML = html;
             };
 
-            const hideTooltip = () => {
-                tooltip.style.display = 'none';
+
+            // --- Poll Mode ---
+            const populatePollSelection = () => {
+                let html = '<h3>Select a Poll to Practice</h3>';
+                studyData.forEach((pdf, index) => {
+                    html += `<button class="poll-select-btn" data-index="${index}">${pdf.title}</button>`;
+                });
+                pollSelection.innerHTML = html;
             };
 
-            const highlightElements = (term) => {
-                clearHighlights();
-                document.querySelector(`li[data-term="${term}"]`)?.classList.add('active');
-                document.querySelectorAll(`.interactive-shape[data-term="${term}"]`).forEach(el => el.classList.add('highlight'));
-            };
-
-            const clearHighlights = () => {
-                termListItems.forEach(item => item.classList.remove('active'));
-                svgShapes.forEach(shape => shape.classList.remove('highlight'));
+            const startPoll = (pdfIndex) => {
+                currentPollIndex = pdfIndex;
+                currentQuestionIndex = 0;
+                pollSelection.classList.add('hidden');
+                pollContainer.classList.remove('hidden');
+                pollResults.classList.add('hidden');
+                document.getElementById('question-card').classList.remove('hidden');
+                displayQuestion();
             };
             
-            const createEventListeners = (element) => {
-                element.addEventListener('mouseenter', (e) => {
-                    const term = element.dataset.term;
-                    highlightElements(term);
-                    showTooltip(e, term);
+            const displayQuestion = () => {
+                const questionData = studyData[currentPollIndex].questions[currentQuestionIndex];
+                const answers = questionData.a.split('|');
+
+                // Reset state
+                submitAnswerBtn.classList.remove('hidden');
+                nextQuestionBtn.classList.add('hidden');
+                feedbackEl.textContent = '';
+                feedbackEl.className = '';
+                
+                let inputHTML = '';
+                const micIconSVG = `
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.49 6-3.31 6-6.72h-1.7z"/>
+                    </svg>`;
+
+                for(let i = 0; i < answers.length; i++){
+                    // Add voice recognition button if supported
+                    const voiceBtnHTML = recognition ? `
+                        <button class="voice-recognition-btn" data-target-index="${i}" title="Answer with voice">
+                            ${micIconSVG}
+                        </button>` : '';
+                    
+                    inputHTML += `
+                        <div class="answer-input-wrapper">
+                            <input type="text" data-index="${i}" placeholder="Answer for blank ${i+1}">
+                            ${voiceBtnHTML}
+                        </div>`;
+                }
+                
+                pollQuestionEl.innerHTML = questionData.q;
+                answerInputsContainer.innerHTML = inputHTML;
+                progressBar.textContent = `Question ${currentQuestionIndex + 1} of ${studyData[currentPollIndex].questions.length}`;
+            };
+            
+            const checkAnswer = () => {
+                const correctAnswers = studyData[currentPollIndex].questions[currentQuestionIndex].a.split('|');
+                const userInputs = answerInputsContainer.querySelectorAll('input');
+                let allCorrect = true;
+
+                userInputs.forEach((input, index) => {
+                    // Check if multiple correct options exist (e.g., "falls/declines")
+                    const possibleCorrectAnswers = correctAnswers[index].split('/').map(ans => ans.trim().toLowerCase());
+                    const userAnswer = input.value.trim().toLowerCase();
+
+                    if (possibleCorrectAnswers.includes(userAnswer)) {
+                        input.classList.add('correct');
+                    } else {
+                        input.classList.add('incorrect');
+                        allCorrect = false;
+                    }
+                    input.disabled = true; // Lock the input after checking
                 });
-                element.addEventListener('mouseleave', () => {
-                    clearHighlights();
-                    hideTooltip();
-                });
-                 element.addEventListener('mousemove', updateTooltipPosition);
+                
+                if (allCorrect) {
+                    feedbackEl.textContent = 'Correct!';
+                    feedbackEl.className = 'correct';
+                } else {
+                    const fullAnswer = correctAnswers.join(', ').replace(/\//g, ' or ');
+                    feedbackEl.textContent = `Incorrect. The correct answer is: ${fullAnswer}`;
+                    feedbackEl.className = 'incorrect';
+                }
+
+                submitAnswerBtn.classList.add('hidden');
+                nextQuestionBtn.classList.remove('hidden');
             };
 
-            termListItems.forEach(createEventListeners);
-            svgShapes.forEach(createEventListeners);
+            const nextQuestion = () => {
+                 currentQuestionIndex++;
+                 if (currentQuestionIndex < studyData[currentPollIndex].questions.length) {
+                     displayQuestion();
+                 } else {
+                     // End of poll
+                     document.getElementById('question-card').classList.add('hidden');
+                     pollResults.classList.remove('hidden');
+                 }
+            };
+            
+            const resetAndSelectPoll = () => {
+                pollResults.classList.add('hidden');
+                pollContainer.classList.add('hidden');
+                pollSelection.classList.remove('hidden');
+            };
+
+            // Event Listeners for Poll
+            pollSelection.addEventListener('click', (e) => {
+                if (e.target.matches('.poll-select-btn')) {
+                    const index = parseInt(e.target.dataset.index);
+                    startPoll(index);
+                }
+            });
+
+            // ** NEW ** Delegated listener for voice buttons
+            answerInputsContainer.addEventListener('click', e => {
+                const voiceBtn = e.target.closest('.voice-recognition-btn');
+                if (voiceBtn && recognition) {
+                    const targetIndex = voiceBtn.dataset.targetIndex;
+                    const targetInput = answerInputsContainer.querySelector(`input[data-index='${targetIndex}']`);
+                    const originalPlaceholder = targetInput.placeholder;
+
+                    recognition.onstart = () => {
+                        voiceBtn.classList.add('listening');
+                        targetInput.placeholder = 'Listening...';
+                    };
+                    
+                    recognition.onresult = (event) => {
+                        const transcript = event.results[0][0].transcript;
+                        targetInput.value = transcript.trim().replace('.', ''); // remove trailing period
+                    };
+
+                    recognition.onerror = (event) => {
+                        console.error('Speech recognition error:', event.error);
+                        targetInput.placeholder = 'Mic error. Please type.';
+                    };
+                    
+                    recognition.onend = () => {
+                        voiceBtn.classList.remove('listening');
+                        if (targetInput.placeholder === 'Listening...') {
+                            targetInput.placeholder = originalPlaceholder;
+                        }
+                    };
+
+                    recognition.start();
+                }
+            });
+
+            submitAnswerBtn.addEventListener('click', checkAnswer);
+            nextQuestionBtn.addEventListener('click', nextQuestion);
+            restartPollBtn.addEventListener('click', () => startPoll(currentPollIndex));
+            backToSelectionBtn.addEventListener('click', resetAndSelectPoll);
+            backToPollSelectionBtn.addEventListener('click', resetAndSelectPoll); // ** NEW **
+
+            // Initializations
+            populateReadView();
+            populatePollSelection();
         });
+
     </script>
 </body>
 </html>
