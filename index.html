@@ -3,358 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inbox (1) - Your Blueprint to LBSNAA</title>
+    <title>BFSc. Study Hub | OUAT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* --- Global Styles & Fonts --- */
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --brand-primary: #0a74bc; --brand-secondary: #0096c7;
+            --bg-main: #f3f6f9; --bg-panel: #ffffff; --bg-nav: #0b2e48;
+            --text-primary: #111827; --text-secondary: #4b5563; --text-light: #f9fafb;
+            --border: #e5e7eb; --hover: #f3f4f6; --shadow: rgba(0, 0, 0, 0.04);
+            --pdf-bg: #374151;
         }
-
-        body {
-            font-family: 'Roboto', 'Arial', sans-serif;
-            background-color: #fff;
-            color: #202124;
-            overflow: hidden; /* Prevents whole page scroll */
+        html.dark-mode {
+             --bg-main: #111827; --bg-panel: #1f2937; --bg-nav: #1f2937;
+             --text-primary: #f9fafb; --text-secondary: #9ca3af;
+             --border: #374151; --hover: #374151; --shadow: rgba(255, 255, 255, 0.05);
+             --pdf-bg: #111827;
         }
-
-        /* --- Main Gmail Layout --- */
-        .gmail-container {
-            display: grid;
-            height: 100vh;
-            grid-template-columns: 256px 1fr;
-            grid-template-rows: 64px 1fr;
-            grid-template-areas:
-                "header header"
-                "sidebar main";
-        }
-
-        /* --- Header (Top Bar) --- */
-        .header {
-            grid-area: header;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            border-bottom: 1px solid #e0e0e0;
-            background-color: #f6f8fc;
-        }
-
-        .header-left, .header-right {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .header-middle {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-        }
-
-        .search-bar {
-            display: flex;
-            align-items: center;
-            background-color: #eaf1fb;
-            width: 100%;
-            max-width: 720px;
-            height: 48px;
-            border-radius: 24px;
-            padding: 0 15px;
-        }
-        .search-bar svg { fill: #5f6368; }
-        .search-bar input {
-            flex-grow: 1;
-            border: none;
-            background: transparent;
-            outline: none;
-            font-size: 16px;
-            margin-left: 15px;
-        }
-
-        .profile-icon {
-            width: 32px;
-            height: 32px;
-            background-color: #6d4caf;
-            border-radius: 50%;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 500;
-        }
-        .header svg { cursor: pointer; fill: #5f6368; }
-
-        /* --- Sidebar (Left Menu) --- */
-        .sidebar {
-            grid-area: sidebar;
-            background-color: #f6f8fc;
-            padding: 8px;
-            padding-top: 16px;
-            border-right: 1px solid #e0e0e0;
-        }
-
-        .compose-btn {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background-color: #c2e7ff;
-            border: none;
-            border-radius: 16px;
-            padding: 16px;
-            font-size: 14px;
-            font-weight: 500;
-            color: #001d35;
-            box-shadow: 0 1px 2px 0 rgba(60,64,67,.3), 0 1px 3px 1px rgba(60,64,67,.15);
-            cursor: pointer;
-            transition: box-shadow 0.1s ease-in-out;
-            margin: 0 8px 16px 0;
-        }
-        .compose-btn:hover { box-shadow: 0 1px 3px 0 rgba(60,64,67,.3), 0 4px 8px 3px rgba(60,64,67,.15); }
-
-        .sidebar-nav ul {
-            list-style: none;
-        }
-        .sidebar-nav li {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            padding: 6px 24px;
-            border-radius: 0 50px 50px 0;
-            font-size: 14px;
-            cursor: pointer;
-        }
-        .sidebar-nav li:hover { background-color: #e8eaed; }
-        .sidebar-nav li.active {
-            background-color: #d3e3fd;
-            font-weight: 700;
-            color: #001d35;
-        }
-        .sidebar-nav svg { fill: #202124; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; font-family: 'Inter', sans-serif; background-color: var(--bg-main); transition: background-color 0.3s; }
+        body { color: var(--text-primary); overflow: hidden; }
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: var(--text-primary); }
         
-        /* --- Main Content (Email View) --- */
-        .main-content {
-            grid-area: main;
-            background-color: #fff;
-            padding: 20px;
-            overflow-y: auto;
-        }
+        #app-loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-nav); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
+        #app-loader img { width: 80px; animation: pulse 1.5s infinite ease-in-out; }
+        #app-loader.fade-out { opacity: 0; pointer-events: none; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; } }
 
-        .email-view {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .email-header h2 {
-            font-size: 24px;
-            font-weight: 400;
-            margin-bottom: 24px;
-        }
-
-        .email-meta {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        .sender-icon {
-            width: 40px;
-            height: 40px;
-            background-color: #006400;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-        .sender-info { flex-grow: 1; }
-        .sender-info strong { font-weight: 500; }
-        .sender-info span { font-size: 12px; color: #5f6368; }
-        .email-date { font-size: 12px; color: #5f6368; }
-
-        /* --- The Email Body --- */
-        .email-body {
-            font-size: 15px;
-            line-height: 1.7;
-            color: #3c4043;
-        }
-        .email-body p {
-            margin-bottom: 1em;
-        }
-
-        .phase-block {
-            margin-bottom: 28px;
-            padding-left: 20px;
-            border-left: 3px solid #005000; /* Dark green border */
-        }
-        .phase-block h3 {
-            font-size: 18px;
-            font-weight: 700;
-            color: #005000; /* Dark green text */
-            margin-bottom: 4px;
-        }
-        .phase-block p {
-            font-size: 15px;
-            margin: 0;
-            color: #3c4043;
-        }
+        .login-container { display: flex; flex-direction:column; justify-content: center; align-items: center; width: 100%; height: 100%; background-color: var(--bg-main); transition: opacity 0.5s ease-out; }
+        .login-box { background-color: var(--bg-panel); padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        html.dark-mode .login-box { box-shadow: 0 10px 30px var(--shadow); }
+        .login-box .logo { width: 60px; margin-bottom: 20px; }
+        .login-box h2 { margin-bottom: 10px; font-size: 1.8rem; }
+        .login-box p { color: var(--text-secondary); margin-bottom: 30px; }
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; font-weight: 500; margin-bottom: 8px; font-size: 0.9rem; }
+        .input-group input { width: 100%; height: 45px; padding: 0 15px; border-radius: 8px; border: 1px solid var(--border); background-color: var(--bg-main); font-size: 1rem; color: var(--text-primary); transition: all 0.2s; }
+        .input-group input:focus { border-color: var(--brand-secondary); box-shadow: 0 0 0 3px rgba(0, 138, 197, 0.2); }
+        #login-btn { width: 100%; height: 45px; border: none; background-color: var(--brand-primary); color: white; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s; position: relative; overflow: hidden; }
+        #login-btn:hover { background-color: var(--brand-secondary); }
+        .login-footer { margin-top: 30px; font-size: 0.8rem; color: var(--text-secondary); }
+        #error-message { color: #e74c3c; margin-top: 15px; font-weight: 500; display: none; }
         
-        .section-divider {
-            border: 0;
-            height: 1px;
-            background-color: #e0e0e0;
-            margin: 30px 0;
-        }
+        .app-container { display: none; width: 100%; height: 100vh; position: relative; }
+        .main-nav { background-color: var(--bg-nav); color: var(--text-light); width: 280px; z-index: 100; display: flex; flex-direction: column; flex-shrink: 0; box-shadow: 2px 0 15px rgba(0,0,0,0.1); transition: transform 0.3s ease, background-color 0.3s; height: 100vh; }
+        .main-nav .header { padding: 25px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        html.dark-mode .main-nav .header { border-bottom-color: var(--border); }
+        .main-nav .logo { width: 48px; height: 48px; margin-right: 15px; }
+        .main-nav h1 { font-size: 1.4rem; color: var(--text-light); } .main-nav span { font-size: 0.8rem; opacity: 0.7; color: var(--text-light); }
+        .semester-menu { list-style: none; padding: 15px 0; overflow-y: auto; flex-grow: 1; }
+        .semester-menu li a, .logout-btn { display: flex; align-items: center; padding: 15px 30px; margin: 2px 15px; border-radius: 8px; color: var(--text-light); text-decoration: none; opacity: 0.8; transition: all 0.2s ease; position: relative; overflow: hidden;}
+        .semester-menu li a:hover, .logout-btn:hover { background-color: rgba(255,255,255,0.08); opacity: 1; }
+        html.dark-mode .semester-menu li a:hover, html.dark-mode .logout-btn:hover { background-color: var(--hover); }
+        .semester-menu li a.active-sem { background-color: var(--brand-secondary); opacity: 1; }
+        .main-nav .logout-btn { background: none; border:none; width:auto; font-size: 1rem; font-family:'Inter', sans-serif; cursor: pointer;}
+        .main-nav .logout-btn:hover { background-color: rgba(231, 76, 60, 0.2); }
+        .semester-menu i, .logout-btn i { width: 30px; font-size: 1.1rem; text-align: center; margin-right: 15px; position: relative; z-index: 2; }
+        .semester-menu span, .logout-btn span { position: relative; z-index: 2; }
+        .nav-footer { margin-top: auto; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+        html.dark-mode .nav-footer { border-top-color: var(--border); }
+        .theme-switcher { display: flex; justify-content: space-between; align-items: center; padding: 12px; background-color: rgba(0,0,0,0.2); border-radius: 8px; margin-bottom: 15px; }
+        html.dark-mode .theme-switcher { background-color: #2c3541; }
+        .theme-switcher label { font-weight: 500; color: var(--text-light); }
+        .toggle-switch { position: relative; display: inline-block; width: 50px; height: 28px; } .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #555; transition: .4s; border-radius: 28px; }
+        .slider:before { position: absolute; content: "\f185"; font-family: 'Font Awesome 6 Free'; font-weight: 900; display: flex; justify-content: center; align-items: center; color: #555; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--brand-secondary); }
+        input:checked + .slider:before { content: "\f186"; transform: translateX(22px); }
+        .main-nav .footer-credit { text-align: center; font-size: 0.8rem; color: var(--text-light); opacity: 0.6; }
         
-        .footer-note {
-            font-style: italic;
-            color: #5f6368;
-        }
+        .mobile-nav-backdrop { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99; }
+        .content-pane { flex-grow: 1; display: flex; flex-direction: column; overflow: hidden; transition: transform 0.3s ease; }
+        .top-bar { display: flex; align-items: center; background-color: var(--bg-panel); padding: 0 30px; height: 80px; flex-shrink: 0; border-bottom: 1px solid var(--border); transition: all 0.3s; }
+        .mobile-menu-toggle { display: none; font-size: 1.5rem; background: none; border: none; cursor: pointer; color: var(--text-primary); margin-right: 20px; position: relative; overflow: hidden; }
+        #page-title { font-size: 1.6rem; font-weight: 600; }
+        .page-content { flex-grow: 1; overflow-y: auto; padding: 30px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
+        .dashboard-header { margin-bottom: 30px; } .dashboard-header h2 { font-size: 2.2rem; } .dashboard-header p { font-size: 1.1rem; color: var(--text-secondary); }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .stat-card { background: var(--bg-panel); padding: 25px; border-radius: 12px; border: 1px solid var(--border); display: flex; align-items: center; gap: 20px; transition: all 0.3s; animation: popIn 0.5s ease-out forwards; opacity: 0; }
+        .stat-card:nth-child(1) { animation-delay: 0.1s; } .stat-card:nth-child(2) { animation-delay: 0.2s; } .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .stat-card .icon-wrapper { font-size: 1.8rem; color: var(--brand-secondary); background-color: var(--hover); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .stat-card .stat-number { font-size: 2rem; font-weight: 700; } .stat-card .stat-label { font-size: 0.9rem; color: var(--text-secondary); }
+        
+        .section-title { font-size: 1.3rem; margin-bottom: 20px; font-weight: 600; }
+        .quick-access-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .semester-card { background: var(--bg-panel); border-radius: 12px; padding: 25px; border: 1px solid var(--border); text-decoration: none; display: flex; flex-direction: column; transition: all 0.2s ease; position: relative; overflow: hidden; }
+        .semester-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px var(--shadow); border-color: var(--brand-secondary); }
+        .semester-card .card-title { font-size: 1.2rem; font-weight: 600; margin-top: 15px; } .semester-card .card-desc { font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px; flex-grow: 1; }
+        .semester-card .card-arrow { align-self: flex-end; font-size: 1.2rem; color: var(--brand-secondary); margin-top: 15px; transition: transform 0.2s; }
+        .semester-card:hover .card-arrow { transform: translateX(5px); }
+
+        .search-box { position: relative; max-width: 400px; margin-bottom: 25px; }
+        #search-input { width: 100%; height: 45px; padding: 12px 15px 12px 40px; border-radius: 8px; border: 1px solid var(--border); background-color: var(--bg-panel); color: var(--text-primary); font-size: 1rem; }
+        .folder { padding: 5px 0; margin-bottom: 15px; }
+        .folder-header { display: flex; align-items: center; font-size: 1.1rem; font-weight: 500; cursor: pointer; padding: 12px 15px; border-radius: 8px; background-color: var(--bg-panel); border: 1px solid var(--border); position: relative; overflow: hidden; }
+        .folder-header:hover { background-color: var(--hover); } .folder.open > .folder-header { background-color: var(--hover); }
+        .folder-header .folder-icon { color: #ffca28; font-size: 1.2rem; margin-right: 15px; width: 20px; transition: transform 0.2s ease; z-index:2; }
+        .folder-header:hover .folder-icon { transform: scale(1.15); }
+        .folder-header .chevron-icon { margin-left: auto; transition: transform 0.3s ease; z-index:2; } .folder.open > .folder-header .chevron-icon { transform: rotate(90deg); }
+        .file-list { list-style: none; padding-left: 20px; margin-top: 5px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; border-left: 2px solid var(--border); }
+        .file-item { display: flex; align-items: center; padding: 12px 15px; margin: 5px 0; border-radius: 6px; cursor: pointer; background-color: var(--bg-panel); border: 1px solid var(--border); transition: all 0.2s ease; position: relative; overflow: hidden;}
+        .file-item:hover { background-color: var(--hover); transform: translateX(5px); }
+        .file-item .pdf-icon { color: #e74c3c; margin-right: 15px; font-size:1rem; transition: transform 0.2s; } .file-item:hover .pdf-icon { transform: scale(1.15); }
+        .no-content, #no-results { text-align:center; padding:50px; color: var(--text-secondary); } .no-content i, #no-results i { font-size:3rem; margin-bottom:15px; }
+
+        .pdf-viewer-container { position: fixed; z-index: 1100; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; opacity: 0; transform: scale(1.05); transition: opacity 0.3s, transform 0.3s; pointer-events: none; }
+        body.pdf-is-open .pdf-viewer-container { opacity: 1; transform: scale(1); pointer-events: auto; }
+        .pdf-viewer-header { flex-shrink: 0; display: flex; align-items: center; background: rgba(30,41,59,0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 0 20px; height: 80px; color: white; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .pdf-viewer-back { font-size: 1.5rem; background: none; border: none; cursor: pointer; color: white; padding: 10px; border-radius: 50%; transition: background-color 0.2s; margin-right: 15px; position:relative; overflow: hidden;} .pdf-viewer-back:hover { background-color: rgba(255,255,255,0.1); }
+        .pdf-title { font-size: 1.1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .pdf-frame-wrapper { flex-grow: 1; position: relative; background-color: var(--pdf-bg); }
+        #pdf-viewer { width: 100%; height: 100%; border: none; }
+        .viewer-controls { position: absolute; bottom: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background: linear-gradient(to top, rgba(0,0,0,0.5), transparent); opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; z-index: 10; }
+        body.pdf-loaded .viewer-controls { opacity: 1; visibility: visible; }
+        .viewer-controls a, .viewer-controls button { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 10px; transition: transform 0.2s; position: relative; overflow: hidden;}
+        .viewer-controls a:hover, .viewer-controls button:hover { transform: scale(1.15); }
+        .ripple { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.3); transform: scale(0); animation: ripple-effect 0.6s linear; }
+        html.dark-mode .ripple { background: rgba(255, 255, 255, 0.1); }
+        @keyframes ripple-effect { to { transform: scale(4); opacity: 0; } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; } }
+
+        @media (max-width: 992px) {
+            .main-nav { position: fixed; transform: translateX(-100%); } body.nav-open .main-nav { transform: translateX(0); } body.nav-open .mobile-nav-backdrop { display: block; } .mobile-menu-toggle { display: block; } .top-bar { padding: 0 15px; } .page-content { padding: 20px; }
+        }
     </style>
 </head>
 <body>
-
-    <div class="gmail-container">
-        <!-- HEADER -->
-        <header class="header">
-            <div class="header-left">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path></svg>
-                <img src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/logo_gmail_lockup_default_1x_r5.png" alt="Gmail Logo">
-            </div>
-            <div class="header-middle">
-                <div class="search-bar">
-                    <svg width="24" height="24" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg>
-                    <input type="text" placeholder="Search mail">
-                </div>
-            </div>
-            <div class="header-right">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M0 11c.51 2.52 2.24 4.75 4.95 6.32l1.23-1.54c-2.06-1.15-3.45-2.92-3.82-5.03L0 11zm17.68-4.95L16.45 7.28c2.06 1.15 3.45 2.92 3.82 5.03l2.36-.25c-.51-2.52-2.24-4.75-4.95-6.32zM12 4c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm-1-5h2v2h-2zm0-8h2v6h-2z"></path></svg>
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M13.85 22.25h-3.7c-.74 0-1.36-.54-1.45-1.27l-.27-1.89c-.27-.14-.53-.29-.79-.46l-1.8.72c-.7.26-1.47-.03-1.81-.65L2.2 15.53c-.35-.66-.2-1.44.36-1.88l1.53-1.19c-.01-.15-.02-.3-.02-.46s.01-.31.02-.46L2.56 10.35c-.55-.45-.71-1.22-.36-1.88l1.84-3.18c.35-.66 1.11-.95 1.81-.65l1.8.72c.26-.17.52-.32.79-.46l.27-1.89c.09-.73.71-1.27 1.45-1.27h3.7c.74 0 1.36.54 1.45 1.27l.27 1.89c.27.14.53.29.79.46l1.8-.72c.7-.26 1.47.03 1.81.65l1.84 3.18c.35.66.2 1.44-.36 1.88l-1.53 1.19c.01.15.02.3.02.46s-.01.31-.02.46l1.53 1.19c.55.45.71 1.22.36 1.88l-1.84 3.18c-.35.66-1.11.95-1.81.65l-1.8-.72c-.26.17-.52.32-.79.46l-.27 1.89c-.09.73-.71 1.27-1.45 1.27zM12 15.5c1.93 0 3.5-1.57 3.5-3.5s-1.57-3.5-3.5-3.5-3.5 1.57-3.5 3.5 1.57 3.5 3.5 3.5z"></path></svg>
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"></path></svg>
-                <div class="profile-icon">A</div>
-            </div>
-        </header>
-
-        <!-- SIDEBAR -->
-        <aside class="sidebar">
-            <button class="compose-btn" id="compose-btn">
-                <svg width="24" height="24" viewBox="0 0 24 24"><path d="M19.4 4.91l-1.06-1.06c-.39-.39-1.02-.39-1.41 0L3 17.75V21h3.25l13.84-13.84c.39-.39.39-1.03 0-1.42L19.4 4.91zM4.5 19.5v-2.09l11.25-11.25 2.09 2.09L6.59 19.5H4.5z"></path></svg>
-                Compose
-            </button>
-            <nav class="sidebar-nav">
-                <ul>
-                    <li class="active">
-                        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path></svg>
-                        <span>Inbox</span>
-                    </li>
-                    <li>
-                        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg>
-                        <span>Starred</span>
-                    </li>
-                    <li>
-                        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"></path></svg>
-                        <span>Snoozed</span>
-                    </li>
-                    <li>
-                        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M10.09 15.59L11.5 17l5-5-5-5-1.41 1.41L12.67 11H3v2h9.67l-2.58 2.59zM19 3H5c-1.11 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"></path></svg>
-                        <span>Sent</span>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
-
-        <!-- MAIN CONTENT -->
-        <main class="main-content">
-            <div class="email-view">
-                <div class="email-header">
-                    <h2>Your Blueprint to LBSNAA: The UPSC 2028 Strategic Roadmap</h2>
-                </div>
-                <div class="email-meta">
-                    <div class="sender-icon">U</div>
-                    <div class="sender-info">
-                        <strong>UPSChub</strong> <span><roadmap@upschub.io></span><br>
-                        <span>to me</span>
-                    </div>
-                    <div class="email-date" id="email-date"></div>
-                </div>
-                <div class="email-body">
-                    <p>Dear Future Topper,</p>
-                    <p>Welcome. This is not just a plan; it's a strategic mission briefing. Your journey towards the final merit list has a clear, structured path. We have broken down the entire preparation into four logical, sequential phases. </p>
-                    <p>Internalize this roadmap. Trust the process. Your mission begins now. 🚀</p>
-
-                    <hr class="section-divider">
-
-                    <div class="phase-block">
-                        <h3>🧱 Phase 1 (2024-2025): Foundation Building</h3>
-                        <p>Focus: NCERTs, Newspaper Reading Habit, Basic Conceptual Clarity.</p>
-                    </div>
-
-                    <div class="phase-block">
-                        <h3>⚙️ Phase 2 (2026): Core Building & Optional Mastery</h3>
-                        <p>Focus: Standard Books, Optional Subject (Paper 1 & 2), Note-making.</p>
-                    </div>
-
-                    <div class="phase-block">
-                        <h3>🎯 Phase 3 (Jan 2027 - Sep 2027): Consolidation & Application</h3>
-                        <p>Focus: Intensive Answer Writing, Essay, Ethics, Mains-specific topics.</p>
-                    </div>
-
-                    <div class="phase-block">
-                        <h3>🚀 Phase 4 (Oct 2027 - May 2028): The Final Assault (Exam Mode)</h3>
-                        <p>Focus: Prelims Test Series, CSAT, Intense Revision, Mains Mock Tests post-prelims.</p>
-                    </div>
-                    
-                    <hr class="section-divider">
-                    
-                    <p class="footer-note">Remember, success in this marathon is a product of unwavering consistency and intelligent hard work. This blueprint is your guide.</p>
-                    
-                    <p>All the best,<br>
-                    – Team UPSChub | Your Partner in Preparation</p>
-                </div>
-            </div>
-        </main>
+    <script>
+        (function() { const theme = localStorage.getItem('theme'); if (theme === 'dark') document.documentElement.classList.add('dark-mode'); })();
+    </script>
+    
+    <div id="app-loader">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSIjMDBhNmYwIiBkPSJNNTAsMUMyMi45LDEsMSwyMi45LDEsNTBzMjEuOSw0OSw0OSw0OXM0OS0yMS45LDQ5LTQ5Uzc3LjEsMSw1MCwxeg0KCQkgTTM2LjYsNjguOGMtMi44LTEuNy0zLjctNS4xLTIuMS03LjlsNi45LTEyLjJsLTkuOCwwYy0zLjEsMC01LjctMi4yLTUuNy01LjJjMC0yLjksMi41LTUuMiw1LjUtNS4yaDkuOGwtMy4yLTUuNmMtMS44LTMuMSwwLjEtNi45LDMuNi04LjYNCgkJczcuOC0xLjEsOS43LDIuMWwyMy45LDQyYy00LjYsMi42LTguNCw0LjQtMTEuNSw1LjVsLTE5LjMtMTRjMy4xLDYuOCwxLjgsMTQtMy4zLDE3LjdDMzkuOCw3MSwzOC4yLDcwLDM2LjYsNjguOHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNjMuOSw0NC42Yy0xLjgtMy4xLTEuNC02LjksMS4xLTguN2M0LjQtMy4xLDEwLjMtMS40LDEyLjUsMi40YzAuOSwxLjYsMS4xLDMuMywwLjUsNS4xDQoJCWMtMC4zLDAuOC0wLjcenMS41LTEuMywyLjFjLTEuOCwxLjgtNCwxLjktNi4xLDAuN2MtMS4xLTAuNi0yLjMtMS0zLjUtMS4xQzY2LDQ1ДY0LjksNDQuOCw2My45LDQ0LjZ6Ii8+PC9zdmc+" alt="Loading...">
     </div>
 
-    <script>
-        // --- Simple JavaScript for Dynamic Date & Interaction ---
+    <div class="login-container" id="login-container">
+        <div class="login-box">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSIjMDBhNmYwIiBkPSJNNTAsMUMyMi45LDEsMSwyMi45LDEsNTBzMjEuOSw0OSw0OSw0OXM0OS0yMS45LDQ5LTQ5Uzc3LjEsMSw1MCwxeg0KCQkgTTM2LjYsNjguOGMtMi44LTEuNy0zLjctNS4xLTIuMS03LjlsNi45LTEyLjJsLTkuOCwwYy0zLjEsMC01LjctMi4yLTUuNy01LjJjMC0yLjksMi41LTUuMiw1LjUtNS4yaDkuOGwtMy4yLTUuNmMtMS44LTMuMSwwLjEtNi45LDMuNi04LjYNCgkJczcuOC0xLjEsOS43LDIuMWwyMy45LDQyYy00LjYsMi42LTguNCw0LjQtMTEuNSw1LjVsLTE5LjMtMTRjMy4xLDYuOCwxLjgsMTQtMy4zLDE3LjdDMzkuOCw3MSwzOC4yLDcwLDM2LjYsNjguOHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNjMuOSw0NC42Yy0xLjgtMy4xLTEuNC02LjksMS4xLTguN2M0LjQtMy4xLDEwLjMtMS40LDEyLjUsMi40YzAuOSwxLjYsMS4xLDMuMywwLjUsNS4xDQoJCWMtMC4zLDAuOC0wLjcenMS41LTEuMywyLjFjLTEuOCwxLjgtNCwxLjktNi4xLDAuN2MtMS4xLTAuNi0yLjMtMS0zLjUtMS4xQzY2LDQ1ДY0LjksNDQuOCw2My45LDQ0LjZ6Ii8+PC9zdmc+" alt="Logo" class="logo">
+            <h2>Welcome to the Hub</h2>
+            <p>Please log in with your Name and Email ID to continue.</p>
+            <form id="login-form">
+                <div class="input-group"><label for="login-name">Your Name</label><input type="text" id="login-name" required></div>
+                <div class="input-group"><label for="login-email">Your Email ID</label><input type="email" id="login-email" required></div>
+                <button type="submit" id="login-btn">Login</button>
+                <p id="error-message">Please fill out both fields.</p>
+            </form>
+            <p class="login-footer">Project Nautilus | Created by Pratyush Swain</p>
+        </div>
+    </div>
+    
+    <div class="app-container" id="app-container">
+        <nav class="main-nav" id="main-nav">
+            <div class="header">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSIjMDBhNmYwIiBkPSJNNTAsMUMyMi45LDEsMSwyMi45LDEsNTBzMjEuOSw0OSw0OSw0OXM0OS0yMS45LDQ5LTQ5Uzc3LjEsMSw1MCwxeg0KCQkgTTM2LjYsNjguOGMtMi44LTEuNy0zLjctNS4xLTIuMS03LjlsNi45LTEyLjJsLTkuOCwwYy0zLjEsMC01LjctMi4yLTUuNy01LjJjMC0yLjksMi41LTUuMiw1LjUtNS4yaDkuOGwtMy4yLTUuNmMtMS44LTMuMSwwLjEtNi45LDMuNi04LjYNCgkJczcuOC0xLjEsOS43LDIuMWwyMy45LDQyYy00LjYsMi42LTguNCw0LjQtMTEuNSw1LjVsLTE5LjMtMTRjMy4xLDYuOCwxLjgsMTQtMy4zLDE3LjdDMzkuOCw3MSwzOC4yLDcwLDM2LjYsNjguOHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNjMuOSw0NC42Yy0xLjgtMy4xLTEuNC02LjksMS4xLTguN2M0LjQtMy4xLDEwLjMtMS40LDEyLjUsMi40YzAuOSwxLjYsMS4xLDMuMywwLjUsNS4xDQoJCWMtMC4zLDAuOC0wLjcenMS41LTEuMywyLjFjLTEuOCwxLjgtNCwxLjktNi4xLDAuN2MtMS4xLTAuNi0yLjMtMS0zLjUtMS4xQzY2LDQ1ДY0LjksNDQuOCw2My45LDQ0LjZ6Ii8+PC9zdmc+" alt="BFSc. Logo" class="logo">
+                <div><h1>BFSc. Study Hub</h1><span>OUAT Digital Library</span></div>
+            </div>
+            <ul class="semester-menu" id="semester-menu">
+                <li><a href="#" class="active-sem" data-view="dashboard"><i class="fa-solid fa-shapes"></i><span>Dashboard</span></a></li>
+                <li><a href="#" data-view="sem1"><i class="fa-solid fa-1"></i><span>Semester 1</span></a></li>
+                <li><a href="#" data-view="sem2"><i class="fa-solid fa-2"></i><span>Semester 2</span></a></li>
+                <li><a href="#" data-view="sem3"><i class="fa-solid fa-3"></i><span>Semester 3</span></a></li>
+                <li><a href="#" data-view="sem4"><i class="fa-solid fa-4"></i><span>Semester 4</span></a></li>
+                <li><a href="#" data-view="sem5"><i class="fa-solid fa-5"></i><span>Semester 5</span></a></li>
+                <li><a href="#" data-view="sem6"><i class="fa-solid fa-6"></i><span>Semester 6</span></a></li>
+                <li><a href="#" data-view="sem7"><i class="fa-solid fa-7"></i><span>Semester 7</span></a></li>
+                <li><a href="#" data-view="sem8"><i class="fa-solid fa-8"></i><span>Semester 8</span></a></li>
+                <li><button class="logout-btn" id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button></li>
+            </ul>
+            <div class="nav-footer">
+                <div class="theme-switcher">
+                    <label for="theme-toggle">Dark Mode</label>
+                    <label class="toggle-switch"> <input type="checkbox" id="theme-toggle"><span class="slider"></span></label>
+                </div>
+                <div class="footer-credit">Created by Pratyush Swain</div>
+            </div>
+        </nav>
+        <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+        <main class="content-pane">
+            <div class="top-bar"><button class="mobile-menu-toggle" id="mobile-menu-toggle"><i class="fa-solid fa-bars"></i></button><h2 id="page-title">Dashboard</h2></div>
+            <div class="page-content" id="page-content"></div>
+        </main>
+        <div class="pdf-viewer-container">
+            <header class="pdf-viewer-header"><button class="pdf-viewer-back"><i class="fa-solid fa-arrow-left"></i></button><span id="pdf-viewer-title" class="pdf-title"></span></header>
+            <div class="pdf-frame-wrapper" id="pdf-frame-wrapper">
+               <iframe id="pdf-viewer" allow="fullscreen"></iframe>
+               <div class="viewer-controls"><a id="download-btn" title="Download PDF"><i class="fa-solid fa-download"></i></a><button id="fullscreen-btn" title="Toggle Fullscreen"><i class="fa-solid fa-expand"></i></button></div>
+            </div>
+       </div>
+    </div>
+<script>
+const courseData = { sem1: [{ name: "Foundational Principles", files: [{ name: "Add Your Sem 1 PDFs Here", path: "#" }] }], sem2: [{ name: "Core Concepts", files: [{ name: "Add Your Sem 2 PDFs Here", path: "#" }] }], sem3: [{ name: "Advanced Topics", files: [{ name: "Add Your Sem 3 PDFs Here", path: "#" }] }], sem4: [ { name: "AAHM - Aquaculture Animal Health", files: [{ name: "AAHM - FISH DISEASES AND MANAGEMENT.pdf", path: "pdfs/sem4/AAHM-Health/AAHM - FISH DISEASES AND MANAGEMENT.pdf" }, { name: "AAHM- 223 - Disease class note .pdf", path: "pdfs/sem4/AAHM-Health/AAHM- 223 - Disease class note .pdf" }, { name: "DISEASES TABLE 3 pg.pdf", path: "pdfs/sem4/AAHM-Health/DISEASES TABLE 3 pg.pdf" }, { name: "Therapeutics notes.pdf", path: "pdfs/sem4/AAHM-Health/Therapeutics notes.pdf" }, { name: "THERAPEUTICS PARASITE RED.pdf", path: "pdfs/sem4/AAHM-Health/THERAPEUTICS PARASITE RED.pdf" }] }, { name: "AQ - Aquaculture Management", files: [{ name: "AQ-221 - Finfish Hatchery Management .pdf", path: "pdfs/sem4/AQ-Hatchery/AQ-221 - Finfish Hatchery Management .pdf" }, { name: "AQ-222 - Fish Nutrition and Feed Technology .pdf", path: "pdfs/sem4/AQ-Hatchery/AQ-222 - Fish Nutrition and Feed Technology .pdf" }, { name: "AQ-223 - Shellfish Hatchery Management .pdf", path: "pdfs/sem4/AQ-Hatchery/AQ-223 - Shellfish Hatchery Management .pdf" }] }, { name: "FEES - Fisheries Extension", files: [{ name: "(Scanned) EXT note 1.pdf", path: "pdfs/sem4/FEES-Education/(Scanned) EXT note 1.pdf" }, { name: "(Scanned) EXT notes 2.pdf", path: "pdfs/sem4/FEES-Education/(Scanned) EXT notes 2.pdf" }] }, { name: "FPT / FE - Processing & Craft", files: [{ name: "CANNING+PACKAGING .pdf", path: "pdfs/sem4/FPT-Processing/CANNING+PACKAGING .pdf" }, { name: "FE-221 - Fishing Craft Technology.pdf", path: "pdfs/sem4/FPT-Processing/FE-221 - Fishing Craft Technology.pdf" }, { name: "FPT-221 - Fish Canning Technology .pdf", path: "pdfs/sem4/FPT-Processing/FPT-221 - Fish Canning Technology .pdf" }, { name: "FPT-222 - Fish Packaging Technology .pdf", path: "pdfs/sem4/FPT-Processing/FPT-222 - Fish Packaging Technology .pdf" }] } ], sem5: [{ name: "Specializations", files: [{ name: "Add Your Sem 5 PDFs Here", path: "#" }] }], sem6: [{ name: "Applied Sciences", files: [{ name: "Add Your Sem 6 PDFs Here", path: "#" }] }], sem7: [{ name: "Advanced Management", files: [{ name: "Add Your Sem 7 PDFs Here", path: "#" }] }], sem8: [{ name: "Project & Internship", files: [{ name: "Add Your Sem 8 PDFs Here", path: "#" }] }] };
 
-        // 1. Set the current date in the email header
-        function formatEmailDate(date) {
-            const options = {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: true
-            };
-            return new Intl.DateTimeFormat('en-US', options).format(date);
-        }
-        document.getElementById('email-date').textContent = formatEmailDate(new Date());
+document.addEventListener('DOMContentLoaded', () => {
+    const body = document.body;
+    const loginContainer = document.getElementById('login-container');
+    const appContainer = document.getElementById('app-container');
+    const loginForm = document.getElementById('login-form');
+    const loginNameInput = document.getElementById('login-name');
+    const loginEmailInput = document.getElementById('login-email');
+    const errorMessage = document.getElementById('error-message');
 
-        // 2. Make the sidebar navigation interactive
-        const navItems = document.querySelectorAll('.sidebar-nav li');
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                // Remove 'active' from all items
-                navItems.forEach(i => i.classList.remove('active'));
-                // Add 'active' to the clicked item
-                item.classList.add('active');
-            });
-        });
-        
-        // 3. Make compose button show a message
-        const composeButton = document.getElementById('compose-btn');
-        composeButton.addEventListener('click', () => {
-            alert("Compose new message functionality is for demonstration only.");
-        });
-
-    </script>
+    const showApp = (userName) => { loginContainer.style.opacity = '0'; setTimeout(() => { loginContainer.style.display = 'none'; appContainer.style.display = 'flex'; initializeMainApp(userName); }, 300); };
+    const showLogin = () => { loginContainer.style.display = 'flex'; appContainer.style.display = 'none'; };
+    const handleLogin = (e) => { e.preventDefault(); const name = loginNameInput.value.trim(); const email = loginEmailInput.value.trim(); if (!name || !email) { errorMessage.style.display = 'block'; return; } const user = { name, email }; localStorage.setItem('loggedInUser', JSON.stringify(user)); showApp(user.name); };
+    const handleLogout = () => { localStorage.removeItem('loggedInUser'); body.style.transition = 'opacity 0.3s'; body.style.opacity = '0'; setTimeout(() => location.reload(), 300); };
+    
+    function createRipple(event) { const item = event.currentTarget; const circle = document.createElement("span"); const diameter = Math.max(item.clientWidth, item.clientHeight); const radius = diameter / 2; circle.style.width = circle.style.height = `${diameter}px`; circle.style.left = `${event.clientX - item.getBoundingClientRect().left - radius}px`; circle.style.top = `${event.clientY - item.getBoundingClientRect().top - radius}px`; circle.classList.add("ripple"); item.appendChild(circle); setTimeout(() => circle.remove(), 600); }
+    
+    function initializeMainApp(userName) {
+        const pageContent = document.getElementById('page-content'), pageTitle = document.getElementById('page-title'), semesterMenu = document.getElementById('semester-menu'), mobileMenuToggle = document.getElementById('mobile-menu-toggle'), mobileNavBackdrop = document.getElementById('mobile-nav-backdrop'), themeToggle = document.getElementById('theme-toggle'), pdfViewerBack = document.querySelector('.pdf-viewer-back'), pdfViewerTitle = document.getElementById('pdf-viewer-title'), pdfIframe = document.getElementById('pdf-viewer'), downloadBtn = document.getElementById('download-btn'), fullscreenBtn = document.getElementById('fullscreen-btn'), pdfFrameWrapper = document.getElementById('pdf-frame-wrapper'), logoutBtn = document.getElementById('logout-btn');
+        const calculateStats = () => { let activeSemesters = 0, totalSubjects = 0, totalPdfs = 0; Object.values(courseData).forEach(sem => { if (sem.length > 0 && sem[0].files && sem[0].files[0].path !== "#") { activeSemesters++; totalSubjects += sem.length; sem.forEach(subject => { totalPdfs += subject.files.length; }); } }); return { activeSemesters, totalSubjects, totalPdfs }; };
+        const renderDashboard = () => {
+            const stats = calculateStats();
+            pageTitle.textContent = 'Dashboard';
+            pageContent.innerHTML = `<div class="dashboard-header"><h2>Welcome, ${userName}!</h2><p>Your academic command center. Ready to dive in?</p></div>
+                <div class="stats-grid"><div class="stat-card"><div class="icon-wrapper"><i class="fa-solid fa-layer-group"></i></div><div><div class="stat-number">${stats.activeSemesters}</div><div class="stat-label">Active Semesters</div></div></div><div class="stat-card"><div class="icon-wrapper"><i class="fa-solid fa-book-bookmark"></i></div><div><div class="stat-number">${stats.totalSubjects}</div><div class="stat-label">Total Subjects</div></div></div><div class="stat-card"><div class="icon-wrapper"><i class="fa-solid fa-file-pdf"></i></div><div><div class="stat-number">${stats.totalPdfs}</div><div class="stat-label">Total PDFs</div></div></div></div>
+                <div><h3 class="section-title">Quick Access</h3><div class="quick-access-grid">
+                <a href="#" class="semester-card" data-view="sem4"><div class="icon-wrapper" style="color:#e74c3c;background-color:#fbeeeC;"><i class="fa-solid fa-flask-vial"></i></div><div><h4 class="card-title">Semester 4</h4><p class="card-desc">Dive into core applied science subjects.</p></div><i class="fa-solid fa-arrow-right card-arrow"></i></a>
+                </div></div>`;
+            document.querySelectorAll('.semester-card').forEach(card => card.addEventListener('click', e => { e.preventDefault(); switchView(e.currentTarget.dataset.view); createRipple(e); }));
+        };
+        const toggleFolder = (folderEl) => { folderEl.classList.toggle('open'); const fileList = folderEl.querySelector('.file-list'); fileList.style.maxHeight = folderEl.classList.contains('open') ? `${fileList.scrollHeight}px` : '0'; };
+        const renderSemester = (semesterId) => {
+            const semesterData = courseData[semesterId] || []; const semNum = semesterId.replace('sem',''); pageTitle.innerHTML = `Semester <span style="color:var(--brand-secondary);">${semNum}</span>`;
+            let contentHTML = `<div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="search-input" placeholder="Search in Semester ${semNum}..."></div><div id="folder-list-container">`;
+            if (semesterData.length === 0 || !semesterData[0].files || semesterData[0].files[0].path === "#") { contentHTML += `<div class="no-content"><i class="fa-solid fa-box-open"></i><p>No materials added for Semester ${semNum} yet.</p></div>`; } 
+            else { semesterData.forEach(folder => { contentHTML += `<div class="folder"><div class="folder-header"><i class="fa-solid fa-folder folder-icon"></i><span>${folder.name}</span><i class="fa-solid fa-chevron-right chevron-icon"></i></div><ul class="file-list">`; folder.files.forEach(file => { contentHTML += `<li class="file-item" data-path="${file.path}" data-name="${file.name}"><i class="fa-solid fa-file-pdf pdf-icon"></i><span>${file.name}</span></li>`; }); contentHTML += `</ul></div>`; }); }
+            contentHTML += `</div><div id="no-results" style="display:none;"><i class="fa-solid fa-ghost"></i><p>No files match search.</p></div>`; pageContent.innerHTML = contentHTML;
+            pageContent.style.animation = 'fadeIn 0.5s'; setTimeout(() => pageContent.style.animation = '', 500);
+            document.getElementById('search-input')?.addEventListener('input', handleSearch);
+            document.querySelectorAll('.folder-header').forEach(h => h.addEventListener('click', e => toggleFolder(e.currentTarget.parentElement)));
+            document.querySelectorAll('.file-item').forEach(i => i.addEventListener('click', e => { if (e.currentTarget.dataset.path !== '#') openPdf(e.currentTarget.dataset.path, e.currentTarget.dataset.name); }));
+        };
+        const switchView = (viewId) => { if (viewId === 'dashboard') renderDashboard(); else renderSemester(viewId); document.querySelector('.semester-menu a.active-sem')?.classList.remove('active-sem'); document.querySelector(`.semester-menu a[data-view="${viewId}"]`).classList.add('active-sem'); body.classList.remove('nav-open'); };
+        const openPdf = (path, name) => { pdfIframe.src = path; pdfViewerTitle.textContent = name; body.classList.add('pdf-is-open'); downloadBtn.href = path; downloadBtn.setAttribute('download', name); };
+        const closePdf = () => { body.classList.remove('pdf-is-open', 'pdf-loaded'); setTimeout(() => pdfIframe.src = 'about:blank', 300); };
+        const handleSearch = (e) => { const query = e.target.value.toLowerCase(); let resultsFound = false; document.querySelectorAll('.folder').forEach(folderEl => { let folderHasMatch = false; const folderName = folderEl.querySelector('.folder-header span').textContent.toLowerCase(); folderEl.querySelectorAll('.file-item').forEach(fileItem => { const fileName = fileItem.querySelector('span').textContent.toLowerCase(); if (fileName.includes(query)) { fileItem.style.display = 'flex'; folderHasMatch = true; } else { fileItem.style.display = 'none'; } }); if (folderName.includes(query) || folderHasMatch) { folderEl.style.display = 'block'; resultsFound = true; if(query) { folderEl.classList.add('open'); folderEl.querySelector('.file-list').style.maxHeight = `${folderEl.querySelector('.file-list').scrollHeight}px`; }} else { folderEl.style.display = 'none'; } if(!query) { folderEl.classList.remove('open'); folderEl.querySelector('.file-list').style.maxHeight = '0'; } }); document.getElementById('no-results').style.display = resultsFound ? 'none' : 'block'; };
+        const initMain = () => {
+            renderDashboard();
+            semesterMenu.addEventListener('click', (e) => { const link = e.target.closest('a'); if (link) { e.preventDefault(); switchView(link.dataset.view); createRipple(e); } });
+            mobileMenuToggle.addEventListener('click', (e) => { body.classList.toggle('nav-open'); createRipple(e); });
+            mobileNavBackdrop.addEventListener('click', () => body.classList.remove('nav-open'));
+            logoutBtn.addEventListener('click', (e) => {createRipple(e); handleLogout(); });
+            if (localStorage.getItem('theme') === 'dark') themeToggle.checked = true;
+            themeToggle.addEventListener('change', (e) => { document.documentElement.classList.toggle('dark-mode', e.target.checked); localStorage.setItem('theme', e.target.checked ? 'dark' : 'light'); });
+            pdfViewerBack.addEventListener('click', (e) => { createRipple(e); closePdf(); });
+            pdfIframe.onload = () => body.classList.add('pdf-loaded');
+            fullscreenBtn.addEventListener('click', (e) => { createRipple(e); if (!document.fullscreenElement) pdfFrameWrapper.requestFullscreen().catch(err => alert(`Fullscreen error: ${err.message}`)); else document.exitFullscreen(); });
+            document.querySelectorAll('a, button').forEach(el => el.addEventListener('click', createRipple));
+        };
+        initMain();
+    }
+    const checkLoginState = () => { const userString = localStorage.getItem('loggedInUser'); setTimeout(() => { const loader = document.getElementById('app-loader'); loader.classList.add('fade-out'); }, 300); if (userString) { showApp(JSON.parse(userString).name); } else { showLogin(); } };
+    loginForm.addEventListener('submit', handleLogin);
+    loginForm.querySelectorAll('button').forEach(b => b.addEventListener('click', createRipple));
+    checkLoginState();
+});
+</script>
 </body>
 </html>
