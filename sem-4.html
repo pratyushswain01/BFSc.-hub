@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,186 +6,263 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BFSc. Study Hub | OUAT</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --brand-primary: #0a69a3; --brand-secondary: #008ac5;
-            --bg-main: #f4f7fa; --bg-panel: #ffffff;
-            --text-primary: #2c3e50; --text-secondary: #5f7d95;
-            --border-light: #e6e9ed; --hover-light: #e9f5ff;
-            --search-bg: #f0f3f6; --shadow: rgba(44, 62, 80, 0.1);
+            --brand-primary: #0a74bc; --brand-secondary: #0096c7;
+            --bg-main: #f3f6f9; --bg-panel: #ffffff; --bg-nav: #0b2e48;
+            --text-primary: #111827; --text-secondary: #4b5563; --text-light: #f9fafb;
+            --border: #e5e7eb; --hover: #f3f4f6; --shadow: rgba(0, 0, 0, 0.04);
+            --pdf-bg: #374151;
+        }
+        html.dark-mode {
+             --bg-main: #111827; --bg-panel: #1f2937; --bg-nav: #1f2937;
+             --text-primary: #f9fafb; --text-secondary: #9ca3af;
+             --border: #374151; --hover: #374151; --shadow: rgba(255, 255, 255, 0.05);
+             --pdf-bg: #111827;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { height: 100%; font-family: 'Inter', sans-serif; }
-        body { background-color: var(--bg-main); color: var(--text-primary); overflow: hidden; }
-        .app-container { display: flex; width: 100%; height: 100%; }
+        html, body { height: 100%; font-family: 'Inter', sans-serif; background-color: var(--bg-main); transition: background-color 0.3s; }
+        body { color: var(--text-primary); overflow: hidden; }
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: var(--text-primary); }
+        
+        #app-loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-nav); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
+        #app-loader img { width: 80px; animation: pulse 1.5s infinite ease-in-out; }
+        #app-loader.fade-out { opacity: 0; pointer-events: none; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; } }
 
-        /* --- File Manager --- */
-        .file-manager { width: 100%; height: 100%; background-color: var(--bg-panel); display: flex; flex-direction: column; box-shadow: 0 0 20px var(--shadow); }
-        .header { padding: 20px; border-bottom: 1px solid var(--border-light); display: flex; align-items: center; flex-shrink: 0; }
-        .logo { width: 48px; height: 48px; margin-right: 15px; }
-        .header h1 { font-family: 'Poppins', sans-serif; font-size: 1.3rem; font-weight: 600; color: var(--brand-primary); }
-        .header span { font-size: 0.8rem; color: var(--text-secondary); }
-        .search-container { padding: 15px 20px; border-bottom: 1px solid var(--border-light); flex-shrink: 0; }
-        .search-box { position: relative; }
-        #search-input { width: 100%; padding: 12px 15px 12px 40px; border-radius: 8px; border: 1px solid var(--border-light); background-color: var(--search-bg); font-size: 0.95rem; outline: none; transition: all 0.2s ease; }
-        #search-input:focus { border-color: var(--brand-secondary); box-shadow: 0 0 0 3px rgba(0, 138, 197, 0.15); }
-        .search-box .fa-magnifying-glass { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); }
-        .folder-list-wrapper { flex-grow: 1; overflow-y: auto; position: relative; }
-        #folder-list-container { padding: 10px 0; }
-        #no-results { display: none; text-align: center; padding: 40px 20px; color: var(--text-secondary); position: absolute; top: 20px; width: 100%; }
-        #no-results i { font-size: 2.5rem; margin-bottom: 10px; }
-        .folder { padding: 5px 20px; transition: opacity 0.3s ease; }
-        .folder-header { display: flex; align-items: center; font-size: 1rem; font-weight: 500; cursor: pointer; padding: 10px; border-radius: 6px; transition: background-color 0.2s; }
-        .folder-header:hover { background-color: var(--hover-light); }
-        .folder.open > .folder-header { background-color: var(--hover-light); }
-        .folder-header .folder-icon { color: #ffca28; font-size: 1.2rem; margin-right: 12px; width: 20px; transition: transform 0.2s ease-in-out; }
-        .folder-header .chevron-icon { margin-left: auto; transition: transform 0.3s ease; }
-        .folder-header:hover .folder-icon { transform: scale(1.1); } /* Icon Animation */
-        .folder.open > .folder-header .chevron-icon { transform: rotate(90deg); }
-        .file-list { list-style: none; padding-left: 45px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; }
-        .folder.open > .file-list { margin-top: 5px; }
-        .file-item { display: flex; align-items: center; padding: 10px 8px; margin: 2px 0; border-radius: 5px; cursor: pointer; transition: all 0.2s; font-size: 0.9rem; }
-        .file-item:hover { background-color: var(--hover-light); }
-        .file-item.active { background-color: var(--brand-primary); color: white; }
-        .file-item .pdf-icon { color: #e63946; margin-right: 12px; transition: transform 0.2s ease-in-out; }
-        .file-item.active .pdf-icon { color: white; }
-        .file-item:hover .pdf-icon { transform: scale(1.1); } /* Icon Animation */
-        footer { padding: 15px 20px; text-align: center; font-size: 0.8rem; color: var(--text-secondary); border-top: 1px solid var(--border-light); flex-shrink: 0; background-color: #fcfdff; }
+        .login-container { display: flex; flex-direction:column; justify-content: center; align-items: center; width: 100%; height: 100%; background-color: var(--bg-main); transition: opacity 0.5s ease-out; }
+        .login-box { background-color: var(--bg-panel); padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        html.dark-mode .login-box { box-shadow: 0 10px 30px var(--shadow); }
+        .login-box .logo { width: 60px; margin-bottom: 20px; }
+        .login-box h2 { margin-bottom: 10px; font-size: 1.8rem; }
+        .login-box p { color: var(--text-secondary); margin-bottom: 30px; }
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; font-weight: 500; margin-bottom: 8px; font-size: 0.9rem; }
+        .input-group input { width: 100%; height: 45px; padding: 0 15px; border-radius: 8px; border: 1px solid var(--border); background-color: var(--bg-main); font-size: 1rem; color: var(--text-primary); transition: all 0.2s; }
+        .input-group input:focus { border-color: var(--brand-secondary); box-shadow: 0 0 0 3px rgba(0, 138, 197, 0.2); }
+        #login-btn { width: 100%; height: 45px; border: none; background-color: var(--brand-primary); color: white; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s; position: relative; overflow: hidden; }
+        #login-btn:hover { background-color: var(--brand-secondary); }
+        .login-footer { margin-top: 30px; font-size: 0.8rem; color: var(--text-secondary); }
+        #error-message { color: #e74c3c; margin-top: 15px; font-weight: 500; display: none; }
+        
+        .app-container { display: none; width: 100%; height: 100vh; position: relative; }
+        .main-nav { background-color: var(--bg-nav); color: var(--text-light); width: 280px; z-index: 100; display: flex; flex-direction: column; flex-shrink: 0; box-shadow: 2px 0 15px rgba(0,0,0,0.1); transition: transform 0.3s ease, background-color 0.3s; height: 100vh; }
+        .main-nav .header { padding: 25px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        html.dark-mode .main-nav .header { border-bottom-color: var(--border); }
+        .main-nav .logo { width: 48px; height: 48px; margin-right: 15px; }
+        .main-nav h1 { font-size: 1.4rem; color: var(--text-light); } .main-nav span { font-size: 0.8rem; opacity: 0.7; color: var(--text-light); }
+        .semester-menu { list-style: none; padding: 15px 0; overflow-y: auto; flex-grow: 1; }
+        .semester-menu li a, .logout-btn { display: flex; align-items: center; padding: 15px 30px; margin: 2px 15px; border-radius: 8px; color: var(--text-light); text-decoration: none; opacity: 0.8; transition: all 0.2s ease; position: relative; overflow: hidden;}
+        .semester-menu li a:hover, .logout-btn:hover { background-color: rgba(255,255,255,0.08); opacity: 1; }
+        html.dark-mode .semester-menu li a:hover, html.dark-mode .logout-btn:hover { background-color: var(--hover); }
+        .semester-menu li a.active-sem { background-color: var(--brand-secondary); opacity: 1; }
+        .main-nav .logout-btn { background: none; border:none; width:auto; font-size: 1rem; font-family:'Inter', sans-serif; cursor: pointer;}
+        .main-nav .logout-btn:hover { background-color: rgba(231, 76, 60, 0.2); }
+        .semester-menu i, .logout-btn i { width: 30px; font-size: 1.1rem; text-align: center; margin-right: 15px; position: relative; z-index: 2; }
+        .semester-menu span, .logout-btn span { position: relative; z-index: 2; }
+        .nav-footer { margin-top: auto; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+        html.dark-mode .nav-footer { border-top-color: var(--border); }
+        .theme-switcher { display: flex; justify-content: space-between; align-items: center; padding: 12px; background-color: rgba(0,0,0,0.2); border-radius: 8px; margin-bottom: 15px; }
+        html.dark-mode .theme-switcher { background-color: #2c3541; }
+        .theme-switcher label { font-weight: 500; color: var(--text-light); }
+        .toggle-switch { position: relative; display: inline-block; width: 50px; height: 28px; } .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #555; transition: .4s; border-radius: 28px; }
+        .slider:before { position: absolute; content: "\f185"; font-family: 'Font Awesome 6 Free'; font-weight: 900; display: flex; justify-content: center; align-items: center; color: #555; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--brand-secondary); }
+        input:checked + .slider:before { content: "\f186"; transform: translateX(22px); }
+        .main-nav .footer-credit { text-align: center; font-size: 0.8rem; color: var(--text-light); opacity: 0.6; }
+        
+        .mobile-nav-backdrop { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99; }
+        .content-pane { flex-grow: 1; display: flex; flex-direction: column; overflow: hidden; transition: transform 0.3s ease; }
+        .top-bar { display: flex; align-items: center; background-color: var(--bg-panel); padding: 0 30px; height: 80px; flex-shrink: 0; border-bottom: 1px solid var(--border); transition: all 0.3s; }
+        .mobile-menu-toggle { display: none; font-size: 1.5rem; background: none; border: none; cursor: pointer; color: var(--text-primary); margin-right: 20px; position: relative; overflow: hidden; }
+        #page-title { font-size: 1.6rem; font-weight: 600; }
+        .page-content { flex-grow: 1; overflow-y: auto; padding: 30px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- PDF Viewer --- */
-        .content-viewer { display: none; width: 100%; height: 100%; flex-direction: column; background-color: var(--bg-panel); }
-        .viewer-header { padding: 0 20px; height: 80px; display: flex; align-items: center; border-bottom: 1px solid var(--border-light); font-weight: 500; flex-shrink: 0; }
-        .back-button { font-size: 1.5rem; color: var(--brand-primary); margin-right: 15px; cursor: pointer; padding: 10px; border-radius: 50%; transition: background-color 0.2s; }
-        .back-button:hover { background-color: var(--hover-light); }
-        .pdf-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 1.1rem; }
-        .pdf-frame-container { flex-grow: 1; background: #4b5257; position: relative; }
+        .dashboard-header { margin-bottom: 30px; } .dashboard-header h2 { font-size: 2.2rem; } .dashboard-header p { font-size: 1.1rem; color: var(--text-secondary); }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .stat-card { background: var(--bg-panel); padding: 25px; border-radius: 12px; border: 1px solid var(--border); display: flex; align-items: center; gap: 20px; transition: all 0.3s; animation: popIn 0.5s ease-out forwards; opacity: 0; }
+        .stat-card:nth-child(1) { animation-delay: 0.1s; } .stat-card:nth-child(2) { animation-delay: 0.2s; } .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .stat-card .icon-wrapper { font-size: 1.8rem; color: var(--brand-secondary); background-color: var(--hover); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .stat-card .stat-number { font-size: 2rem; font-weight: 700; } .stat-card .stat-label { font-size: 0.9rem; color: var(--text-secondary); }
+        
+        .section-title { font-size: 1.3rem; margin-bottom: 20px; font-weight: 600; }
+        .quick-access-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .semester-card { background: var(--bg-panel); border-radius: 12px; padding: 25px; border: 1px solid var(--border); text-decoration: none; display: flex; flex-direction: column; transition: all 0.2s ease; position: relative; overflow: hidden; }
+        .semester-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px var(--shadow); border-color: var(--brand-secondary); }
+        .semester-card .card-title { font-size: 1.2rem; font-weight: 600; margin-top: 15px; } .semester-card .card-desc { font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px; flex-grow: 1; }
+        .semester-card .card-arrow { align-self: flex-end; font-size: 1.2rem; color: var(--brand-secondary); margin-top: 15px; transition: transform 0.2s; }
+        .semester-card:hover .card-arrow { transform: translateX(5px); }
+
+        .search-box { position: relative; max-width: 400px; margin-bottom: 25px; }
+        #search-input { width: 100%; height: 45px; padding: 12px 15px 12px 40px; border-radius: 8px; border: 1px solid var(--border); background-color: var(--bg-panel); color: var(--text-primary); font-size: 1rem; }
+        .folder { padding: 5px 0; margin-bottom: 15px; }
+        .folder-header { display: flex; align-items: center; font-size: 1.1rem; font-weight: 500; cursor: pointer; padding: 12px 15px; border-radius: 8px; background-color: var(--bg-panel); border: 1px solid var(--border); position: relative; overflow: hidden; }
+        .folder-header:hover { background-color: var(--hover); } .folder.open > .folder-header { background-color: var(--hover); }
+        .folder-header .folder-icon { color: #ffca28; font-size: 1.2rem; margin-right: 15px; width: 20px; transition: transform 0.2s ease; z-index:2; }
+        .folder-header:hover .folder-icon { transform: scale(1.15); }
+        .folder-header .chevron-icon { margin-left: auto; transition: transform 0.3s ease; z-index:2; } .folder.open > .folder-header .chevron-icon { transform: rotate(90deg); }
+        .file-list { list-style: none; padding-left: 20px; margin-top: 5px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; border-left: 2px solid var(--border); }
+        .file-item { display: flex; align-items: center; padding: 12px 15px; margin: 5px 0; border-radius: 6px; cursor: pointer; background-color: var(--bg-panel); border: 1px solid var(--border); transition: all 0.2s ease; position: relative; overflow: hidden;}
+        .file-item:hover { background-color: var(--hover); transform: translateX(5px); }
+        .file-item .pdf-icon { color: #e74c3c; margin-right: 15px; font-size:1rem; transition: transform 0.2s; } .file-item:hover .pdf-icon { transform: scale(1.15); }
+        .no-content, #no-results { text-align:center; padding:50px; color: var(--text-secondary); } .no-content i, #no-results i { font-size:3rem; margin-bottom:15px; }
+
+        .pdf-viewer-container { position: fixed; z-index: 1100; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; opacity: 0; transform: scale(1.05); transition: opacity 0.3s, transform 0.3s; pointer-events: none; }
+        body.pdf-is-open .pdf-viewer-container { opacity: 1; transform: scale(1); pointer-events: auto; }
+        .pdf-viewer-header { flex-shrink: 0; display: flex; align-items: center; background: rgba(30,41,59,0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 0 20px; height: 80px; color: white; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .pdf-viewer-back { font-size: 1.5rem; background: none; border: none; cursor: pointer; color: white; padding: 10px; border-radius: 50%; transition: background-color 0.2s; margin-right: 15px; position:relative; overflow: hidden;} .pdf-viewer-back:hover { background-color: rgba(255,255,255,0.1); }
+        .pdf-title { font-size: 1.1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .pdf-frame-wrapper { flex-grow: 1; position: relative; background-color: var(--pdf-bg); }
         #pdf-viewer { width: 100%; height: 100%; border: none; }
-        #pdf-loader { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 50px; height: 50px; border: 5px solid rgba(255,255,255,0.2); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; display: none; }
-        @keyframes spin { 100% { transform: translate(-50%, -50%) rotate(360deg); } }
         .viewer-controls { position: absolute; bottom: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background: linear-gradient(to top, rgba(0,0,0,0.5), transparent); opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; z-index: 10; }
         body.pdf-loaded .viewer-controls { opacity: 1; visibility: visible; }
-        .viewer-controls a, .viewer-controls button { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; text-shadow: 0 1px 3px rgba(0,0,0,0.7); padding: 10px; transition: transform 0.2s, color 0.2s; }
+        .viewer-controls a, .viewer-controls button { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 10px; transition: transform 0.2s; position: relative; overflow: hidden;}
         .viewer-controls a:hover, .viewer-controls button:hover { transform: scale(1.15); }
-        #page-info-tip { color: rgba(255, 255, 255, 0.8); font-size: 0.8rem; text-shadow: 0 1px 2px rgba(0,0,0,0.7); }
-        
-        /* --- View-Switching & Responsive --- */
-        body.pdf-is-open .file-manager { display: none; }
-        body.pdf-is-open .content-viewer { display: flex; }
-        @media (min-width: 800px) {
-            .file-manager { display: flex !important; width: 380px; flex-shrink: 0; }
-            .content-viewer { display: flex !important; flex-grow: 1; }
-            .back-button { display: none; }
-            .viewer-header { justify-content: center; }
-            #welcome-message { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center; padding: 20px; color: var(--text-secondary); }
-            #welcome-message .welcome-icon { font-size: 5rem; color: var(--brand-secondary); margin-bottom: 20px; }
-            #welcome-message h2 { font-size: 2rem; font-weight: 600; margin-bottom: 10px; }
-            #pdf-viewer { display: none; }
+        .ripple { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.3); transform: scale(0); animation: ripple-effect 0.6s linear; }
+        html.dark-mode .ripple { background: rgba(255, 255, 255, 0.1); }
+        @keyframes ripple-effect { to { transform: scale(4); opacity: 0; } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; } }
+
+        @media (max-width: 992px) {
+            .main-nav { position: fixed; transform: translateX(-100%); } body.nav-open .main-nav { transform: translateX(0); } body.nav-open .mobile-nav-backdrop { display: block; } .mobile-menu-toggle { display: block; } .top-bar { padding: 0 15px; } .page-content { padding: 20px; }
         }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <aside class="file-manager">
-            <header class="header">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSIjMGE2OWEzIiBkPSJNNTAsMUMyMi45LDEsMSwyMi45LDEsNTBzMjEuOSw0OSw0OSw0OXM0OS0yMS45LDQ5LTQ5Uzc3LjEsMSw1MCwxeg0KCQkgTTM2LjYsNjguOGMtMi44LTEuNy0zLjctNS4xLTIuMS03LjlsNi45LTEyLjJsLTkuOCwwYy0zLjEsMC01LjctMi4yLTUuNy01LjJjMC0yLjksMi41LTUuMiw1LjUtNS4yaDkuOGwtMy4yLTUuNmMtMS44LTMuMSwwLjEtNi45LDMuNi04LjYNCgkJczcuOC0xLjEsOS43LDIuMWwyMy45LDQyYy00LjYsMi42LTguNCw0LjQtMTEuNSw1LjVsLTE5LjMtMTRjMy4xLDYuOCwxLjgsMTQtMy4zLDE3LjdDMzkuOCw3MSwzOC4yLDcwLDM2LjYsNjguOHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNjMuOSw0NC42Yy0xLjgtMy4xLTEuNC02LjksMS4xLTguN2M0LjQtMy4xLDEwLjMtMS40LDEyLjUsMi40YzAuOSwxLjYsMS4xLDMuMywwLjUsNS4xDQoJCWMtMC4zLDAuOC0wLjcsMS41LTEuMywyLjFjLTEuOCwxLjgtNCwxLjktNi4xLDAuN2MtMS4xLTAuNi0yLjMtMS0zLjUtMS4xQzY2LDQ1LDY0LjksNDQuOCw2My45LDQ0LjZ6Ii8+PC9zdmc+" alt="BFSc. Logo" class="logo">
-                <div><h1>BFSc. Study Hub</h1><span>OUAT Digital Library</span></div>
-            </header>
-            <div class="search-container"><div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="search-input" placeholder="Search notes..."></div></div>
-            <div class="folder-list-wrapper"><nav id="folder-list-container"></nav><div id="no-results"><i class="fa-regular fa-compass"></i><p>No results found</p></div></div>
-            <footer>Created by Pratyush Swain</footer>
-        </aside>
-
-        <main class="content-viewer">
-            <header class="viewer-header"><i class="fa-solid fa-arrow-left back-button" onclick="goBack()"></i><span id="pdf-title">Select a file</span></header>
-            <div class="pdf-frame-container" id="pdf-frame-container">
-                <div id="pdf-loader"></div>
-                <iframe id="pdf-viewer" title="PDF Viewer" allow="fullscreen"></iframe>
-                <div class="viewer-controls">
-                    <a id="download-btn" title="Download PDF"><i class="fa-solid fa-download"></i></a>
-                    <span id="page-info-tip" title="Use the browser's PDF toolbar for page navigation">Page numbers in viewer bar</span>
-                    <button id="fullscreen-btn" title="Toggle Fullscreen"><i class="fa-solid fa-expand"></i></button>
-                </div>
-            </div>
-        </main>
+    <script>
+        (function() { const theme = localStorage.getItem('theme'); if (theme === 'dark') document.documentElement.classList.add('dark-mode'); })();
+    </script>
+    
+    <div id="app-loader">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSIjMDBhNmYwIiBkPSJNNTAsMUMyMi45LDEsMSwyMi45LDEsNTBzMjEuOSw0OSw0OSw0OXM0OS0yMS45LDQ5LTQ5Uzc3LjEsMSw1MCwxeg0KCQkgTTM2LjYsNjguOGMtMi44LTEuNy0zLjctNS4xLTIuMS03LjlsNi45LTEyLjJsLTkuOCwwYy0zLjEsMC01LjctMi4yLTUuNy01LjJjMC0yLjksMi41LTUuMiw1LjUtNS4yaDkuOGwtMy4yLTUuNmMtMS44LTMuMSwwLjEtNi45LDMuNi04LjYNCgkJczcuOC0xLjEsOS43LDIuMWwyMy45LDQyYy00LjYsMi42LTguNCw0LjQtMTEuNSw1LjVsLTE5LjMtMTRjMy4xLDYuOCwxLjgsMTQtMy4zLDE3LjdDMzkuOCw3MSwzOC4yLDcwLDM2LjYsNjguOHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNjMuOSw0NC42Yy0xLjgtMy4xLTEuNC02LjksMS4xLTguN2M0LjQtMy4xLDEwLjMtMS40LDEyLjUsMi40YzAuOSwxLjYsMS4xLDMuMywwLjUsNS4xDQoJCWMtMC4zLDAuOC0wLjcenMS41LTEuMywyLjFjLTEuOCwxLjgtNCwxLjktNi4xLDAuN2MtMS4xLTAuNi0yLjMtMS0zLjUtMS4xQzY2LDQ1ДY0LjksNDQuOCw2My45LDQ0LjZ6Ii8+PC9zdmc+" alt="Loading...">
     </div>
 
+    <div class="login-container" id="login-container">
+        <div class="login-box">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSIjMDBhNmYwIiBkPSJNNTAsMUMyMi45LDEsMSwyMi45LDEsNTBzMjEuOSw0OSw0OSw0OXM0OS0yMS45LDQ5LTQ5Uzc3LjEsMSw1MCwxeg0KCQkgTTM2LjYsNjguOGMtMi44LTEuNy0zLjctNS4xLTIuMS03LjlsNi45LTEyLjJsLTkuOCwwYy0zLjEsMC01LjctMi4yLTUuNy01LjJjMC0yLjksMi41LTUuMiw1LjUtNS4yaDkuOGwtMy4yLTUuNmMtMS44LTMuMSwwLjEtNi45LDMuNi04LjYNCgkJczcuOC0xLjEsOS43LDIuMWwyMy45LDQyYy00LjYsMi42LTguNCw0LjQtMTEuNSw1LjVsLTE5LjMtMTRjMy4xLDYuOCwxLjgsMTQtMy4zLDE3LjdDMzkuOCw3MSwzOC4yLDcwLDM2LjYsNjguOHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNjMuOSw0NC42Yy0xLjgtMy4xLTEuNC02LjksMS4xLTguN2M0LjQtMy4xLDEwLjMtMS40LDEyLjUsMi40YzAuOSwxLjYsMS4xLDMuMywwLjUsNS4xDQoJCWMtMC4zLDAuOC0wLjcenMS41LTEuMywyLjFjLTEuOCwxLjgtNCwxLjktNi4xLDAuN2MtMS4xLTAuNi0yLjMtMS0zLjUtMS4xQzY2LDQ1ДY0LjksNDQuOCw2My45LDQ0LjZ6Ii8+PC9zdmc+" alt="Logo" class="logo">
+            <h2>Welcome to the Hub</h2>
+            <p>Please log in with your Name and Email ID to continue.</p>
+            <form id="login-form">
+                <div class="input-group"><label for="login-name">Your Name</label><input type="text" id="login-name" required></div>
+                <div class="input-group"><label for="login-email">Your Email ID</label><input type="email" id="login-email" required></div>
+                <button type="submit" id="login-btn">Login</button>
+                <p id="error-message">Please fill out both fields.</p>
+            </form>
+            <p class="login-footer">Project Nautilus | Created by Pratyush Swain</p>
+        </div>
+    </div>
+    
+    <div class="app-container" id="app-container">
+        <nav class="main-nav" id="main-nav">
+            <div class="header">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSIjMDBhNmYwIiBkPSJNNTAsMUMyMi45LDEsMSwyMi45LDEsNTBzMjEuOSw0OSw0OSw0OXM0OS0yMS45LDQ5LTQ5Uzc3LjEsMSw1MCwxeg0KCQkgTTM2LjYsNjguOGMtMi44LTEuNy0zLjctNS4xLTIuMS03LjlsNi45LTEyLjJsLTkuOCwwYy0zLjEsMC01LjctMi4yLTUuNy01LjJjMC0yLjksMi41LTUuMiw1LjUtNS4yaDkuOGwtMy4yLTUuNmMtMS44LTMuMSwwLjEtNi45LDMuNi04LjYNCgkJczcuOC0xLjEsOS43LDIuMWwyMy45LDQyYy00LjYsMi42LTguNCw0LjQtMTEuNSw1LjVsLTE5LjMtMTRjMy4xLDYuOCwxLjgsMTQtMy4zLDE3LjdDMzkuOCw3MSwzOC4yLDcwLDM2LjYsNjguOHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNjMuOSw0NC42Yy0xLjgtMy4xLTEuNC02LjksMS4xLTguN2M0LjQtMy4xLDEwLjMtMS40LDEyLjUsMi40YzAuOSwxLjYsMS4xLDMuMywwLjUsNS4xDQoJCWMtMC4zLDAuOC0wLjcenMS41LTEuMywyLjFjLTEuOCwxLjgtNCwxLjktNi4xLDAuN2MtMS4xLTAuNi0yLjMtMS0zLjUtMS4xQzY2LDQ1ДY0LjksNDQuOCw2My45LDQ0LjZ6Ii8+PC9zdmc+" alt="BFSc. Logo" class="logo">
+                <div><h1>BFSc. Study Hub</h1><span>OUAT Digital Library</span></div>
+            </div>
+            <ul class="semester-menu" id="semester-menu">
+                <li><a href="#" class="active-sem" data-view="dashboard"><i class="fa-solid fa-shapes"></i><span>Dashboard</span></a></li>
+                <li><a href="#" data-view="sem1"><i class="fa-solid fa-1"></i><span>Semester 1</span></a></li>
+                <li><a href="#" data-view="sem2"><i class="fa-solid fa-2"></i><span>Semester 2</span></a></li>
+                <li><a href="#" data-view="sem3"><i class="fa-solid fa-3"></i><span>Semester 3</span></a></li>
+                <li><a href="#" data-view="sem4"><i class="fa-solid fa-4"></i><span>Semester 4</span></a></li>
+                <li><a href="#" data-view="sem5"><i class="fa-solid fa-5"></i><span>Semester 5</span></a></li>
+                <li><a href="#" data-view="sem6"><i class="fa-solid fa-6"></i><span>Semester 6</span></a></li>
+                <li><a href="#" data-view="sem7"><i class="fa-solid fa-7"></i><span>Semester 7</span></a></li>
+                <li><a href="#" data-view="sem8"><i class="fa-solid fa-8"></i><span>Semester 8</span></a></li>
+                <li><button class="logout-btn" id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button></li>
+            </ul>
+            <div class="nav-footer">
+                <div class="theme-switcher">
+                    <label for="theme-toggle">Dark Mode</label>
+                    <label class="toggle-switch"> <input type="checkbox" id="theme-toggle"><span class="slider"></span></label>
+                </div>
+                <div class="footer-credit">Created by Pratyush Swain</div>
+            </div>
+        </nav>
+        <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+        <main class="content-pane">
+            <div class="top-bar"><button class="mobile-menu-toggle" id="mobile-menu-toggle"><i class="fa-solid fa-bars"></i></button><h2 id="page-title">Dashboard</h2></div>
+            <div class="page-content" id="page-content"></div>
+        </main>
+        <div class="pdf-viewer-container">
+            <header class="pdf-viewer-header"><button class="pdf-viewer-back"><i class="fa-solid fa-arrow-left"></i></button><span id="pdf-viewer-title" class="pdf-title"></span></header>
+            <div class="pdf-frame-wrapper" id="pdf-frame-wrapper">
+               <iframe id="pdf-viewer" allow="fullscreen"></iframe>
+               <div class="viewer-controls"><a id="download-btn" title="Download PDF"><i class="fa-solid fa-download"></i></a><button id="fullscreen-btn" title="Toggle Fullscreen"><i class="fa-solid fa-expand"></i></button></div>
+            </div>
+       </div>
+    </div>
 <script>
-// ===================================================================================
-// === YOUR PRE-CONFIGURED COURSE DATA - NO NEED TO EDIT =============================
-// ===================================================================================
-const courseData = [
-    {
-        name: "AAHM-221 - Therapeutics in Aquaculture",
-        files: [
-            { name: "Therapeutics notes.pdf", path: "pdfs/AAHM-221/Therapeutics notes.pdf" },
-            { name: "THERAPEUTICS PARASITE RED.pdf", path: "pdfs/AAHM-221/THERAPEUTICS PARASITE RED.pdf" },
-        ]
-    },
-    {
-        name: "AAHM - Diseases & Management",
-        files: [
-            { name: "AAHM - FISH DISEASES AND MANAGEMENT.pdf", path: "pdfs/AAHM-Diseases/AAHM - FISH DISEASES AND MANAGEMENT.pdf" },
-            { name: "AAHM- 223 - Disease class note .pdf", path: "pdfs/AAHM-Diseases/AAHM- 223 - Disease class note .pdf" },
-            { name: "DISEASES TABLE 3 pg.pdf", path: "pdfs/AAHM-Diseases/DISEASES TABLE 3 pg.pdf" },
-        ]
-    },
-    {
-        name: "AQ - Aquaculture & Hatchery Mgmt.",
-        files: [
-            { name: "AQ-221 - Finfish Hatchery Management .pdf", path: "pdfs/AQ-Hatchery/AQ-221 - Finfish Hatchery Management .pdf" },
-            { name: "AQ-222 - Fish Nutrition and Feed Technology .pdf", path: "pdfs/AQ-Hatchery/AQ-222 - Fish Nutrition and Feed Technology .pdf" },
-            { name: "AQ-223 - Shellfish Hatchery Management .pdf", path: "pdfs/AQ-Hatchery/AQ-223 - Shellfish Hatchery Management .pdf" },
-        ]
-    },
-    {
-        name: "FEES-221 - Fisheries Extension Education",
-        files: [
-            { name: "(Scanned) EXT note 1.pdf", path: "pdfs/FEES-221/(Scanned) EXT note 1.pdf" },
-            { name: "(Scanned) EXT notes 2.pdf", path: "pdfs/FEES-221/(Scanned) EXT notes 2.pdf" },
-        ]
-    },
-    {
-        name: "FPT & FE - Processing & Craft",
-        files: [
-            { name: "CANNING+PACKAGING .pdf", path: "pdfs/FPT-Processing/CANNING+PACKAGING .pdf" },
-            { name: "FE-221 - Fishing Craft Technology.pdf", path: "pdfs/FPT-Processing/FE-221 - Fishing Craft Technology.pdf" },
-            { name: "FPT-221 - Fish Canning Technology .pdf", path: "pdfs/FPT-Processing/FPT-221 - Fish Canning Technology .pdf" },
-            { name: "FPT-222 - Fish Packaging Technology .pdf", path: "pdfs/FPT-Processing/FPT-222 - Fish Packaging Technology .pdf" },
-        ]
-    }
-];
-// ===================================================================================
-// === CORE APPLICATION LOGIC (No changes needed here) ===============================
-// ===================================================================================
+const courseData = { sem1: [{ name: "Foundational Principles", files: [{ name: "Add Your Sem 1 PDFs Here", path: "#" }] }], sem2: [{ name: "Core Concepts", files: [{ name: "Add Your Sem 2 PDFs Here", path: "#" }] }], sem3: [{ name: "Advanced Topics", files: [{ name: "Add Your Sem 3 PDFs Here", path: "#" }] }], sem4: [ { name: "AAHM - Aquaculture Animal Health", files: [{ name: "AAHM - FISH DISEASES AND MANAGEMENT.pdf", path: "pdfs/sem4/AAHM-Health/AAHM - FISH DISEASES AND MANAGEMENT.pdf" }, { name: "AAHM- 223 - Disease class note .pdf", path: "pdfs/sem4/AAHM-Health/AAHM- 223 - Disease class note .pdf" }, { name: "DISEASES TABLE 3 pg.pdf", path: "pdfs/sem4/AAHM-Health/DISEASES TABLE 3 pg.pdf" }, { name: "Therapeutics notes.pdf", path: "pdfs/sem4/AAHM-Health/Therapeutics notes.pdf" }, { name: "THERAPEUTICS PARASITE RED.pdf", path: "pdfs/sem4/AAHM-Health/THERAPEUTICS PARASITE RED.pdf" }] }, { name: "AQ - Aquaculture Management", files: [{ name: "AQ-221 - Finfish Hatchery Management .pdf", path: "pdfs/sem4/AQ-Hatchery/AQ-221 - Finfish Hatchery Management .pdf" }, { name: "AQ-222 - Fish Nutrition and Feed Technology .pdf", path: "pdfs/sem4/AQ-Hatchery/AQ-222 - Fish Nutrition and Feed Technology .pdf" }, { name: "AQ-223 - Shellfish Hatchery Management .pdf", path: "pdfs/sem4/AQ-Hatchery/AQ-223 - Shellfish Hatchery Management .pdf" }] }, { name: "FEES - Fisheries Extension", files: [{ name: "(Scanned) EXT note 1.pdf", path: "pdfs/sem4/FEES-Education/(Scanned) EXT note 1.pdf" }, { name: "(Scanned) EXT notes 2.pdf", path: "pdfs/sem4/FEES-Education/(Scanned) EXT notes 2.pdf" }] }, { name: "FPT / FE - Processing & Craft", files: [{ name: "CANNING+PACKAGING .pdf", path: "pdfs/sem4/FPT-Processing/CANNING+PACKAGING .pdf" }, { name: "FE-221 - Fishing Craft Technology.pdf", path: "pdfs/sem4/FPT-Processing/FE-221 - Fishing Craft Technology.pdf" }, { name: "FPT-221 - Fish Canning Technology .pdf", path: "pdfs/sem4/FPT-Processing/FPT-221 - Fish Canning Technology .pdf" }, { name: "FPT-222 - Fish Packaging Technology .pdf", path: "pdfs/sem4/FPT-Processing/FPT-222 - Fish Packaging Technology .pdf" }] } ], sem5: [{ name: "Specializations", files: [{ name: "Add Your Sem 5 PDFs Here", path: "#" }] }], sem6: [{ name: "Applied Sciences", files: [{ name: "Add Your Sem 6 PDFs Here", path: "#" }] }], sem7: [{ name: "Advanced Management", files: [{ name: "Add Your Sem 7 PDFs Here", path: "#" }] }], sem8: [{ name: "Project & Internship", files: [{ name: "Add Your Sem 8 PDFs Here", path: "#" }] }] };
+
 document.addEventListener('DOMContentLoaded', () => {
     const body = document.body;
-    const folderContainer = document.getElementById('folder-list-container');
-    const pdfViewer = document.getElementById('pdf-viewer');
-    const pdfFrameContainer = document.getElementById('pdf-frame-container');
-    const pdfTitle = document.getElementById('pdf-title');
-    const pdfLoader = document.getElementById('pdf-loader');
-    const searchInput = document.getElementById('search-input');
-    const noResultsMsg = document.getElementById('no-results');
-    const downloadBtn = document.getElementById('download-btn');
-    const fullscreenBtn = document.getElementById('fullscreen-btn');
-    let currentPdf = { path: '', name: '' };
-    const welcomeMessageHTML = `<div id="welcome-message"><i class="fa-solid fa-fish-fins welcome-icon"></i><h2>BFSc. Study Hub</h2><p>Select a PDF or use the search bar to begin.</p></div>`;
-    const renderStructure = () => { let content = ''; courseData.forEach((folder, index) => { content += `<div class="folder" data-folder-index="${index}"><div class="folder-header" onclick="toggleFolder(this.parentElement)"><i class="fa-solid fa-folder folder-icon"></i><span class="folder-name">${folder.name}</span><i class="fa-solid fa-chevron-right chevron-icon"></i></div><ul class="file-list">`; folder.files.forEach(file => { content += `<li class="file-item" onclick="openPdf('${file.path}', '${file.name}', this)"><i class="fa-solid fa-file-pdf pdf-icon"></i><span class="file-name">${file.name}</span></li>`; }); content += `</ul></div>`; }); folderContainer.innerHTML = content; };
-    const openFolder = (folderEl) => { if (!folderEl.classList.contains('open')) { folderEl.classList.add('open'); folderEl.querySelector('.file-list').style.maxHeight = folderEl.querySelector('.file-list').scrollHeight + "px"; } };
-    const closeFolder = (folderEl) => { if (folderEl.classList.contains('open')) { folderEl.classList.remove('open'); folderEl.querySelector('.file-list').style.maxHeight = '0'; } };
-    window.toggleFolder = (folderEl) => { folderEl.classList.contains('open') ? closeFolder(folderEl) : openFolder(folderEl); };
-    const updateViewerControls = () => { if (currentPdf.path) { downloadBtn.href = currentPdf.path; downloadBtn.setAttribute('download', currentPdf.name); downloadBtn.style.pointerEvents = 'auto'; fullscreenBtn.style.pointerEvents = 'auto'; } else { downloadBtn.href = '#'; downloadBtn.removeAttribute('download'); downloadBtn.style.pointerEvents = 'none'; fullscreenBtn.style.pointerEvents = 'none'; } };
-    window.openPdf = (path, name, element) => { currentPdf = { path, name }; body.classList.remove('pdf-loaded'); body.classList.add('pdf-is-open'); pdfLoader.style.display = 'block'; pdfViewer.style.display = 'none'; document.getElementById('welcome-message')?.remove(); pdfViewer.src = path; pdfTitle.textContent = name; document.querySelector('.file-item.active')?.classList.remove('active'); element.classList.add('active'); updateViewerControls(); };
-    window.goBack = () => { currentPdf = { path: '', name: '' }; body.classList.remove('pdf-is-open', 'pdf-loaded'); pdfViewer.src = 'about:blank'; document.querySelector('.file-item.active')?.classList.remove('active'); updateViewerControls(); if (window.innerWidth >= 800 && !document.getElementById('welcome-message')) { pdfFrameContainer.insertAdjacentHTML('afterbegin', welcomeMessageHTML); } };
-    pdfViewer.onload = () => { pdfLoader.style.display = 'none'; pdfViewer.style.display = 'block'; body.classList.add('pdf-loaded'); };
-    const toggleFullScreen = () => { if (!document.fullscreenElement) { pdfFrameContainer.requestFullscreen().catch(err => { alert(`Error enabling full-screen: ${err.message}`); }); } else { document.exitFullscreen(); } };
-    fullscreenBtn.addEventListener('click', toggleFullScreen);
-    const handleSearch = (e) => { const query = e.target.value.toLowerCase(); let resultsFound = false; document.querySelectorAll('.folder').forEach(folderEl => { const folderName = folderEl.querySelector('.folder-name').textContent.toLowerCase(); const files = folderEl.querySelectorAll('.file-item'); let folderHasMatch = false; files.forEach(fileEl => { const fileName = fileEl.querySelector('.file-name').textContent.toLowerCase(); if (fileName.includes(query)) { fileEl.style.display = 'flex'; folderHasMatch = true; resultsFound = true; } else { fileEl.style.display = 'none'; } }); if (folderName.includes(query) || folderHasMatch) { folderEl.style.display = 'block'; if (query.length > 0) openFolder(folderEl); resultsFound = true; } else { folderEl.style.display = 'none'; } if (query.length === 0) closeFolder(folderEl); }); noResultsMsg.style.display = resultsFound ? 'none' : 'block'; };
-    const init = () => { renderStructure(); if (window.innerWidth >= 800) { pdfFrameContainer.insertAdjacentHTML('afterbegin', welcomeMessageHTML); } searchInput.addEventListener('input', handleSearch); updateViewerControls(); };
-    init();
+    const loginContainer = document.getElementById('login-container');
+    const appContainer = document.getElementById('app-container');
+    const loginForm = document.getElementById('login-form');
+    const loginNameInput = document.getElementById('login-name');
+    const loginEmailInput = document.getElementById('login-email');
+    const errorMessage = document.getElementById('error-message');
+
+    const showApp = (userName) => { loginContainer.style.opacity = '0'; setTimeout(() => { loginContainer.style.display = 'none'; appContainer.style.display = 'flex'; initializeMainApp(userName); }, 300); };
+    const showLogin = () => { loginContainer.style.display = 'flex'; appContainer.style.display = 'none'; };
+    const handleLogin = (e) => { e.preventDefault(); const name = loginNameInput.value.trim(); const email = loginEmailInput.value.trim(); if (!name || !email) { errorMessage.style.display = 'block'; return; } const user = { name, email }; localStorage.setItem('loggedInUser', JSON.stringify(user)); showApp(user.name); };
+    const handleLogout = () => { localStorage.removeItem('loggedInUser'); body.style.transition = 'opacity 0.3s'; body.style.opacity = '0'; setTimeout(() => location.reload(), 300); };
+    
+    function createRipple(event) { const item = event.currentTarget; const circle = document.createElement("span"); const diameter = Math.max(item.clientWidth, item.clientHeight); const radius = diameter / 2; circle.style.width = circle.style.height = `${diameter}px`; circle.style.left = `${event.clientX - item.getBoundingClientRect().left - radius}px`; circle.style.top = `${event.clientY - item.getBoundingClientRect().top - radius}px`; circle.classList.add("ripple"); item.appendChild(circle); setTimeout(() => circle.remove(), 600); }
+    
+    function initializeMainApp(userName) {
+        const pageContent = document.getElementById('page-content'), pageTitle = document.getElementById('page-title'), semesterMenu = document.getElementById('semester-menu'), mobileMenuToggle = document.getElementById('mobile-menu-toggle'), mobileNavBackdrop = document.getElementById('mobile-nav-backdrop'), themeToggle = document.getElementById('theme-toggle'), pdfViewerBack = document.querySelector('.pdf-viewer-back'), pdfViewerTitle = document.getElementById('pdf-viewer-title'), pdfIframe = document.getElementById('pdf-viewer'), downloadBtn = document.getElementById('download-btn'), fullscreenBtn = document.getElementById('fullscreen-btn'), pdfFrameWrapper = document.getElementById('pdf-frame-wrapper'), logoutBtn = document.getElementById('logout-btn');
+        const calculateStats = () => { let activeSemesters = 0, totalSubjects = 0, totalPdfs = 0; Object.values(courseData).forEach(sem => { if (sem.length > 0 && sem[0].files && sem[0].files[0].path !== "#") { activeSemesters++; totalSubjects += sem.length; sem.forEach(subject => { totalPdfs += subject.files.length; }); } }); return { activeSemesters, totalSubjects, totalPdfs }; };
+        const renderDashboard = () => {
+            const stats = calculateStats();
+            pageTitle.textContent = 'Dashboard';
+            pageContent.innerHTML = `<div class="dashboard-header"><h2>Welcome, ${userName}!</h2><p>Your academic command center. Ready to dive in?</p></div>
+                <div class="stats-grid"><div class="stat-card"><div class="icon-wrapper"><i class="fa-solid fa-layer-group"></i></div><div><div class="stat-number">${stats.activeSemesters}</div><div class="stat-label">Active Semesters</div></div></div><div class="stat-card"><div class="icon-wrapper"><i class="fa-solid fa-book-bookmark"></i></div><div><div class="stat-number">${stats.totalSubjects}</div><div class="stat-label">Total Subjects</div></div></div><div class="stat-card"><div class="icon-wrapper"><i class="fa-solid fa-file-pdf"></i></div><div><div class="stat-number">${stats.totalPdfs}</div><div class="stat-label">Total PDFs</div></div></div></div>
+                <div><h3 class="section-title">Quick Access</h3><div class="quick-access-grid">
+                <a href="#" class="semester-card" data-view="sem4"><div class="icon-wrapper" style="color:#e74c3c;background-color:#fbeeeC;"><i class="fa-solid fa-flask-vial"></i></div><div><h4 class="card-title">Semester 4</h4><p class="card-desc">Dive into core applied science subjects.</p></div><i class="fa-solid fa-arrow-right card-arrow"></i></a>
+                </div></div>`;
+            document.querySelectorAll('.semester-card').forEach(card => card.addEventListener('click', e => { e.preventDefault(); switchView(e.currentTarget.dataset.view); createRipple(e); }));
+        };
+        const toggleFolder = (folderEl) => { folderEl.classList.toggle('open'); const fileList = folderEl.querySelector('.file-list'); fileList.style.maxHeight = folderEl.classList.contains('open') ? `${fileList.scrollHeight}px` : '0'; };
+        const renderSemester = (semesterId) => {
+            const semesterData = courseData[semesterId] || []; const semNum = semesterId.replace('sem',''); pageTitle.innerHTML = `Semester <span style="color:var(--brand-secondary);">${semNum}</span>`;
+            let contentHTML = `<div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="search-input" placeholder="Search in Semester ${semNum}..."></div><div id="folder-list-container">`;
+            if (semesterData.length === 0 || !semesterData[0].files || semesterData[0].files[0].path === "#") { contentHTML += `<div class="no-content"><i class="fa-solid fa-box-open"></i><p>No materials added for Semester ${semNum} yet.</p></div>`; } 
+            else { semesterData.forEach(folder => { contentHTML += `<div class="folder"><div class="folder-header"><i class="fa-solid fa-folder folder-icon"></i><span>${folder.name}</span><i class="fa-solid fa-chevron-right chevron-icon"></i></div><ul class="file-list">`; folder.files.forEach(file => { contentHTML += `<li class="file-item" data-path="${file.path}" data-name="${file.name}"><i class="fa-solid fa-file-pdf pdf-icon"></i><span>${file.name}</span></li>`; }); contentHTML += `</ul></div>`; }); }
+            contentHTML += `</div><div id="no-results" style="display:none;"><i class="fa-solid fa-ghost"></i><p>No files match search.</p></div>`; pageContent.innerHTML = contentHTML;
+            pageContent.style.animation = 'fadeIn 0.5s'; setTimeout(() => pageContent.style.animation = '', 500);
+            document.getElementById('search-input')?.addEventListener('input', handleSearch);
+            document.querySelectorAll('.folder-header').forEach(h => h.addEventListener('click', e => toggleFolder(e.currentTarget.parentElement)));
+            document.querySelectorAll('.file-item').forEach(i => i.addEventListener('click', e => { if (e.currentTarget.dataset.path !== '#') openPdf(e.currentTarget.dataset.path, e.currentTarget.dataset.name); }));
+        };
+        const switchView = (viewId) => { if (viewId === 'dashboard') renderDashboard(); else renderSemester(viewId); document.querySelector('.semester-menu a.active-sem')?.classList.remove('active-sem'); document.querySelector(`.semester-menu a[data-view="${viewId}"]`).classList.add('active-sem'); body.classList.remove('nav-open'); };
+        const openPdf = (path, name) => { pdfIframe.src = path; pdfViewerTitle.textContent = name; body.classList.add('pdf-is-open'); downloadBtn.href = path; downloadBtn.setAttribute('download', name); };
+        const closePdf = () => { body.classList.remove('pdf-is-open', 'pdf-loaded'); setTimeout(() => pdfIframe.src = 'about:blank', 300); };
+        const handleSearch = (e) => { const query = e.target.value.toLowerCase(); let resultsFound = false; document.querySelectorAll('.folder').forEach(folderEl => { let folderHasMatch = false; const folderName = folderEl.querySelector('.folder-header span').textContent.toLowerCase(); folderEl.querySelectorAll('.file-item').forEach(fileItem => { const fileName = fileItem.querySelector('span').textContent.toLowerCase(); if (fileName.includes(query)) { fileItem.style.display = 'flex'; folderHasMatch = true; } else { fileItem.style.display = 'none'; } }); if (folderName.includes(query) || folderHasMatch) { folderEl.style.display = 'block'; resultsFound = true; if(query) { folderEl.classList.add('open'); folderEl.querySelector('.file-list').style.maxHeight = `${folderEl.querySelector('.file-list').scrollHeight}px`; }} else { folderEl.style.display = 'none'; } if(!query) { folderEl.classList.remove('open'); folderEl.querySelector('.file-list').style.maxHeight = '0'; } }); document.getElementById('no-results').style.display = resultsFound ? 'none' : 'block'; };
+        const initMain = () => {
+            renderDashboard();
+            semesterMenu.addEventListener('click', (e) => { const link = e.target.closest('a'); if (link) { e.preventDefault(); switchView(link.dataset.view); createRipple(e); } });
+            mobileMenuToggle.addEventListener('click', (e) => { body.classList.toggle('nav-open'); createRipple(e); });
+            mobileNavBackdrop.addEventListener('click', () => body.classList.remove('nav-open'));
+            logoutBtn.addEventListener('click', (e) => {createRipple(e); handleLogout(); });
+            if (localStorage.getItem('theme') === 'dark') themeToggle.checked = true;
+            themeToggle.addEventListener('change', (e) => { document.documentElement.classList.toggle('dark-mode', e.target.checked); localStorage.setItem('theme', e.target.checked ? 'dark' : 'light'); });
+            pdfViewerBack.addEventListener('click', (e) => { createRipple(e); closePdf(); });
+            pdfIframe.onload = () => body.classList.add('pdf-loaded');
+            fullscreenBtn.addEventListener('click', (e) => { createRipple(e); if (!document.fullscreenElement) pdfFrameWrapper.requestFullscreen().catch(err => alert(`Fullscreen error: ${err.message}`)); else document.exitFullscreen(); });
+            document.querySelectorAll('a, button').forEach(el => el.addEventListener('click', createRipple));
+        };
+        initMain();
+    }
+    const checkLoginState = () => { const userString = localStorage.getItem('loggedInUser'); setTimeout(() => { const loader = document.getElementById('app-loader'); loader.classList.add('fade-out'); }, 300); if (userString) { showApp(JSON.parse(userString).name); } else { showLogin(); } };
+    loginForm.addEventListener('submit', handleLogin);
+    loginForm.querySelectorAll('button').forEach(b => b.addEventListener('click', createRipple));
+    checkLoginState();
 });
 </script>
 </body>
