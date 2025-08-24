@@ -1,271 +1,269 @@
+
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fish Diseases and Management - Advanced Course Index</title>
-    <!-- Tailwind CSS for styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>BFSc. Study Hub | OUAT</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles for a more polished look */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f4f8;
+        :root {
+            --brand-primary: #0a74bc; --brand-secondary: #0096c7;
+            --bg-main: #f3f6f9; --bg-panel: #ffffff; --bg-nav: #0b2e48;
+            --text-primary: #111827; --text-secondary: #4b5563; --text-light: #f9fafb;
+            --border: #e5e7eb; --hover: #f3f4f6; --shadow: rgba(0, 0, 0, 0.04);
+            --pdf-bg: #374151;
         }
-        .hero-bg {
-            background-color: #0052D4;
-            background-image: linear-gradient(135deg, #0052D4 0%, #4364F7 50%, #6FB1FC 100%);
+        html.dark-mode {
+             --bg-main: #111827; --bg-panel: #1f2937; --bg-nav: #1f2937;
+             --text-primary: #f9fafb; --text-secondary: #9ca3af;
+             --border: #374151; --hover: #374151; --shadow: rgba(255, 255, 255, 0.05);
+             --pdf-bg: #111827;
         }
-        .unit-card {
-            transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
-        }
-        .unit-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-        }
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-in-out;
-        }
-        .accordion-button.active + .accordion-content {
-            max-height: 1000px; /* Adjust as needed */
-        }
-        .accordion-button .chevron {
-            transition: transform 0.3s ease;
-        }
-        .accordion-button.active .chevron {
-            transform: rotate(180deg);
-        }
-        #scrollTopBtn {
-            transition: opacity 0.3s, visibility 0.3s;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; font-family: 'Inter', sans-serif; background-color: var(--bg-main); transition: background-color 0.3s; }
+        body { color: var(--text-primary); overflow: hidden; }
+        h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; color: var(--text-primary); }
+        
+        #app-loader { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-nav); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
+        #app-loader img { width: 80px; animation: pulse 1.5s infinite ease-in-out; }
+        #app-loader.fade-out { opacity: 0; pointer-events: none; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; } }
+
+        .login-container { display: flex; flex-direction:column; justify-content: center; align-items: center; width: 100%; height: 100%; background-color: var(--bg-main); transition: opacity 0.5s ease-out; }
+        .login-box { background-color: var(--bg-panel); padding: 40px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        html.dark-mode .login-box { box-shadow: 0 10px 30px var(--shadow); }
+        .login-box .logo { width: 60px; margin-bottom: 20px; }
+        .login-box h2 { margin-bottom: 10px; font-size: 1.8rem; }
+        .login-box p { color: var(--text-secondary); margin-bottom: 30px; }
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; font-weight: 500; margin-bottom: 8px; font-size: 0.9rem; }
+        .input-group input { width: 100%; height: 45px; padding: 0 15px; border-radius: 8px; border: 1px solid var(--border); background-color: var(--bg-main); font-size: 1rem; color: var(--text-primary); transition: all 0.2s; }
+        .input-group input:focus { border-color: var(--brand-secondary); box-shadow: 0 0 0 3px rgba(0, 138, 197, 0.2); }
+        #login-btn { width: 100%; height: 45px; border: none; background-color: var(--brand-primary); color: white; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s; position: relative; overflow: hidden; }
+        #login-btn:hover { background-color: var(--brand-secondary); }
+        .login-footer { margin-top: 30px; font-size: 0.8rem; color: var(--text-secondary); }
+        #error-message { color: #e74c3c; margin-top: 15px; font-weight: 500; display: none; }
+        
+        .app-container { display: none; width: 100%; height: 100vh; position: relative; }
+        .main-nav { background-color: var(--bg-nav); color: var(--text-light); width: 280px; z-index: 100; display: flex; flex-direction: column; flex-shrink: 0; box-shadow: 2px 0 15px rgba(0,0,0,0.1); transition: transform 0.3s ease, background-color 0.3s; height: 100vh; }
+        .main-nav .header { padding: 25px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        html.dark-mode .main-nav .header { border-bottom-color: var(--border); }
+        .main-nav .logo { width: 48px; height: 48px; margin-right: 15px; }
+        .main-nav h1 { font-size: 1.4rem; color: var(--text-light); } .main-nav span { font-size: 0.8rem; opacity: 0.7; color: var(--text-light); }
+        .semester-menu { list-style: none; padding: 15px 0; overflow-y: auto; flex-grow: 1; }
+        .semester-menu li a, .logout-btn { display: flex; align-items: center; padding: 15px 30px; margin: 2px 15px; border-radius: 8px; color: var(--text-light); text-decoration: none; opacity: 0.8; transition: all 0.2s ease; position: relative; overflow: hidden;}
+        .semester-menu li a:hover, .logout-btn:hover { background-color: rgba(255,255,255,0.08); opacity: 1; }
+        html.dark-mode .semester-menu li a:hover, html.dark-mode .logout-btn:hover { background-color: var(--hover); }
+        .semester-menu li a.active-sem { background-color: var(--brand-secondary); opacity: 1; }
+        .main-nav .logout-btn { background: none; border:none; width:auto; font-size: 1rem; font-family:'Inter', sans-serif; cursor: pointer;}
+        .main-nav .logout-btn:hover { background-color: rgba(231, 76, 60, 0.2); }
+        .semester-menu i, .logout-btn i { width: 30px; font-size: 1.1rem; text-align: center; margin-right: 15px; position: relative; z-index: 2; }
+        .semester-menu span, .logout-btn span { position: relative; z-index: 2; }
+        .nav-footer { margin-top: auto; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+        html.dark-mode .nav-footer { border-top-color: var(--border); }
+        .theme-switcher { display: flex; justify-content: space-between; align-items: center; padding: 12px; background-color: rgba(0,0,0,0.2); border-radius: 8px; margin-bottom: 15px; }
+        html.dark-mode .theme-switcher { background-color: #2c3541; }
+        .theme-switcher label { font-weight: 500; color: var(--text-light); }
+        .toggle-switch { position: relative; display: inline-block; width: 50px; height: 28px; } .toggle-switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #555; transition: .4s; border-radius: 28px; }
+        .slider:before { position: absolute; content: "\f185"; font-family: 'Font Awesome 6 Free'; font-weight: 900; display: flex; justify-content: center; align-items: center; color: #555; height: 20px; width: 20px; left: 4px; bottom: 4px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: var(--brand-secondary); }
+        input:checked + .slider:before { content: "\f186"; transform: translateX(22px); }
+        .main-nav .footer-credit { text-align: center; font-size: 0.8rem; color: var(--text-light); opacity: 0.6; }
+        
+        .mobile-nav-backdrop { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 99; }
+        .content-pane { flex-grow: 1; display: flex; flex-direction: column; overflow: hidden; transition: transform 0.3s ease; }
+        .top-bar { display: flex; align-items: center; background-color: var(--bg-panel); padding: 0 30px; height: 80px; flex-shrink: 0; border-bottom: 1px solid var(--border); transition: all 0.3s; }
+        .mobile-menu-toggle { display: none; font-size: 1.5rem; background: none; border: none; cursor: pointer; color: var(--text-primary); margin-right: 20px; position: relative; overflow: hidden; }
+        #page-title { font-size: 1.6rem; font-weight: 600; }
+        .page-content { flex-grow: 1; overflow-y: auto; padding: 30px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .dashboard-header { margin-bottom: 30px; } .dashboard-header h2 { font-size: 2.2rem; } .dashboard-header p { font-size: 1.1rem; color: var(--text-secondary); }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; margin-bottom: 40px; }
+        .stat-card { background: var(--bg-panel); padding: 25px; border-radius: 12px; border: 1px solid var(--border); display: flex; align-items: center; gap: 20px; transition: all 0.3s; animation: popIn 0.5s ease-out forwards; opacity: 0; }
+        .stat-card:nth-child(1) { animation-delay: 0.1s; } .stat-card:nth-child(2) { animation-delay: 0.2s; } .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .stat-card .icon-wrapper { font-size: 1.8rem; color: var(--brand-secondary); background-color: var(--hover); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .stat-card .stat-number { font-size: 2rem; font-weight: 700; } .stat-card .stat-label { font-size: 0.9rem; color: var(--text-secondary); }
+        
+        .section-title { font-size: 1.3rem; margin-bottom: 20px; font-weight: 600; }
+        .quick-access-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+        .semester-card { background: var(--bg-panel); border-radius: 12px; padding: 25px; border: 1px solid var(--border); text-decoration: none; display: flex; flex-direction: column; transition: all 0.2s ease; position: relative; overflow: hidden; }
+        .semester-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px var(--shadow); border-color: var(--brand-secondary); }
+        .semester-card .card-title { font-size: 1.2rem; font-weight: 600; margin-top: 15px; } .semester-card .card-desc { font-size: 0.9rem; color: var(--text-secondary); margin-top: 5px; flex-grow: 1; }
+        .semester-card .card-arrow { align-self: flex-end; font-size: 1.2rem; color: var(--brand-secondary); margin-top: 15px; transition: transform 0.2s; }
+        .semester-card:hover .card-arrow { transform: translateX(5px); }
+
+        .search-box { position: relative; max-width: 400px; margin-bottom: 25px; }
+        #search-input { width: 100%; height: 45px; padding: 12px 15px 12px 40px; border-radius: 8px; border: 1px solid var(--border); background-color: var(--bg-panel); color: var(--text-primary); font-size: 1rem; }
+        .folder { padding: 5px 0; margin-bottom: 15px; }
+        .folder-header { display: flex; align-items: center; font-size: 1.1rem; font-weight: 500; cursor: pointer; padding: 12px 15px; border-radius: 8px; background-color: var(--bg-panel); border: 1px solid var(--border); position: relative; overflow: hidden; }
+        .folder-header:hover { background-color: var(--hover); } .folder.open > .folder-header { background-color: var(--hover); }
+        .folder-header .folder-icon { color: #ffca28; font-size: 1.2rem; margin-right: 15px; width: 20px; transition: transform 0.2s ease; z-index:2; }
+        .folder-header:hover .folder-icon { transform: scale(1.15); }
+        .folder-header .chevron-icon { margin-left: auto; transition: transform 0.3s ease; z-index:2; } .folder.open > .folder-header .chevron-icon { transform: rotate(90deg); }
+        .file-list { list-style: none; padding-left: 20px; margin-top: 5px; max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; border-left: 2px solid var(--border); }
+        .file-item { display: flex; align-items: center; padding: 12px 15px; margin: 5px 0; border-radius: 6px; cursor: pointer; background-color: var(--bg-panel); border: 1px solid var(--border); transition: all 0.2s ease; position: relative; overflow: hidden;}
+        .file-item:hover { background-color: var(--hover); transform: translateX(5px); }
+        .file-item .pdf-icon { color: #e74c3c; margin-right: 15px; font-size:1rem; transition: transform 0.2s; } .file-item:hover .pdf-icon { transform: scale(1.15); }
+        .no-content, #no-results { text-align:center; padding:50px; color: var(--text-secondary); } .no-content i, #no-results i { font-size:3rem; margin-bottom:15px; }
+
+        .pdf-viewer-container { position: fixed; z-index: 1100; top: 0; left: 0; width: 100%; height: 100%; display: none; flex-direction: column; opacity: 0; transform: scale(1.05); transition: opacity 0.3s, transform 0.3s; pointer-events: none; }
+        body.pdf-is-open .pdf-viewer-container { opacity: 1; transform: scale(1); pointer-events: auto; }
+        .pdf-viewer-header { flex-shrink: 0; display: flex; align-items: center; background: rgba(30,41,59,0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 0 20px; height: 80px; color: white; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .pdf-viewer-back { font-size: 1.5rem; background: none; border: none; cursor: pointer; color: white; padding: 10px; border-radius: 50%; transition: background-color 0.2s; margin-right: 15px; position:relative; overflow: hidden;} .pdf-viewer-back:hover { background-color: rgba(255,255,255,0.1); }
+        .pdf-title { font-size: 1.1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .pdf-frame-wrapper { flex-grow: 1; position: relative; background-color: var(--pdf-bg); }
+        #pdf-viewer { width: 100%; height: 100%; border: none; }
+        .viewer-controls { position: absolute; bottom: 0; left: 0; right: 0; display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background: linear-gradient(to top, rgba(0,0,0,0.5), transparent); opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; z-index: 10; }
+        body.pdf-loaded .viewer-controls { opacity: 1; visibility: visible; }
+        .viewer-controls a, .viewer-controls button { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; padding: 10px; transition: transform 0.2s; position: relative; overflow: hidden;}
+        .viewer-controls a:hover, .viewer-controls button:hover { transform: scale(1.15); }
+        .ripple { position: absolute; border-radius: 50%; background: rgba(255, 255, 255, 0.3); transform: scale(0); animation: ripple-effect 0.6s linear; }
+        html.dark-mode .ripple { background: rgba(255, 255, 255, 0.1); }
+        @keyframes ripple-effect { to { transform: scale(4); opacity: 0; } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.8; } 50% { transform: scale(1.1); opacity: 1; } }
+
+        @media (max-width: 992px) {
+            .main-nav { position: fixed; transform: translateX(-100%); } body.nav-open .main-nav { transform: translateX(0); } body.nav-open .mobile-nav-backdrop { display: block; } .mobile-menu-toggle { display: block; } .top-bar { padding: 0 15px; } .page-content { padding: 20px; }
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
-
-    <!-- Header Section -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4">
-            <div class="text-center">
-                <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900">BFSc. Course: Fish Diseases and Management</h1>
-                <p class="text-md text-gray-600 mt-1">Advanced Course Index</p>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero-bg text-white py-16">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">Your Guide to Aquatic Animal Health</h2>
-            <p class="text-lg md:text-xl max-w-3xl mx-auto">Navigate through the course curriculum with ease. Use the search below to find specific topics or browse by unit.</p>
-        </div>
-    </section>
-
-    <!-- Main Content: Index -->
-    <main class="container mx-auto px-6 py-12">
-        
-        <!-- Search Bar -->
-        <div class="mb-10 max-w-4xl mx-auto">
-            <div class="relative">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                    <svg class="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none">
-                        <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                </span>
-                <input type="text" id="search-input" placeholder="Search for a chapter..." class="w-full py-3 pl-10 pr-4 text-gray-700 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-            </div>
-        </div>
-
-        <div class="space-y-6 max-w-4xl mx-auto" id="course-units">
-            <!-- Unit 1 -->
-            <div class="unit-card bg-white rounded-lg shadow-lg overflow-hidden">
-                <button class="accordion-button w-full text-left p-6 flex justify-between items-center bg-gray-50 hover:bg-gray-100 focus:outline-none">
-                    <h2 class="text-xl font-bold text-blue-800">UNIT 1: INTRODUCTION</h2>
-                    <svg class="chevron w-6 h-6 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="accordion-content">
-                    <ul class="p-6 pt-0 space-y-3">
-                        <li class="chapter-item"><a href="unit1_chapter1.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 1: Development of disease in fish <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Unit 2 -->
-            <div class="unit-card bg-white rounded-lg shadow-lg overflow-hidden">
-                <button class="accordion-button w-full text-left p-6 flex justify-between items-center bg-gray-50 hover:bg-gray-100 focus:outline-none">
-                    <h2 class="text-xl font-bold text-blue-800">UNIT 2: PATHOPHYSIOLOGY AND SYSTEMATIC PATHOLOGY</h2>
-                    <svg class="chevron w-6 h-6 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="accordion-content">
-                    <ul class="p-6 pt-0 space-y-3">
-                        <li class="chapter-item"><a href="unit2_chapter1.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 1: Pathophysiology of fish diseases <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                        <li class="chapter-item"><a href="unit2_chapter2.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 2: Systematic pathology fish <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Unit 3 -->
-            <div class="unit-card bg-white rounded-lg shadow-lg overflow-hidden">
-                <button class="accordion-button w-full text-left p-6 flex justify-between items-center bg-gray-50 hover:bg-gray-100 focus:outline-none">
-                    <h2 class="text-xl font-bold text-blue-800">UNIT 3: DEFENCE MECHANISMS</h2>
-                    <svg class="chevron w-6 h-6 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="accordion-content">
-                    <ul class="p-6 pt-0 space-y-3">
-                        <li class="chapter-item"><a href="unit3_chapter1.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 1: Defence mechanisms in fish <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                        <li class="chapter-item"><a href="unit3_chapter2.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 2: Defence mechanisms in shellfish <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Unit 4 -->
-            <div class="unit-card bg-white rounded-lg shadow-lg overflow-hidden">
-                <button class="accordion-button w-full text-left p-6 flex justify-between items-center bg-gray-50 hover:bg-gray-100 focus:outline-none">
-                    <h2 class="text-xl font-bold text-blue-800">UNIT 4: PARASITIC DISEASES</h2>
-                    <svg class="chevron w-6 h-6 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="accordion-content">
-                    <ul class="p-6 pt-0 space-y-3">
-                        <li class="chapter-item"><a href="unit4_chapter1.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 1: Classification and life history of parasites <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                        <li class="chapter-item"><a href="unit4_chapter2.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 2: Protozoan parasitic fish diseases <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                        <li class="chapter-item"><a href="unit4_chapter3.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 3: Metazoan parasitic fish diseases <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Unit 5 -->
-            <div class="unit-card bg-white rounded-lg shadow-lg overflow-hidden">
-                <button class="accordion-button w-full text-left p-6 flex justify-between items-center bg-gray-50 hover:bg-gray-100 focus:outline-none">
-                    <h2 class="text-xl font-bold text-blue-800">UNIT 5: INFECTIOUS DISEASES</h2>
-                    <svg class="chevron w-6 h-6 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="accordion-content">
-                    <ul class="p-6 pt-0 space-y-3">
-                        <li class="chapter-item"><a href="unit5_chapter1.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 1: Bacterial infectious diseases of fish <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                        <li class="chapter-item"><a href="unit5_chapter2.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 2: Bacterial infectious diseases of shellfish <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                        <li class="chapter-item"><a href="unit5_chapter3.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 3: Viral diseases of fish <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                        <li class="chapter-item"><a href="unit5_chapter4.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 4: Viral diseases of shrimps <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                        <li class="chapter-item"><a href="unit5_chapter5.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 5: Fungal diseases of fish and shrimp <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                        <li class="chapter-item"><a href="unit5_chapter6.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 6: Zoonotic and OIE listed notifiable diseases <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Unit 6 -->
-            <div class="unit-card bg-white rounded-lg shadow-lg overflow-hidden">
-                <button class="accordion-button w-full text-left p-6 flex justify-between items-center bg-gray-50 hover:bg-gray-100 focus:outline-none">
-                    <h2 class="text-xl font-bold text-blue-800">UNIT 6: NON-INFECTIOUS DISEASES</h2>
-                    <svg class="chevron w-6 h-6 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="accordion-content">
-                    <ul class="p-6 pt-0 space-y-3">
-                        <li class="chapter-item"><a href="unit6_chapter1.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 1: Nutritional pathology of Teleosts <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                        <li class="chapter-item"><a href="unit6_chapter2.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 2: Toxic components of the diet <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                        <li class="chapter-item"><a href="unit6_chapter3.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 3: Water quality parameters <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Unit 7 -->
-            <div class="unit-card bg-white rounded-lg shadow-lg overflow-hidden">
-                <button class="accordion-button w-full text-left p-6 flex justify-between items-center bg-gray-50 hover:bg-gray-100 focus:outline-none">
-                    <h2 class="text-xl font-bold text-blue-800">UNIT 7: PROPHYLAXIS AND THERAPEUTICS</h2>
-                    <svg class="chevron w-6 h-6 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-                <div class="accordion-content">
-                    <ul class="p-6 pt-0 space-y-3">
-                        <li class="chapter-item"><a href="unit7_chapter1.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 1: Diagnosis of fish diseases <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                        <li class="chapter-item"><a href="unit7_chapter2.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 2: Fish pharmacology <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                        <li class="chapter-item"><a href="unit7_chapter3.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 3: Principles of vaccination and fish immunisation <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                        <li class="chapter-item"><a href="unit7_chapter4.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 4: New trends in vaccination <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                        <li class="chapter-item"><a href="unit7_chapter5.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 5: Quarantine and health certification in aquaculture <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                        <li class="chapter-item"><a href="unit7_chapter6.html" class="flex items-center text-gray-700 hover:text-blue-600 font-medium transition group">Chapter 6: Strategies for health management <span class="ml-auto text-blue-500 font-bold opacity-0 group-hover:opacity-100 transition">&rarr;</span></a></li>
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <!-- Footer Section -->
-    <footer class="bg-gray-800 text-white mt-12">
-        <div class="container mx-auto px-6 py-6 text-center">
-            <p>&copy; Fish Diseases and Management Course</p>
-            <p class="text-sm text-gray-400 mt-1">created by Pratyudh Swain</p>
-        </div>
-    </footer>
-
-    <!-- Scroll to Top Button -->
-    <button id="scrollTopBtn" class="hidden fixed bottom-5 right-5 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
-    </button>
-
+<body>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Accordion functionality
-            const accordionButtons = document.querySelectorAll('.accordion-button');
-            accordionButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    button.classList.toggle('active');
-                });
-            });
-
-            // Search functionality
-            const searchInput = document.getElementById('search-input');
-            const unitCards = document.querySelectorAll('.unit-card');
-
-            searchInput.addEventListener('input', function () {
-                const filter = searchInput.value.toLowerCase();
-                
-                unitCards.forEach(card => {
-                    const chapters = card.querySelectorAll('.chapter-item');
-                    let unitHasVisibleChapter = false;
-
-                    chapters.forEach(chapter => {
-                        const chapterText = chapter.textContent.toLowerCase();
-                        if (chapterText.includes(filter)) {
-                            chapter.style.display = '';
-                            unitHasVisibleChapter = true;
-                        } else {
-                            chapter.style.display = 'none';
-                        }
-                    });
-
-                    if (unitHasVisibleChapter) {
-                        card.style.display = '';
-                        // If searching, expand the relevant accordions
-                        const accordionBtn = card.querySelector('.accordion-button');
-                        if (filter) {
-                           if (!accordionBtn.classList.contains('active')) {
-                               accordionBtn.classList.add('active');
-                           }
-                        }
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            });
-
-            // Scroll to Top button functionality
-            const scrollTopBtn = document.getElementById('scrollTopBtn');
-            window.onscroll = function () {
-                if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                    scrollTopBtn.classList.remove('hidden');
-                } else {
-                    scrollTopBtn.classList.add('hidden');
-                }
-            };
-
-            scrollTopBtn.addEventListener('click', function () {
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            });
-        });
+        (function() { const theme = localStorage.getItem('theme'); if (theme === 'dark') document.documentElement.classList.add('dark-mode'); })();
     </script>
+    
+    <div id="app-loader">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSIjMDBhNmYwIiBkPSJNNTAsMUMyMi45LDEsMSwyMi45LDEsNTBzMjEuOSw0OSw0OSw0OXM0OS0yMS45LDQ5LTQ5Uzc3LjEsMSw1MCwxeg0KCQkgTTM2LjYsNjguOGMtMi44LTEuNy0zLjctNS4xLTIuMS03LjlsNi45LTEyLjJsLTkuOCwwYy0zLjEsMC01LjctMi4yLTUuNy01LjJjMC0yLjksMi41LTUuMiw1LjUtNS4yaDkuOGwtMy4yLTUuNmMtMS44LTMuMSwwLjEtNi45LDMuNi04LjYNCgkJczcuOC0xLjEsOS43LDIuMWwyMy45LDQyYy00LjYsMi42LTguNCw0LjQtMTEuNSw1LjVsLTE5LjMtMTRjMy4xLDYuOCwxLjgsMTQtMy4zLDE3LjdDMzkuOCw3MSwzOC4yLDcwLDM2LjYsNjguOHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNjMuOSw0NC42Yy0xLjgtMy4xLTEuNC02LjksMS4xLTguN2M0LjQtMy4xLDEwLjMtMS40LDEyLjUsMi40YzAuOSwxLjYsMS4xLDMuMywwLjUsNS4xDQoJCWMtMC4zLDAuOC0wLjcenMS41LTEuMywyLjFjLTEuOCwxLjgtNCwxLjktNi4xLDAuN2MtMS4xLTAuNi0yLjMtMS0zLjUtMS4xQzY2LDQ1ДY0LjksNDQuOCw2My45LDQ0LjZ6Ii8+PC9zdmc+" alt="Loading...">
+    </div>
 
+    <div class="login-container" id="login-container">
+        <div class="login-box">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSIjMDBhNmYwIiBkPSJNNTAsMUMyMi45LDEsMSwyMi45LDEsNTBzMjEuOSw0OSw0OSw0OXM0OS0yMS45LDQ5LTQ5Uzc3LjEsMSw1MCwxeg0KCQkgTTM2LjYsNjguOGMtMi44LTEuNy0zLjctNS4xLTIuMS03LjlsNi45LTEyLjJsLTkuOCwwYy0zLjEsMC01LjctMi4yLTUuNy01LjJjMC0yLjksMi41LTUuMiw1LjUtNS4yaDkuOGwtMy4yLTUuNmMtMS44LTMuMSwwLjEtNi45LDMuNi04LjYNCgkJczcuOC0xLjEsOS43LDIuMWwyMy45LDQyYy00LjYsMi42LTguNCw0LjQtMTEuNSw1LjVsLTE5LjMtMTRjMy4xLDYuOCwxLjgsMTQtMy4zLDE3LjdDMzkuOCw3MSwzOC4yLDcwLDM2LjYsNjguOHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNjMuOSw0NC42Yy0xLjgtMy4xLTEuNC02LjksMS4xLTguN2M0LjQtMy4xLDEwLjMtMS40LDEyLjUsMi40YzAuOSwxLjYsMS4xLDMuMywwLjUsNS4xDQoJCWMtMC4zLDAuOC0wLjcenMS41LTEuMywyLjFjLTEuOCwxLjgtNCwxLjktNi4xLDAuN2MtMS4xLTAuNi0yLjMtMS0zLjUtMS4xQzY2LDQ1ДY0LjksNDQuOCw2My45LDQ0LjZ6Ii8+PC9zdmc+" alt="Logo" class="logo">
+            <h2>Welcome to the Hub</h2>
+            <p>Please log in with your Name and Email ID to continue.</p>
+            <form id="login-form">
+                <div class="input-group"><label for="login-name">Your Name</label><input type="text" id="login-name" required></div>
+                <div class="input-group"><label for="login-email">Your Email ID</label><input type="email" id="login-email" required></div>
+                <button type="submit" id="login-btn">Login</button>
+                <p id="error-message">Please fill out both fields.</p>
+            </form>
+            <p class="login-footer">Project Nautilus | Created by Pratyush Swain</p>
+        </div>
+    </div>
+    
+    <div class="app-container" id="app-container">
+        <nav class="main-nav" id="main-nav">
+            <div class="header">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cGF0aCBmaWxsPSIjMDBhNmYwIiBkPSJNNTAsMUMyMi45LDEsMSwyMi45LDEsNTBzMjEuOSw0OSw0OSw0OXM0OS0yMS45LDQ5LTQ5Uzc3LjEsMSw1MCwxeg0KCQkgTTM2LjYsNjguOGMtMi44LTEuNy0zLjctNS4xLTIuMS03LjlsNi45LTEyLjJsLTkuOCwwYy0zLjEsMC01LjctMi4yLTUuNy01LjJjMC0yLjksMi41LTUuMiw1LjUtNS4yaDkuOGwtMy4yLTUuNmMtMS44LTMuMSwwLjEtNi45LDMuNi04LjYNCgkJczcuOC0xLjEsOS43LDIuMWwyMy45LDQyYy00LjYsMi42LTguNCw0LjQtMTEuNSw1LjVsLTE5LjMtMTRjMy4xLDYuOCwxLjgsMTQtMy4zLDE3LjdDMzkuOCw3MSwzOC4yLDcwLDM2LjYsNjguOHoiLz48cGF0aCBmaWxsPSIjZmZmIiBkPSJNNjMuOSw0NC42Yy0xLjgtMy4xLTEuNC02LjksMS4xLTguN2M0LjQtMy4xLDEwLjMtMS40LDEyLjUsMi40YzAuOSwxLjYsMS4xLDMuMywwLjUsNS4xDQoJCWMtMC4zLDAuOC0wLjcenMS41LTEuMywyLjFjLTEuOCwxLjgtNCwxLjktNi4xLDAuN2MtMS4xLTAuNi0yLjMtMS0zLjUtMS4xQzY2LDQ1ДY0LjksNDQuOCw2My45LDQ0LjZ6Ii8+PC9zdmc+" alt="BFSc. Logo" class="logo">
+                <div><h1>BFSc. Study Hub</h1><span>OUAT Digital Library</span></div>
+            </div>
+            <ul class="semester-menu" id="semester-menu">
+                <li><a href="#" class="active-sem" data-view="dashboard"><i class="fa-solid fa-shapes"></i><span>Dashboard</span></a></li>
+                <li><a href="#" data-view="sem1"><i class="fa-solid fa-1"></i><span>Semester 1</span></a></li>
+                <li><a href="#" data-view="sem2"><i class="fa-solid fa-2"></i><span>Semester 2</span></a></li>
+                <li><a href="#" data-view="sem3"><i class="fa-solid fa-3"></i><span>Semester 3</span></a></li>
+                <li><a href="#" data-view="sem4"><i class="fa-solid fa-4"></i><span>Semester 4</span></a></li>
+                <li><a href="#" data-view="sem5"><i class="fa-solid fa-5"></i><span>Semester 5</span></a></li>
+                <li><a href="#" data-view="sem6"><i class="fa-solid fa-6"></i><span>Semester 6</span></a></li>
+                <li><a href="#" data-view="sem7"><i class="fa-solid fa-7"></i><span>Semester 7</span></a></li>
+                <li><a href="#" data-view="sem8"><i class="fa-solid fa-8"></i><span>Semester 8</span></a></li>
+                <li><button class="logout-btn" id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></button></li>
+            </ul>
+            <div class="nav-footer">
+                <div class="theme-switcher">
+                    <label for="theme-toggle">Dark Mode</label>
+                    <label class="toggle-switch"> <input type="checkbox" id="theme-toggle"><span class="slider"></span></label>
+                </div>
+                <div class="footer-credit">Created by Pratyush Swain</div>
+            </div>
+        </nav>
+        <div class="mobile-nav-backdrop" id="mobile-nav-backdrop"></div>
+        <main class="content-pane">
+            <div class="top-bar"><button class="mobile-menu-toggle" id="mobile-menu-toggle"><i class="fa-solid fa-bars"></i></button><h2 id="page-title">Dashboard</h2></div>
+            <div class="page-content" id="page-content"></div>
+        </main>
+        <div class="pdf-viewer-container">
+            <header class="pdf-viewer-header"><button class="pdf-viewer-back"><i class="fa-solid fa-arrow-left"></i></button><span id="pdf-viewer-title" class="pdf-title"></span></header>
+            <div class="pdf-frame-wrapper" id="pdf-frame-wrapper">
+               <iframe id="pdf-viewer" allow="fullscreen"></iframe>
+               <div class="viewer-controls"><a id="download-btn" title="Download PDF"><i class="fa-solid fa-download"></i></a><button id="fullscreen-btn" title="Toggle Fullscreen"><i class="fa-solid fa-expand"></i></button></div>
+            </div>
+       </div>
+    </div>
+<script>
+const courseData = { sem1: [{ name: "Foundational Principles", files: [{ name: "Add Your Sem 1 PDFs Here", path: "#" }] }], sem2: [{ name: "Core Concepts", files: [{ name: "Add Your Sem 2 PDFs Here", path: "#" }] }], sem3: [{ name: "Advanced Topics", files: [{ name: "Add Your Sem 3 PDFs Here", path: "#" }] }], sem4: [ { name: "AAHM - Aquaculture Animal Health", files: [{ name: "AAHM - FISH DISEASES AND MANAGEMENT.pdf", path: "pdfs/sem4/AAHM-Health/AAHM - FISH DISEASES AND MANAGEMENT.pdf" }, { name: "AAHM- 223 - Disease class note .pdf", path: "pdfs/sem4/AAHM-Health/AAHM- 223 - Disease class note .pdf" }, { name: "DISEASES TABLE 3 pg.pdf", path: "pdfs/sem4/AAHM-Health/DISEASES TABLE 3 pg.pdf" }, { name: "Therapeutics notes.pdf", path: "pdfs/sem4/AAHM-Health/Therapeutics notes.pdf" }, { name: "THERAPEUTICS PARASITE RED.pdf", path: "pdfs/sem4/AAHM-Health/THERAPEUTICS PARASITE RED.pdf" }] }, { name: "AQ - Aquaculture Management", files: [{ name: "AQ-221 - Finfish Hatchery Management .pdf", path: "pdfs/sem4/AQ-Hatchery/AQ-221 - Finfish Hatchery Management .pdf" }, { name: "AQ-222 - Fish Nutrition and Feed Technology .pdf", path: "pdfs/sem4/AQ-Hatchery/AQ-222 - Fish Nutrition and Feed Technology .pdf" }, { name: "AQ-223 - Shellfish Hatchery Management .pdf", path: "pdfs/sem4/AQ-Hatchery/AQ-223 - Shellfish Hatchery Management .pdf" }] }, { name: "FEES - Fisheries Extension", files: [{ name: "(Scanned) EXT note 1.pdf", path: "pdfs/sem4/FEES-Education/(Scanned) EXT note 1.pdf" }, { name: "(Scanned) EXT notes 2.pdf", path: "pdfs/sem4/FEES-Education/(Scanned) EXT notes 2.pdf" }] }, { name: "FPT / FE - Processing & Craft", files: [{ name: "CANNING+PACKAGING .pdf", path: "pdfs/sem4/FPT-Processing/CANNING+PACKAGING .pdf" }, { name: "FE-221 - Fishing Craft Technology.pdf", path: "pdfs/sem4/FPT-Processing/FE-221 - Fishing Craft Technology.pdf" }, { name: "FPT-221 - Fish Canning Technology .pdf", path: "pdfs/sem4/FPT-Processing/FPT-221 - Fish Canning Technology .pdf" }, { name: "FPT-222 - Fish Packaging Technology .pdf", path: "pdfs/sem4/FPT-Processing/FPT-222 - Fish Packaging Technology .pdf" }] } ], sem5: [{ name: "Specializations", files: [{ name: "Add Your Sem 5 PDFs Here", path: "#" }] }], sem6: [{ name: "Applied Sciences", files: [{ name: "Add Your Sem 6 PDFs Here", path: "#" }] }], sem7: [{ name: "Advanced Management", files: [{ name: "Add Your Sem 7 PDFs Here", path: "#" }] }], sem8: [{ name: "Project & Internship", files: [{ name: "Add Your Sem 8 PDFs Here", path: "#" }] }] };
+
+document.addEventListener('DOMContentLoaded', () => {
+    const body = document.body;
+    const loginContainer = document.getElementById('login-container');
+    const appContainer = document.getElementById('app-container');
+    const loginForm = document.getElementById('login-form');
+    const loginNameInput = document.getElementById('login-name');
+    const loginEmailInput = document.getElementById('login-email');
+    const errorMessage = document.getElementById('error-message');
+
+    const showApp = (userName) => { loginContainer.style.opacity = '0'; setTimeout(() => { loginContainer.style.display = 'none'; appContainer.style.display = 'flex'; initializeMainApp(userName); }, 300); };
+    const showLogin = () => { loginContainer.style.display = 'flex'; appContainer.style.display = 'none'; };
+    const handleLogin = (e) => { e.preventDefault(); const name = loginNameInput.value.trim(); const email = loginEmailInput.value.trim(); if (!name || !email) { errorMessage.style.display = 'block'; return; } const user = { name, email }; localStorage.setItem('loggedInUser', JSON.stringify(user)); showApp(user.name); };
+    const handleLogout = () => { localStorage.removeItem('loggedInUser'); body.style.transition = 'opacity 0.3s'; body.style.opacity = '0'; setTimeout(() => location.reload(), 300); };
+    
+    function createRipple(event) { const item = event.currentTarget; const circle = document.createElement("span"); const diameter = Math.max(item.clientWidth, item.clientHeight); const radius = diameter / 2; circle.style.width = circle.style.height = `${diameter}px`; circle.style.left = `${event.clientX - item.getBoundingClientRect().left - radius}px`; circle.style.top = `${event.clientY - item.getBoundingClientRect().top - radius}px`; circle.classList.add("ripple"); item.appendChild(circle); setTimeout(() => circle.remove(), 600); }
+    
+    function initializeMainApp(userName) {
+        const pageContent = document.getElementById('page-content'), pageTitle = document.getElementById('page-title'), semesterMenu = document.getElementById('semester-menu'), mobileMenuToggle = document.getElementById('mobile-menu-toggle'), mobileNavBackdrop = document.getElementById('mobile-nav-backdrop'), themeToggle = document.getElementById('theme-toggle'), pdfViewerBack = document.querySelector('.pdf-viewer-back'), pdfViewerTitle = document.getElementById('pdf-viewer-title'), pdfIframe = document.getElementById('pdf-viewer'), downloadBtn = document.getElementById('download-btn'), fullscreenBtn = document.getElementById('fullscreen-btn'), pdfFrameWrapper = document.getElementById('pdf-frame-wrapper'), logoutBtn = document.getElementById('logout-btn');
+        const calculateStats = () => { let activeSemesters = 0, totalSubjects = 0, totalPdfs = 0; Object.values(courseData).forEach(sem => { if (sem.length > 0 && sem[0].files && sem[0].files[0].path !== "#") { activeSemesters++; totalSubjects += sem.length; sem.forEach(subject => { totalPdfs += subject.files.length; }); } }); return { activeSemesters, totalSubjects, totalPdfs }; };
+        const renderDashboard = () => {
+            const stats = calculateStats();
+            pageTitle.textContent = 'Dashboard';
+            pageContent.innerHTML = `<div class="dashboard-header"><h2>Welcome, ${userName}!</h2><p>Your academic command center. Ready to dive in?</p></div>
+                <div class="stats-grid"><div class="stat-card"><div class="icon-wrapper"><i class="fa-solid fa-layer-group"></i></div><div><div class="stat-number">${stats.activeSemesters}</div><div class="stat-label">Active Semesters</div></div></div><div class="stat-card"><div class="icon-wrapper"><i class="fa-solid fa-book-bookmark"></i></div><div><div class="stat-number">${stats.totalSubjects}</div><div class="stat-label">Total Subjects</div></div></div><div class="stat-card"><div class="icon-wrapper"><i class="fa-solid fa-file-pdf"></i></div><div><div class="stat-number">${stats.totalPdfs}</div><div class="stat-label">Total PDFs</div></div></div></div>
+                <div><h3 class="section-title">Quick Access</h3><div class="quick-access-grid">
+                <a href="#" class="semester-card" data-view="sem4"><div class="icon-wrapper" style="color:#e74c3c;background-color:#fbeeeC;"><i class="fa-solid fa-flask-vial"></i></div><div><h4 class="card-title">Semester 4</h4><p class="card-desc">Dive into core applied science subjects.</p></div><i class="fa-solid fa-arrow-right card-arrow"></i></a>
+                </div></div>`;
+            document.querySelectorAll('.semester-card').forEach(card => card.addEventListener('click', e => { e.preventDefault(); switchView(e.currentTarget.dataset.view); createRipple(e); }));
+        };
+        const toggleFolder = (folderEl) => { folderEl.classList.toggle('open'); const fileList = folderEl.querySelector('.file-list'); fileList.style.maxHeight = folderEl.classList.contains('open') ? `${fileList.scrollHeight}px` : '0'; };
+        const renderSemester = (semesterId) => {
+            const semesterData = courseData[semesterId] || []; const semNum = semesterId.replace('sem',''); pageTitle.innerHTML = `Semester <span style="color:var(--brand-secondary);">${semNum}</span>`;
+            let contentHTML = `<div class="search-box"><i class="fa-solid fa-magnifying-glass"></i><input type="text" id="search-input" placeholder="Search in Semester ${semNum}..."></div><div id="folder-list-container">`;
+            if (semesterData.length === 0 || !semesterData[0].files || semesterData[0].files[0].path === "#") { contentHTML += `<div class="no-content"><i class="fa-solid fa-box-open"></i><p>No materials added for Semester ${semNum} yet.</p></div>`; } 
+            else { semesterData.forEach(folder => { contentHTML += `<div class="folder"><div class="folder-header"><i class="fa-solid fa-folder folder-icon"></i><span>${folder.name}</span><i class="fa-solid fa-chevron-right chevron-icon"></i></div><ul class="file-list">`; folder.files.forEach(file => { contentHTML += `<li class="file-item" data-path="${file.path}" data-name="${file.name}"><i class="fa-solid fa-file-pdf pdf-icon"></i><span>${file.name}</span></li>`; }); contentHTML += `</ul></div>`; }); }
+            contentHTML += `</div><div id="no-results" style="display:none;"><i class="fa-solid fa-ghost"></i><p>No files match search.</p></div>`; pageContent.innerHTML = contentHTML;
+            pageContent.style.animation = 'fadeIn 0.5s'; setTimeout(() => pageContent.style.animation = '', 500);
+            document.getElementById('search-input')?.addEventListener('input', handleSearch);
+            document.querySelectorAll('.folder-header').forEach(h => h.addEventListener('click', e => toggleFolder(e.currentTarget.parentElement)));
+            document.querySelectorAll('.file-item').forEach(i => i.addEventListener('click', e => { if (e.currentTarget.dataset.path !== '#') openPdf(e.currentTarget.dataset.path, e.currentTarget.dataset.name); }));
+        };
+        const switchView = (viewId) => { if (viewId === 'dashboard') renderDashboard(); else renderSemester(viewId); document.querySelector('.semester-menu a.active-sem')?.classList.remove('active-sem'); document.querySelector(`.semester-menu a[data-view="${viewId}"]`).classList.add('active-sem'); body.classList.remove('nav-open'); };
+        const openPdf = (path, name) => { pdfIframe.src = path; pdfViewerTitle.textContent = name; body.classList.add('pdf-is-open'); downloadBtn.href = path; downloadBtn.setAttribute('download', name); };
+        const closePdf = () => { body.classList.remove('pdf-is-open', 'pdf-loaded'); setTimeout(() => pdfIframe.src = 'about:blank', 300); };
+        const handleSearch = (e) => { const query = e.target.value.toLowerCase(); let resultsFound = false; document.querySelectorAll('.folder').forEach(folderEl => { let folderHasMatch = false; const folderName = folderEl.querySelector('.folder-header span').textContent.toLowerCase(); folderEl.querySelectorAll('.file-item').forEach(fileItem => { const fileName = fileItem.querySelector('span').textContent.toLowerCase(); if (fileName.includes(query)) { fileItem.style.display = 'flex'; folderHasMatch = true; } else { fileItem.style.display = 'none'; } }); if (folderName.includes(query) || folderHasMatch) { folderEl.style.display = 'block'; resultsFound = true; if(query) { folderEl.classList.add('open'); folderEl.querySelector('.file-list').style.maxHeight = `${folderEl.querySelector('.file-list').scrollHeight}px`; }} else { folderEl.style.display = 'none'; } if(!query) { folderEl.classList.remove('open'); folderEl.querySelector('.file-list').style.maxHeight = '0'; } }); document.getElementById('no-results').style.display = resultsFound ? 'none' : 'block'; };
+        const initMain = () => {
+            renderDashboard();
+            semesterMenu.addEventListener('click', (e) => { const link = e.target.closest('a'); if (link) { e.preventDefault(); switchView(link.dataset.view); createRipple(e); } });
+            mobileMenuToggle.addEventListener('click', (e) => { body.classList.toggle('nav-open'); createRipple(e); });
+            mobileNavBackdrop.addEventListener('click', () => body.classList.remove('nav-open'));
+            logoutBtn.addEventListener('click', (e) => {createRipple(e); handleLogout(); });
+            if (localStorage.getItem('theme') === 'dark') themeToggle.checked = true;
+            themeToggle.addEventListener('change', (e) => { document.documentElement.classList.toggle('dark-mode', e.target.checked); localStorage.setItem('theme', e.target.checked ? 'dark' : 'light'); });
+            pdfViewerBack.addEventListener('click', (e) => { createRipple(e); closePdf(); });
+            pdfIframe.onload = () => body.classList.add('pdf-loaded');
+            fullscreenBtn.addEventListener('click', (e) => { createRipple(e); if (!document.fullscreenElement) pdfFrameWrapper.requestFullscreen().catch(err => alert(`Fullscreen error: ${err.message}`)); else document.exitFullscreen(); });
+            document.querySelectorAll('a, button').forEach(el => el.addEventListener('click', createRipple));
+        };
+        initMain();
+    }
+    const checkLoginState = () => { const userString = localStorage.getItem('loggedInUser'); setTimeout(() => { const loader = document.getElementById('app-loader'); loader.classList.add('fade-out'); }, 300); if (userString) { showApp(JSON.parse(userString).name); } else { showLogin(); } };
+    loginForm.addEventListener('submit', handleLogin);
+    loginForm.querySelectorAll('button').forEach(b => b.addEventListener('click', createRipple));
+    checkLoginState();
+});
+</script>
 </body>
 </html>
