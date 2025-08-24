@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Study Guide: Unit 2 - Systematic Pathology of Fish</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Cool Blues & Grays -->
+    <!-- Application Structure Plan: The SPA is a two-part study tool for Unit 2, Ch 2. Part 1 is a "Study Hub" with key organ system pathologies in accordions. Part 2 is a "Mock Test" with MCQs for self-assessment. This Learn -> Test flow is ideal for student preparation on this dense topic. -->
+    <!-- Visualization & Content Choices: Report Info: Unit 2, Ch 2 concepts -> Goal: Inform/Organize -> Viz: Styled HTML accordions -> Interaction: Click to expand/collapse. Justification: Organizes the pathology of numerous organ systems into manageable, self-contained sections. | Report Info: Q&A -> Goal: Test Knowledge -> Viz: Dynamic quiz -> Interaction: User input, feedback, scoring. Justification: Active recall via a quiz enhances learning. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f0f4f8; }
+        h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+        .quiz-option { transition: all 0.2s ease-in-out; }
+        .quiz-option:hover { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+        .correct-answer { background-color: #d1fae5 !important; border-color: #10b981 !important; }
+        .wrong-answer { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
+        .progress-bar-fill { transition: width 0.5s ease-in-out; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; }
+        .accordion-button.active + .accordion-content { max-height: 800px; }
+        .accordion-button .chevron { transition: transform 0.3s ease; }
+        .accordion-button.active .chevron { transform: rotate(180deg); }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-5 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Systematic Pathology of Fish</h1>
+            <p class="text-md text-gray-600 mt-2">Interactive Study Guide for Unit 2, Chapter 2</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 py-10">
+
+        <!-- Part 1: Study Hub -->
+        <section id="study-hub" class="mb-16">
+            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold text-center mb-2 text-blue-700">Unit 2, Chapter 2 Study Hub</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">Review the key pathologies affecting different organ systems in fish. Click on any system to expand and see more details.</p>
+
+                <div class="space-y-4">
+                    <!-- Accordion Item 1: Integumentary System (Skin) -->
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="accordion-button w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100">
+                            <span class="font-semibold text-lg">Integumentary System (Skin)</span>
+                            <span class="chevron text-gray-500">▼</span>
+                        </button>
+                        <div class="accordion-content p-4 pt-0">
+                            <ul class="list-disc list-inside mt-2 space-y-2 text-gray-700">
+                                <li><strong>Structure:</strong> Comprises Cuticle, Epidermis, Basement membrane, Dermis, Hypodermis, and Subcutaneous muscle. The epidermis is living and avascular.</li>
+                                <li><strong>Spongiosis (Intercellular Oedema):</strong> The earliest inflammatory sign; separation of malpighian cells by tissue fluid.</li>
+                                <li><strong>Hyperplasia:</strong> Abnormal increase in the number of cells, a common response in fish epidermis, especially at low temperatures.</li>
+                                <li><strong>Wound Ulcers:</strong> Caused by injury or infection, leading to a break in the skin. Healing is temperature-dependent and involves migration of malpighian cells.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Accordion Item 2: Respiratory System (Gills) -->
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="accordion-button w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100">
+                            <span class="font-semibold text-lg">Respiratory System (Gills)</span>
+                            <span class="chevron text-gray-500">▼</span>
+                        </button>
+                        <div class="accordion-content p-4 pt-0">
+                            <p class="text-gray-700">Gills are delicate and a primary site for infection and damage from irritants. Three main pathological changes are recognized:</p>
+                             <ul class="list-disc list-inside mt-2 space-y-2">
+                                <li><strong>1. Lamellar Oedema:</strong> Reversible fluid accumulation in the lamella, often due to chemical pollutants.</li>
+                                <li><strong>2. Lamellar Hyperplasia:</strong> Increase in the number of malpighian cells, thickening the lamella and reducing gas exchange efficiency.</li>
+                                <li><strong>3. Lamellar Fusion:</strong> Irreversible fusion of secondary lamellae, severely reducing the respiratory surface area.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Accordion Item 3: Circulatory System -->
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="accordion-button w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100">
+                            <span class="font-semibold text-lg">Circulatory System (Blood, Heart, Vessels)</span>
+                            <span class="chevron text-gray-500">▼</span>
+                        </button>
+                        <div class="accordion-content p-4 pt-0">
+                             <ul class="list-disc list-inside mt-2 space-y-2">
+                                <li><strong>Haemopoietic Tissue:</strong> Located in the spleen and kidney, responsible for producing blood cells.</li>
+                                <li><strong>Anaemia:</strong> Reduction in red blood cells. Three types:
+                                    <ul class="list-['-_'] list-inside ml-4">
+                                        <li><strong>Haemorrhagic:</strong> Due to excessive blood loss (e.g., from VHSV).</li>
+                                        <li><strong>Haemolytic:</strong> Due to increased destruction of red blood cells (e.g., by *Vibrio* toxins).</li>
+                                        <li><strong>Hypoplastic:</strong> Due to failure of haemopoietic tissue to produce cells (e.g., nutritional deficiency).</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Heart Pathologies:</strong> Include Oedema (cardiac failure), Myocardial Necrosis (muscle degeneration), and nutritional myopathies (Vitamin E deficiency).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Accordion Item 4: Digestive System -->
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="accordion-button w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100">
+                            <span class="font-semibold text-lg">Digestive System</span>
+                            <span class="chevron text-gray-500">▼</span>
+                        </button>
+                        <div class="accordion-content p-4 pt-0">
+                            <ul class="list-disc list-inside mt-2 space-y-2">
+                                <li><strong>Oral Cavity:</strong> Can suffer from traumatic lesions, ulcers, and conditions like Enteric Red Mouth disease (*Yersinia ruckeri*).</li>
+                                <li><strong>Intestine:</strong> Can be damaged by protozoans (coccidiosis), nematodes, or toxins, leading to sloughing of the gut mucosa.</li>
+                                <li><strong>Liver Pathologies:</strong>
+                                    <ul class="list-['-_'] list-inside ml-4">
+                                        <li><strong>Hepatic Necrosis:</strong> Death of liver cells.</li>
+                                        <li><strong>Lipid Infiltration (Lipoid Liver):</strong> Excess fat accumulation, often from rancid feed.</li>
+                                        <li><strong>Cirrhosis:</strong> Increase in fibrous tissue due to chronic damage.</li>
+                                        <li><strong>Hepatoma (Carcinoma):</strong> Liver cancer, often caused by Aflatoxin from *Aspergillus flavus* mold.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Pancreas Pathologies:</strong>
+                                     <ul class="list-['-_'] list-inside ml-4">
+                                        <li><strong>Acinar Necrosis:</strong> Death of enzyme-producing cells, a key sign of Infectious Pancreatic Necrosis Virus (IPNV).</li>
+                                        <li><strong>Pancreatic Atrophy:</strong> Shrinkage of pancreatic cells.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Study Section -->
+                <div id="semester-prep" class="mt-8">
+                    <h3 class="text-xl font-bold text-center my-8 border-t pt-8">Comprehensive Q&A for Semester Exams</h3>
+                    <div class="space-y-8">
+
+                        <!-- Multiple Choice Questions -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">I. Multiple Choice Questions</h4>
+                            <div class="space-y-4 bg-gray-50 p-4 rounded-lg border">
+                                <p><strong>1. The earliest sign of an inflammatory response in the teleost epidermis is:</strong><br>
+                                    a) Hyperplasia<br>
+                                    b) Necrosis<br>
+                                    c) Spongiosis<br>
+                                    d) Ulceration<br>
+                                    <strong>Answer: c) Spongiosis</strong></p>
+                                <p><strong>2. Which gill pathology is considered irreversible?</strong><br>
+                                    a) Lamellar Oedema<br>
+                                    b) Lamellar Hyperplasia<br>
+                                    c) Lamellar Fusion<br>
+                                    d) Lamellar Necrosis<br>
+                                    <strong>Answer: c) Lamellar Fusion</strong></p>
+                                <p><strong>3. Anaemia caused by the failure of haemopoietic tissue to produce enough red blood cells is known as:</strong><br>
+                                    a) Haemorrhagic anaemia<br>
+                                    b) Haemolytic anaemia<br>
+                                    c) Hypoplastic anaemia<br>
+                                    d) Nutritional anaemia<br>
+                                    <strong>Answer: c) Hypoplastic anaemia</strong></p>
+                                <p><strong>4. Acinar necrosis of the pancreas is a characteristic sign of which viral disease?</strong><br>
+                                    a) Viral Haemorrhagic Septicaemia (VHS)<br>
+                                    b) Infectious Pancreatic Necrosis (IPN)<br>
+                                    c) Spring Viraemia of Carp (SVC)<br>
+                                    d) Koi Herpesvirus (KHV)<br>
+                                    <strong>Answer: b) Infectious Pancreatic Necrosis (IPN)</strong></p>
+                            </div>
+                        </div>
+
+                        <!-- Fill in the Blanks -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">II. Fill in the Blanks</h4>
+                            <div class="space-y-3 bg-gray-50 p-4 rounded-lg border">
+                                <p>1. The fundamental unit of the epidermis of teleost fish is the fibrous ____________ cell. <br><strong>Answer: malpighian</strong></p>
+                                <p>2. The cells that give structural support to the secondary gill lamellae are called ____________ cells.<br><strong>Answer: pillar</strong></p>
+                                <p>3. Liver cancer in fish, known as hepatoma, is often caused by ____________, a toxin produced by the fungus *Aspergillus flavus*.<br><strong>Answer: Aflatoxin</strong></p>
+                                <p>4. Enteric Red Mouth disease, which causes reddening of the mouth, is caused by the bacterium ____________.<br><strong>Answer: *Yersinia ruckeri*</strong></p>
+                            </div>
+                        </div>
+
+                        <!-- True or False -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">III. True or False</h4>
+                            <div class="space-y-3 bg-gray-50 p-4 rounded-lg border">
+                                <p>1. The epidermis of a fish is avascular (lacks a direct blood supply).<br><strong>Answer: True.</strong></p>
+                                <p>2. Wound healing in fish is faster at lower temperatures.<br><strong>Answer: False.</strong> Wound healing is temperature-dependent and is faster at higher temperatures.</p>
+                                <p>3. Lamellar oedema in gills is an irreversible condition.<br><strong>Answer: False.</strong> It is described as a reversible condition.</p>
+                                <p>4. Lipoid liver disease is associated with feeding fish highly rancid diets.<br><strong>Answer: True.</strong></p>
+                            </div>
+                        </div>
+
+                        <!-- Match the Following -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">IV. Match the Following</h4>
+                            <div class="bg-gray-50 p-4 rounded-lg border">
+                                <p><strong>Instructions:</strong> Match the pathological condition in Column A with its primary associated organ/system in Column B.</p>
+                                <div class="grid grid-cols-2 gap-4 mt-2">
+                                    <div><strong>Column A</strong><ul class="list-disc list-inside"><li>1. Lamellar fusion</li><li>2. Cirrhosis</li><li>3. Spongiosis</li><li>4. Haemolytic anaemia</li></ul></div>
+                                    <div><strong>Column B</strong><ul class="list-disc list-inside"><li>a) Skin (Integument)</li><li>b) Blood (Circulatory System)</li><li>c) Gills (Respiratory System)</li><li>d) Liver (Digestive System)</li></ul></div>
+                                </div>
+                                <p class="mt-3"><strong>Answers:</strong> 1-c, 2-d, 3-a, 4-b</p>
+                            </div>
+                        </div>
+
+                        <!-- Short Notes -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">V. Short Notes</h4>
+                            <div class="space-y-4">
+                                <div class="bg-gray-50 p-4 rounded-lg border">
+                                    <h5 class="font-bold">1. Describe the three main pathological changes observed in fish gills.</h5>
+                                    <p class="text-gray-700 mt-1">The three main pathological changes in fish gills are:
+                                    <br>1. <strong>Lamellar Oedema:</strong> This is a reversible condition where fluid accumulates in the interstitial spaces of the lamellae, causing them to swell. It is often a response to chemical pollutants and can lead to respiratory distress.
+                                    <br>2. <strong>Lamellar Hyperplasia:</strong> This is an increase in the number of epithelial (malpighian) cells on the lamellae. This thickens the tissue, which reduces the efficiency of gas exchange and can interfere with ion regulation.
+                                    <br>3. <strong>Lamellar Fusion:</strong> This is an irreversible, severe outcome of massive hyperplasia where adjacent secondary lamellae fuse together into a solid mass. This drastically reduces the available surface area for respiration and can be fatal, especially as oxygen demand increases.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-lg border">
+                                    <h5 class="font-bold">2. Explain the three types of anaemia found in fish.</h5>
+                                    <p class="text-gray-700 mt-1">Anaemia is a reduction in the total mass of red blood cells, leading to deficient oxygen transport. The three types are:
+                                    <br>1. <strong>Haemorrhagic Anaemia:</strong> Caused by excessive blood loss that outpaces the body's ability to replace it. This can result from physical injury, certain viral diseases (like VHSV), or blood-sucking parasites.
+                                    <br>2. <strong>Haemolytic Anaemia:</strong> Caused by an increased rate of red blood cell destruction (haemolysis). This is often due to toxins (haemolysins) produced by bacteria like *Vibrio anguillarum* or certain blood protozoa.
+                                    <br>3. <strong>Hypoplastic Anaemia:</strong> Caused by the failure of the haemopoietic tissues (in the kidney and spleen) to produce an adequate number of red blood cells. This can be due to nutritional deficiencies, radiation, or diseases affecting these organs.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Long Answer Question -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">VI. Long Answer Question</h4>
+                             <div class="bg-gray-50 p-4 rounded-lg border">
+                                <h5 class="font-bold">1. Compare and contrast the pathological responses of the fish integumentary system (skin) and respiratory system (gills) to external stressors and pathogens.</h5>
+                                <p class="text-gray-700 mt-2">
+                                    The skin and gills are the two primary barriers between a fish and its environment, and both exhibit distinct pathological responses to stressors and pathogens.
+                                </p>
+                                <p class="text-gray-700 mt-2">
+                                    <strong>Integumentary System (Skin):</strong> The skin's response is primarily protective and reparative. Its earliest inflammatory response is **Spongiosis** (oedema), where fluid separates the epidermal cells. A more common and generalized response is **Hyperplasia**, an increase in cell number to thicken the epidermis as a protective barrier. If the barrier is breached by trauma or a lesion, an **ulcer** forms. The skin's healing process is highly effective but temperature-dependent, relying on the migration of **malpighian cells** to cover the wound. Because the epidermis is avascular, its direct responses are limited, and major inflammatory events occur deeper in the vascularized dermis and hypodermis.
+                                </p>
+                                <p class="text-gray-700 mt-2">
+                                    <strong>Respiratory System (Gills):</strong> The gills, being extremely delicate and directly involved in vital functions (respiration, osmoregulation), show more severe and functionally debilitating responses. Like the skin, gills can exhibit **oedema** (Lamellar Oedema) and **hyperplasia** (Lamellar Hyperplasia). However, gill hyperplasia is more immediately dangerous as it thickens the lamellar epithelium, directly impeding gas exchange. The most severe gill response is **Lamellar Fusion**, an irreversible consequence of massive hyperplasia where the respiratory surfaces are permanently lost. Unlike the skin, where healing aims to restore a simple barrier, pathological changes in the gills directly compromise a critical physiological function, often leading to severe respiratory distress and mortality.
+                                </p>
+                                <p class="text-gray-700 mt-2">
+                                    <strong>Comparison:</strong> Both systems use hyperplasia as a key defensive response. However, the consequences are vastly different. Skin hyperplasia is primarily a thickening defense, while gill hyperplasia is a life-threatening impediment to breathing. Skin damage (ulcers) can be effectively repaired, whereas severe gill damage (fusion) is irreversible. Therefore, while both systems act as barriers, the pathological responses of the gills are more functionally critical and have more immediate and severe consequences for the fish's survival.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 text-center">
+                    <button id="start-quiz-btn" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105">
+                        Start Mock Test (MCQs)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Part 2: Mock Test -->
+        <section id="interactive-quiz" class="bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold text-center mb-6">Mock Test</h2>
+            
+            <div id="quiz-progress" class="mb-6">
+                <div class="flex justify-between mb-1">
+                    <span class="text-base font-medium text-blue-700">Progress</span>
+                    <span id="progress-text" class="text-sm font-medium text-blue-700"></span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full progress-bar-fill" style="width: 0%"></div>
+                </div>
+                <div class="text-right mt-2 font-bold text-lg">Score: <span id="score-text">0</span></div>
+            </div>
+
+            <div id="quiz-container">
+                <!-- Quiz questions will be injected here by JavaScript -->
+            </div>
+
+            <div id="quiz-controls" class="mt-8 text-center">
+                <button id="next-btn" class="bg-blue-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400" disabled>Next Question</button>
+            </div>
+            
+            <div id="results-container" class="hidden text-center mt-8">
+                <h3 class="text-3xl font-bold text-gray-900">Quiz Complete!</h3>
+                <p class="text-xl mt-4">Your final score is <span id="final-score" class="font-bold text-blue-600"></span>.</p>
+                <p class="text-gray-600 mt-2" id="results-message"></p>
+                <button id="restart-btn" class="mt-6 bg-gray-800 text-white font-bold py-2 px-6 rounded-lg hover:bg-gray-900 transition">Restart Quiz</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="mt-12 py-6 text-center text-gray-500">
+        <p>&copy; 2025 Interactive Study Tools. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Accordion Logic
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    accordionButtons.forEach(otherButton => {
+                        if (otherButton !== button) otherButton.classList.remove('active');
+                    });
+                    button.classList.toggle('active');
+                });
+            });
+
+            // Smooth scroll to quiz
+            document.getElementById('start-quiz-btn').addEventListener('click', () => {
+                document.getElementById('interactive-quiz').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Quiz Logic
+            const quizData = [
+                { type: 'mcq', question: "The separation of individual malpighian cells by tissue fluid in the skin is called:", options: ["Hyperplasia", "Spongiosis", "Necrosis", "Keratosis"], answer: "Spongiosis" },
+                { type: 'mcq', question: "Which of these gill pathologies is described as irreversible?", options: ["Lamellar Oedema", "Lamellar Hyperplasia", "Lamellar Fusion", "Secondary Infection"], answer: "Lamellar Fusion" },
+                { type: 'mcq', question: "Haemolytic anaemia is caused by:", options: ["Excessive blood loss", "Failure of blood cell production", "Increased destruction of erythrocytes", "Nutritional deficiency"], answer: "Increased destruction of erythrocytes" },
+                { type: 'mcq', question: "Enteric Red Mouth disease is caused by which bacterium?", options: ["Vibrio anguillarum", "Aeromonas salmonicida", "Yersinia ruckeri", "Flexibacter columnaris"], answer: "Yersinia ruckeri" },
+                { type: 'mcq', question: "Aflatoxin, a primary cause of liver cancer (hepatoma) in fish, is produced by:", options: ["A bacterium", "A virus", "A fungus", "A protozoan"], answer: "A fungus" },
+                { type: 'mcq', question: "Infectious Pancreatic Necrosis Virus (IPNV) primarily causes which pathology?", options: ["Hepatic granuloma", "Acinar necrosis", "Lipoid liver", "Glomerular nephritis"], answer: "Acinar necrosis" },
+                { type: 'mcq', question: "The condition where eyes bulge out from the eye socket is known as:", options: ["Cataract", "Lordosis", "Exophthalmia", "Anaemia"], answer: "Exophthalmia" },
+                { type: 'mcq', question: "Skeletal deformities like scoliosis and lordosis in fish have been frequently associated with a deficiency of:", options: ["Vitamin A", "Vitamin E", "Vitamin C", "Vitamin K"], answer: "Vitamin C" },
+                { type: 'mcq', question: "The fish's primary respiratory organs and a favored site for external parasites are the:", options: ["Fins", "Skin", "Gills", "Intestine"], answer: "Gills" },
+                { type: 'mcq', question: "The haemopoietic (blood-producing) tissue in teleost fish is mainly located in the kidney and:", options: ["Liver", "Heart", "Spleen", "Pancreas"], answer: "Spleen" }
+            ];
+
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let questionAnswered = false;
+            const totalQuestions = quizData.length;
+
+            const quizContainer = document.getElementById('quiz-container');
+            const nextBtn = document.getElementById('next-btn');
+            const restartBtn = document.getElementById('restart-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const scoreText = document.getElementById('score-text');
+            const resultsContainer = document.getElementById('results-container');
+            const finalScoreEl = document.getElementById('final-score');
+            const resultsMessageEl = document.getElementById('results-message');
+            const quizProgress = document.getElementById('quiz-progress');
+            const quizControls = document.getElementById('quiz-controls');
+
+            function startQuiz() {
+                currentQuestionIndex = 0;
+                score = 0;
+                questionAnswered = false;
+                resultsContainer.classList.add('hidden');
+                quizContainer.classList.remove('hidden');
+                quizProgress.classList.remove('hidden');
+                quizControls.classList.remove('hidden');
+                updateProgress();
+                showQuestion();
+            }
+
+            function showQuestion() {
+                questionAnswered = false;
+                nextBtn.disabled = true;
+                const questionData = quizData[currentQuestionIndex];
+                let html = `<div class="mb-4"><p class="text-lg font-semibold">${currentQuestionIndex + 1}. ${questionData.question}</p></div>`;
+
+                if (questionData.type === 'mcq') {
+                    html += '<div class="space-y-3">';
+                    questionData.options.forEach(option => {
+                        html += `<button class="quiz-option w-full text-left p-4 bg-white border-2 border-gray-200 rounded-lg">${option}</button>`;
+                    });
+                    html += '</div>';
+                }
+                quizContainer.innerHTML = html;
+                addEventListeners();
+            }
+
+            function addEventListeners() {
+                if (quizData[currentQuestionIndex].type === 'mcq') {
+                    document.querySelectorAll('.quiz-option').forEach(button => {
+                        button.addEventListener('click', checkMCQAnswer);
+                    });
+                }
+            }
+            
+            function checkMCQAnswer(e) {
+                if (questionAnswered) return;
+                questionAnswered = true;
+                const selectedOption = e.target;
+                const isCorrect = selectedOption.textContent === quizData[currentQuestionIndex].answer;
+                
+                if (isCorrect) {
+                    score++;
+                    selectedOption.classList.add('correct-answer');
+                } else {
+                    selectedOption.classList.add('wrong-answer');
+                    document.querySelectorAll('.quiz-option').forEach(btn => {
+                        if (btn.textContent === quizData[currentQuestionIndex].answer) {
+                            btn.classList.add('correct-answer');
+                        }
+                    });
+                }
+                updateProgress();
+                nextBtn.disabled = false;
+            }
+
+            function updateProgress() {
+                scoreText.textContent = score;
+                const progressPercentage = ((currentQuestionIndex) / totalQuestions) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                progressText.textContent = `${currentQuestionIndex} / ${totalQuestions}`;
+            }
+
+            function showNextQuestion() {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < totalQuestions) {
+                    updateProgress();
+                    showQuestion();
+                } else {
+                    showResults();
+                }
+            }
+            
+            function showResults() {
+                progressBar.style.width = '100%';
+                progressText.textContent = `${totalQuestions} / ${totalQuestions}`;
+                quizContainer.classList.add('hidden');
+                quizControls.classList.add('hidden');
+                resultsContainer.classList.remove('hidden');
+                finalScoreEl.textContent = `${score} out of ${totalQuestions}`;
+                
+                const percentage = (score / totalQuestions) * 100;
+                let message = "";
+                if (percentage >= 90) {
+                    message = "Excellent work! You have a strong grasp of the material. 🎓";
+                } else if (percentage >= 70) {
+                    message = "Great job! You know this topic well. A little review will make it perfect.";
+                } else if (percentage >= 50) {
+                    message = "Good effort. Review the concepts to solidify your understanding.";
+                } else {
+                    message = "Keep studying! Re-read the chapter and try the quiz again.";
+                }
+                resultsMessageEl.textContent = message;
+            }
+
+            nextBtn.addEventListener('click', showNextQuestion);
+            restartBtn.addEventListener('click', () => {
+                document.getElementById('study-hub').scrollIntoView({ behavior: 'smooth' });
+                startQuiz();
+            });
+
+            startQuiz();
+        });
+    </script>
+</body>
+</html>
