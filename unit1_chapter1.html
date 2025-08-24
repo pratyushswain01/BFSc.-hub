@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Study Guide: Unit 1 - Fish Disease Fundamentals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Cool Blues & Grays -->
+    <!-- Application Structure Plan: The SPA is redesigned into a two-part study tool. Part 1 is a "Study Hub" with all key concepts from Unit 1 presented in digestible cards and accordions. Part 2 is a "Mock Test" (the interactive quiz). This creates a clear user flow: Learn -> Test. This structure is more pedagogically sound for a student than just a quiz, fulfilling the request for a complete study tool. -->
+    <!-- Visualization & Content Choices: Report Info: All of Unit 1 concepts -> Goal: Inform/Organize -> Viz: Styled HTML cards and accordions -> Interaction: Click to expand/collapse details. Justification: Prevents information overload and allows self-paced learning. | Report Info: Q&A -> Goal: Test Knowledge -> Viz: Dynamic quiz interface -> Interaction: User input, feedback, score tracking. Justification: Active recall is a proven study method. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f0f4f8; }
+        h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+        .quiz-option { transition: all 0.2s ease-in-out; }
+        .quiz-option:hover { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+        .correct-answer { background-color: #d1fae5 !important; border-color: #10b981 !important; }
+        .wrong-answer { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
+        .progress-bar-fill { transition: width 0.5s ease-in-out; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; }
+        .accordion-button.active + .accordion-content { max-height: 500px; }
+        .accordion-button .chevron { transition: transform 0.3s ease; }
+        .accordion-button.active .chevron { transform: rotate(180deg); }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-5 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Fish Disease Fundamentals</h1>
+            <p class="text-md text-gray-600 mt-2">Interactive Study Guide for Unit 1</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 py-10">
+
+        <!-- Part 1: Study Hub -->
+        <section id="study-hub" class="mb-16">
+            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold text-center mb-2 text-blue-700">Unit 1 Study Hub</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">Review the key concepts from Chapter 1. Click on any topic to expand and see more details. Once you're ready, proceed to the mock test.</p>
+
+                <div class="space-y-4">
+                    <!-- Accordion Item 1: The Disease Triad -->
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="accordion-button w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100">
+                            <span class="font-semibold text-lg">Key Concept: The Disease Triad</span>
+                            <span class="chevron text-gray-500">▼</span>
+                        </button>
+                        <div class="accordion-content p-4 pt-0">
+                            <p class="text-gray-700">Disease occurs from a breakdown in the balance between three factors (as per Snieszko, 1970):</p>
+                            <ul class="list-disc list-inside mt-2 space-y-1">
+                                <li><strong>Host:</strong> The fish's own health, immunity, and stress level.</li>
+                                <li><strong>Pathogen:</strong> The virulence and concentration of the disease-causing agent.</li>
+                                <li><strong>Environment:</strong> Water quality parameters like temperature, oxygen, and stocking density.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Accordion Item 2: Role of Stress -->
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="accordion-button w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100">
+                            <span class="font-semibold text-lg">The Role of Stress</span>
+                            <span class="chevron text-gray-500">▼</span>
+                        </button>
+                        <div class="accordion-content p-4 pt-0">
+                            <p class="text-gray-700">Stress is a primary trigger for disease outbreaks. Key points include:</p>
+                             <ul class="list-disc list-inside mt-2 space-y-1">
+                                <li>Stressors include high stocking density, poor water quality, and handling.</li>
+                                <li>The stress response is mediated by the <strong>Hypothalamus-Pituitary-Interrenal (HPI) axis</strong>.</li>
+                                <li>This axis stimulates the production of <strong>corticosteroids</strong> (stress hormones).</li>
+                                <li>While adaptive, these hormones are <strong>immuno-suppressive</strong>, lowering the fish's ability to fight off pathogens.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Accordion Item 3: Aquaculture Practices -->
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="accordion-button w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100">
+                            <span class="font-semibold text-lg">Impact of Modern Aquaculture</span>
+                            <span class="chevron text-gray-500">▼</span>
+                        </button>
+                        <div class="accordion-content p-4 pt-0">
+                            <p class="text-gray-700">The shift to intensive systems has increased disease risk:</p>
+                             <ul class="list-disc list-inside mt-2 space-y-1">
+                                <li><strong>High Stocking Density:</strong> Increases stress and facilitates rapid pathogen transmission.</li>
+                                <li><strong>Water Quality Issues:</strong> High waste production can lead to low oxygen and high ammonia, stressing fish.</li>
+                                <li><strong>Opportunistic Pathogens:</strong> High organic load allows bacteria that are normally harmless to multiply and cause disease in stressed fish.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Accordion Item 4: Disease Outbreak Classification -->
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="accordion-button w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100">
+                            <span class="font-semibold text-lg">Disease Outbreak Classifications (Kinne, 1980)</span>
+                            <span class="chevron text-gray-500">▼</span>
+                        </button>
+                        <div class="accordion-content p-4 pt-0">
+                            <ul class="list-disc list-inside mt-2 space-y-1">
+                                <li><strong>Sporadic:</strong> Occurs infrequently in a few members of a population.</li>
+                                <li><strong>Epizootic:</strong> A large-scale outbreak in a limited geographical area.</li>
+                                <li><strong>Panzootic:</strong> An outbreak that occurs over a very large area.</li>
+                                <li><strong>Enzootic:</strong> Persists at a low level or re-occurs in a specific area.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Study Section -->
+                <div id="semester-prep" class="mt-8">
+                    <h3 class="text-xl font-bold text-center my-8 border-t pt-8">Sample Questions for Semester Exams</h3>
+                    <div class="space-y-8">
+
+                        <!-- Multiple Choice Questions -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">I. Multiple Choice Questions</h4>
+                            <div class="space-y-3 bg-gray-50 p-4 rounded-lg border">
+                                <p><strong>1. The stress response in fish is initiated by the stimulation of which axis?</strong><br>
+                                    a) Hypothalamus-Pituitary-Gonadal (HPG) axis<br>
+                                    b) Hypothalamus-Pituitary-Interrenal (HPI) axis<br>
+                                    c) Thyroid-Stimulating Hormone (TSH) axis<br>
+                                    <strong>Answer: b) Hypothalamus-Pituitary-Interrenal (HPI) axis</strong></p>
+                                <p><strong>2. A large-scale outbreak of a communicable animal disease occurring temporarily within a limited geographical area is known as a(n):</strong><br>
+                                    a) Sporadic disease<br>
+                                    b) Enzootic<br>
+                                    c) Epizootic<br>
+                                    <strong>Answer: c) Epizootic</strong></p>
+                            </div>
+                        </div>
+
+                        <!-- Fill in the Blanks -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">II. Fill in the Blanks</h4>
+                            <div class="space-y-3 bg-gray-50 p-4 rounded-lg border">
+                                <p>1. The shift from semi-intensive to intensive aquaculture systems has led to an indiscriminate increase in ____________. <br><strong>Answer: stocking density</strong></p>
+                                <p>2. Fish are ____________, meaning their body functions are largely controlled by the surrounding water temperature.<br><strong>Answer: poikilothermic</strong></p>
+                                <p>3. In closed circulatory systems, the introduction of a ____________ is essential to maintain water quality.<br><strong>Answer: biofilter</strong></p>
+                            </div>
+                        </div>
+
+                        <!-- True or False -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">III. True or False</h4>
+                            <div class="space-y-3 bg-gray-50 p-4 rounded-lg border">
+                                <p>1. Intensive culture systems have a lower risk of disease outbreaks compared to extensive systems.<br><strong>Answer: False.</strong> The risk of disease increases with higher stocking densities found in intensive systems.</p>
+                                <p>2. A healthy, stress-free fish can resist invasion by most pathogens.<br><strong>Answer: True.</strong> The host's health and lack of stress are crucial for resisting disease.</p>
+                            </div>
+                        </div>
+
+                        <!-- Match the Following -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">IV. Match the Following</h4>
+                            <div class="bg-gray-50 p-4 rounded-lg border">
+                                <p><strong>Instructions:</strong> Match the items in Column A with the correct description in Column B.</p>
+                                <div class="grid grid-cols-2 gap-4 mt-2">
+                                    <div><strong>Column A</strong><ul class="list-disc list-inside"><li>1. Snieszko</li><li>2. HPI Axis</li><li>3. Kinne</li><li>4. Ozone</li></ul></div>
+                                    <div><strong>Column B</strong><ul class="list-disc list-inside"><li>a) Classification of disease outbreaks</li><li>b) Water sterilization</li><li>c) Host, Pathogen, Environment balance</li><li>d) Stress response hormones</li></ul></div>
+                                </div>
+                                <p class="mt-3"><strong>Answers:</strong> 1-c, 2-d, 3-a, 4-b</p>
+                            </div>
+                        </div>
+
+                        <!-- Short Notes -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">V. Short Notes</h4>
+                            <div class="space-y-4">
+                                <div class="bg-gray-50 p-4 rounded-lg border">
+                                    <h5 class="font-bold">1. Significance of Water Quality in Fish Health</h5>
+                                    <p class="text-gray-700 mt-1">Good water quality is fundamental to fish health management. The aquatic environment is dynamic, and fish, being poikilothermic, are directly affected by parameters like temperature, pH, and dissolved oxygen. Poor water quality acts as a major stressor, weakening the fish's immune system and making it susceptible to opportunistic pathogens. Key management practices include pre-treating inlet water, maintaining optimal dissolved oxygen through aeration, controlling organic load from uneaten feed and waste, and using biofilters in recirculating systems to remove toxic metabolites like ammonia.</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-lg border">
+                                    <h5 class="font-bold">2. The Role of Stress in Disease Development</h5>
+                                    <p class="text-gray-700 mt-1">Stress is a critical factor that disrupts the balance between the fish (host) and potential pathogens. When a fish is stressed by factors like high stocking density, poor water quality, or handling, its body initiates a physiological response via the Hypothalamus-Pituitary-Interrenal (HPI) axis. This leads to the release of stress hormones called corticosteroids. While these hormones help the fish cope in the short term, they have a significant downside: they suppress the immune system. This immunosuppression lowers the fish's natural disease resistance, opening the door for opportunistic pathogens to cause an infection.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Long Answer Question -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">VI. Long Answer Question</h4>
+                             <div class="bg-gray-50 p-4 rounded-lg border">
+                                <h5 class="font-bold">1. Explain the interaction between Host, Pathogen, and Environment in the development of fish diseases, as described by Snieszko. How do modern aquaculture practices influence this balance?</h5>
+                                <p class="text-gray-700 mt-2">
+                                    The development of disease in fish, according to S.F. Snieszko's model, results from a breakdown in the balance between three components: the <strong>Host</strong>, the <strong>Pathogen</strong>, and the <strong>Environment</strong>.
+                                </p>
+                                <ul class="list-disc list-inside my-2 space-y-1 text-gray-700">
+                                    <li><strong>The Host:</strong> Refers to the fish's health, immune status, and stress level. A strong host can resist most infections.</li>
+                                    <li><strong>The Pathogen:</strong> The disease-causing agent. Its ability to cause disease (virulence) and its concentration are key.</li>
+                                    <li><strong>The Environment:</strong> The water conditions. Poor quality (e.g., low oxygen, high ammonia) stresses the host and can favor the pathogen.</li>
+                                </ul>
+                                <p class="text-gray-700 mt-2">
+                                    <strong>Influence of Modern Aquaculture Practices:</strong> Modern intensive aquaculture disrupts this balance significantly. <strong>High stocking densities</strong> increase host stress and allow pathogens to spread easily. This also leads to <strong>water quality deterioration</strong> from accumulated waste, further stressing the fish. The high organic load creates an ideal breeding ground for opportunistic pathogens, increasing their concentration in the environment. In essence, intensive practices weaken the host while strengthening the pathogen and degrading the environment, making disease outbreaks far more likely.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 text-center">
+                    <button id="start-quiz-btn" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105">
+                        Start Mock Test (MCQs)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Part 2: Mock Test -->
+        <section id="interactive-quiz" class="bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold text-center mb-6">Mock Test</h2>
+            
+            <div id="quiz-progress" class="mb-6">
+                <div class="flex justify-between mb-1">
+                    <span class="text-base font-medium text-blue-700">Progress</span>
+                    <span id="progress-text" class="text-sm font-medium text-blue-700"></span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full progress-bar-fill" style="width: 0%"></div>
+                </div>
+                <div class="text-right mt-2 font-bold text-lg">Score: <span id="score-text">0</span></div>
+            </div>
+
+            <div id="quiz-container">
+                <!-- Quiz questions will be injected here by JavaScript -->
+            </div>
+
+            <div id="quiz-controls" class="mt-8 text-center">
+                <button id="next-btn" class="bg-blue-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400" disabled>Next Question</button>
+            </div>
+            
+            <div id="results-container" class="hidden text-center mt-8">
+                <h3 class="text-3xl font-bold text-gray-900">Quiz Complete!</h3>
+                <p class="text-xl mt-4">Your final score is <span id="final-score" class="font-bold text-blue-600"></span>.</p>
+                <p class="text-gray-600 mt-2" id="results-message"></p>
+                <button id="restart-btn" class="mt-6 bg-gray-800 text-white font-bold py-2 px-6 rounded-lg hover:bg-gray-900 transition">Restart Quiz</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="mt-12 py-6 text-center text-gray-500">
+        <p>&copy; 2025 Interactive Study Tools. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Accordion Logic
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    accordionButtons.forEach(otherButton => {
+                        if (otherButton !== button) otherButton.classList.remove('active');
+                    });
+                    button.classList.toggle('active');
+                });
+            });
+
+            // Smooth scroll to quiz
+            document.getElementById('start-quiz-btn').addEventListener('click', () => {
+                document.getElementById('interactive-quiz').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Quiz Logic
+            const quizData = [
+                { type: 'mcq', question: "According to Snieszko (1970), the incidence of disease in fish is due to a breakdown of the balance between which three factors?", options: ["Host, Water, and Temperature", "Pathogen, Feed, and Stress", "Host, Pathogen, and Environment", "Environment, Stress, and Genetics"], answer: "Host, Pathogen, and Environment" },
+                { type: 'mcq', question: "The stress response in fish is initiated by the stimulation of which axis?", options: ["Hypothalamus-Pituitary-Gonadal (HPG) axis", "Hypothalamus-Pituitary-Interrenal (HPI) axis", "Thyroid-Stimulating Hormone (TSH) axis", "Adrenal-Cortex-Medulla (ACM) axis"], answer: "Hypothalamus-Pituitary-Interrenal (HPI) axis" },
+                { type: 'mcq', question: "Which of the following is a primary constraint to the growth and sustainability of aquaculture?", options: ["Lack of suitable species", "High cost of feed", "Incidence of diseases", "Market demand fluctuations"], answer: "Incidence of diseases" },
+                { type: 'mcq', question: "What is the main effect of corticosteroids produced during a stress response in fish?", options: ["They enhance growth", "They boost the immune system", "They are immuno-suppressive", "They increase appetite"], answer: "They are immuno-suppressive" },
+                { type: 'mcq', question: "A large-scale outbreak of a communicable animal disease occurring temporarily within a limited geographical area is known as a(n):", options: ["Sporadic disease", "Enzootic", "Panzootic", "Epizootic"], answer: "Epizootic" }
+            ];
+
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let questionAnswered = false;
+            const totalQuestions = quizData.length;
+
+            const quizContainer = document.getElementById('quiz-container');
+            const nextBtn = document.getElementById('next-btn');
+            const restartBtn = document.getElementById('restart-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const scoreText = document.getElementById('score-text');
+            const resultsContainer = document.getElementById('results-container');
+            const finalScoreEl = document.getElementById('final-score');
+            const resultsMessageEl = document.getElementById('results-message');
+            const quizProgress = document.getElementById('quiz-progress');
+            const quizControls = document.getElementById('quiz-controls');
+
+            function startQuiz() {
+                currentQuestionIndex = 0;
+                score = 0;
+                questionAnswered = false;
+                resultsContainer.classList.add('hidden');
+                quizContainer.classList.remove('hidden');
+                quizProgress.classList.remove('hidden');
+                quizControls.classList.remove('hidden');
+                updateProgress();
+                showQuestion();
+            }
+
+            function showQuestion() {
+                questionAnswered = false;
+                nextBtn.disabled = true;
+                const questionData = quizData[currentQuestionIndex];
+                let html = `<div class="mb-4"><p class="text-lg font-semibold">${currentQuestionIndex + 1}. ${questionData.question}</p></div>`;
+
+                if (questionData.type === 'mcq') {
+                    html += '<div class="space-y-3">';
+                    questionData.options.forEach(option => {
+                        html += `<button class="quiz-option w-full text-left p-4 bg-white border-2 border-gray-200 rounded-lg">${option}</button>`;
+                    });
+                    html += '</div>';
+                }
+                quizContainer.innerHTML = html;
+                addEventListeners();
+            }
+
+            function addEventListeners() {
+                if (quizData[currentQuestionIndex].type === 'mcq') {
+                    document.querySelectorAll('.quiz-option').forEach(button => {
+                        button.addEventListener('click', checkMCQAnswer);
+                    });
+                }
+            }
+            
+            function checkMCQAnswer(e) {
+                if (questionAnswered) return;
+                questionAnswered = true;
+                const selectedOption = e.target;
+                const isCorrect = selectedOption.textContent === quizData[currentQuestionIndex].answer;
+                
+                if (isCorrect) {
+                    score++;
+                    selectedOption.classList.add('correct-answer');
+                } else {
+                    selectedOption.classList.add('wrong-answer');
+                    document.querySelectorAll('.quiz-option').forEach(btn => {
+                        if (btn.textContent === quizData[currentQuestionIndex].answer) {
+                            btn.classList.add('correct-answer');
+                        }
+                    });
+                }
+                updateProgress();
+                nextBtn.disabled = false;
+            }
+
+            function updateProgress() {
+                scoreText.textContent = score;
+                const progressPercentage = ((currentQuestionIndex) / totalQuestions) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                progressText.textContent = `${currentQuestionIndex} / ${totalQuestions}`;
+            }
+
+            function showNextQuestion() {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < totalQuestions) {
+                    updateProgress();
+                    showQuestion();
+                } else {
+                    showResults();
+                }
+            }
+            
+            function showResults() {
+                progressBar.style.width = '100%';
+                progressText.textContent = `${totalQuestions} / ${totalQuestions}`;
+                quizContainer.classList.add('hidden');
+                quizControls.classList.add('hidden');
+                resultsContainer.classList.remove('hidden');
+                finalScoreEl.textContent = `${score} out of ${totalQuestions}`;
+                
+                const percentage = (score / totalQuestions) * 100;
+                let message = "";
+                if (percentage >= 90) {
+                    message = "Excellent work! You have a strong grasp of the material. �";
+                } else if (percentage >= 70) {
+                    message = "Great job! You know this topic well. A little review will make it perfect.";
+                } else if (percentage >= 50) {
+                    message = "Good effort. Review the concepts to solidify your understanding.";
+                } else {
+                    message = "Keep studying! Re-read the chapter and try the quiz again.";
+                }
+                resultsMessageEl.textContent = message;
+            }
+
+            nextBtn.addEventListener('click', showNextQuestion);
+            restartBtn.addEventListener('click', () => {
+                document.getElementById('study-hub').scrollIntoView({ behavior: 'smooth' });
+                startQuiz();
+            });
+
+            startQuiz();
+        });
+    </script>
+</body>
+</html>
+�
