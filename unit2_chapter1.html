@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Study Guide: Unit 2 - Pathophysiology of Fish Diseases</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Cool Blues & Grays -->
+    <!-- Application Structure Plan: The SPA is a two-part study tool for Unit 2, Ch 1. Part 1 is a "Study Hub" with key concepts in accordions for easy learning. Part 2 is a "Mock Test" with MCQs for self-assessment. This Learn -> Test flow is ideal for student preparation. -->
+    <!-- Visualization & Content Choices: Report Info: Unit 2, Ch 1 concepts -> Goal: Inform/Organize -> Viz: Styled HTML accordions -> Interaction: Click to expand/collapse. Justification: Organizes complex topics like GAS, Inflammation, and Necrosis clearly. | Report Info: Q&A -> Goal: Test Knowledge -> Viz: Dynamic quiz -> Interaction: User input, feedback, scoring. Justification: Active recall via a quiz enhances learning. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f0f4f8; }
+        h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+        .quiz-option { transition: all 0.2s ease-in-out; }
+        .quiz-option:hover { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+        .correct-answer { background-color: #d1fae5 !important; border-color: #10b981 !important; }
+        .wrong-answer { background-color: #fee2e2 !important; border-color: #ef4444 !important; }
+        .progress-bar-fill { transition: width 0.5s ease-in-out; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease-in-out; }
+        .accordion-button.active + .accordion-content { max-height: 600px; }
+        .accordion-button .chevron { transition: transform 0.3s ease; }
+        .accordion-button.active .chevron { transform: rotate(180deg); }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-5 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900">Pathophysiology of Fish Diseases</h1>
+            <p class="text-md text-gray-600 mt-2">Interactive Study Guide for Unit 2, Chapter 1</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 py-10">
+
+        <!-- Part 1: Study Hub -->
+        <section id="study-hub" class="mb-16">
+            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold text-center mb-2 text-blue-700">Unit 2 Study Hub</h2>
+                <p class="text-center text-gray-600 mb-8 max-w-3xl mx-auto">Review the key concepts from Chapter 1 on Pathophysiology. Click on any topic to expand and see more details.</p>
+
+                <div class="space-y-4">
+                    <!-- Accordion Item 1: Pathogens & Stress -->
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="accordion-button w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100">
+                            <span class="font-semibold text-lg">Pathogens & Stress</span>
+                            <span class="chevron text-gray-500">▼</span>
+                        </button>
+                        <div class="accordion-content p-4 pt-0">
+                            <ul class="list-disc list-inside mt-2 space-y-2 text-gray-700">
+                                <li><strong>Pathology:</strong> The study of disease and their causative agents.</li>
+                                <li><strong>Obligate Pathogen:</strong> An organism that will cause disease simply by being present (e.g., *Aeromonas salmonicida*).</li>
+                                <li><strong>Opportunistic Pathogen:</strong> An organism that only causes disease when the host's resistance is low (e.g., *Vibrio sp.* in shrimps, *Aeromonas hydrophila*).</li>
+                                <li><strong>Stress:</strong> Defined by Selye (1950) as the sum of all physiological responses by which an animal tries to maintain normal metabolism in the face of a physical or chemical force. Temperature is a major stressor for fish.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Accordion Item 2: General Adaptation Syndrome (GAS) -->
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="accordion-button w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100">
+                            <span class="font-semibold text-lg">General Adaptation Syndrome (GAS)</span>
+                            <span class="chevron text-gray-500">▼</span>
+                        </button>
+                        <div class="accordion-content p-4 pt-0">
+                            <p class="text-gray-700">GAS describes the three phases of an animal's response to stress:</p>
+                             <ul class="list-disc list-inside mt-2 space-y-2">
+                                <li><strong>1. Alarm Reaction:</strong> The initial physical response to a stressor, like escaping or physiological changes (e.g., fish coming to the surface for oxygen).</li>
+                                <li><strong>2. Stage of Resistance:</strong> The period where the animal adapts to achieve homeostasis (internal balance) under the new, stressful conditions.</li>
+                                <li><strong>3. Stage of Exhaustion:</strong> If the animal fails to achieve homeostasis, it becomes exhausted, which can lead to disease.</li>
+                                <li><strong>Hormonal Control:</strong> The GAS is mediated by the <strong>Hypothalamic-Pituitary-Interrenal (HPI) axis</strong>, which releases hormones like Cortisol and ACTH.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Accordion Item 3: Inflammation -->
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="accordion-button w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100">
+                            <span class="font-semibold text-lg">Inflammatory Response</span>
+                            <span class="chevron text-gray-500">▼</span>
+                        </button>
+                        <div class="accordion-content p-4 pt-0">
+                            <p class="text-gray-700">Inflammation is the series of changes in tissue following an injury. The five cardinal signs in higher vertebrates are:</p>
+                             <ul class="list-disc list-inside mt-2 space-y-2">
+                                <li><strong>Rubor (Redness):</strong> Due to dilation of capillaries.</li>
+                                <li><strong>Tumor (Swelling):</strong> Due to fluid (exudate) leaking from capillaries.</li>
+                                <li><strong>Calor (Heat):</strong> Due to increased physical activity in the area.</li>
+                                <li><strong>Dolor (Pain):</strong> Due to stretching of nerve endings.</li>
+                                <li><strong>Et functio laesa (Loss of function):</strong> Due to a combination of pain, swelling, and tissue destruction.</li>
+                                <li><strong>Cellular Response:</strong> White blood cells like Neutrophils and Monocytes migrate from the blood to the affected tissue.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Accordion Item 4: Necrosis (Cell Death) -->
+                    <div class="border border-gray-200 rounded-lg">
+                        <button class="accordion-button w-full flex justify-between items-center text-left p-4 bg-gray-50 hover:bg-gray-100">
+                            <span class="font-semibold text-lg">Necrosis (Cell Death) & Granuloma</span>
+                            <span class="chevron text-gray-500">▼</span>
+                        </button>
+                        <div class="accordion-content p-4 pt-0">
+                            <p class="text-gray-700">Necrosis is the death of cells, a non-reversible outcome of prolonged inflammation.</p>
+                            <ul class="list-disc list-inside mt-2 space-y-2">
+                                <li><strong>Types of Necrosis:</strong>
+                                    <ul class="list-['-_'] list-inside ml-4">
+                                        <li><strong>Liquefactive Necrosis:</strong> Enzymatic digestion of cells (e.g., in furunculosis).</li>
+                                        <li><strong>Coagulative Necrosis:</strong> Results from loss of blood supply (ischaemia).</li>
+                                        <li><strong>Fat Necrosis:</strong> Rare; caused by lipase enzymes from damaged pancreatic tissue.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Stages of Necrosis (Nuclear Changes):</strong>
+                                    <ul class="list-['-_'] list-inside ml-4">
+                                        <li><strong>Pyknosis:</strong> Shrunken, dark nucleus.</li>
+                                        <li><strong>Karyorhexis:</strong> Rupture and fragmentation of the nucleus.</li>
+                                        <li><strong>Karyolysis:</strong> Complete dissolution of the nucleus.</li>
+                                    </ul>
+                                </li>
+                                 <li><strong>Granuloma:</strong> A mass of inflamed tissue, often associated with chronic inflammation, formed to wall off a foreign body or pathogen like *Mycobacterium*.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- New Study Section -->
+                <div id="semester-prep" class="mt-8">
+                    <h3 class="text-xl font-bold text-center my-8 border-t pt-8">Sample Questions for Semester Exams</h3>
+                    <div class="space-y-8">
+
+                        <!-- Multiple Choice Questions -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">I. Multiple Choice Questions</h4>
+                            <div class="space-y-3 bg-gray-50 p-4 rounded-lg border">
+                                <p><strong>1. An organism that causes disease only when the host's resistance is low is called a(n):</strong><br>
+                                    a) Obligate pathogen<br>
+                                    b) Commensal organism<br>
+                                    c) Opportunistic pathogen<br>
+                                    <strong>Answer: c) Opportunistic pathogen</strong></p>
+                                <p><strong>2. Which is the final stage of the General Adaptation Syndrome (GAS) that can lead to disease?</strong><br>
+                                    a) Alarm Reaction<br>
+                                    b) Stage of Exhaustion<br>
+                                    c) Stage of Resistance<br>
+                                    <strong>Answer: b) Stage of Exhaustion</strong></p>
+                            </div>
+                        </div>
+
+                        <!-- Fill in the Blanks -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">II. Fill in the Blanks</h4>
+                            <div class="space-y-3 bg-gray-50 p-4 rounded-lg border">
+                                <p>1. The cardinal sign of inflammation known as 'redness' is referred to as ____________. <br><strong>Answer: Rubor</strong></p>
+                                <p>2. The stage of necrosis characterized by a shrunken and very dark nucleus is called ____________.<br><strong>Answer: Pyknosis</strong></p>
+                                <p>3. The events of the General Adaptation Syndrome are mediated by a hormonal and nervous reaction involving the ____________ axis.<br><strong>Answer: Hypothalamic-Pituitary-Interrenal (HPI)</strong></p>
+                            </div>
+                        </div>
+
+                        <!-- True or False -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">III. True or False</h4>
+                            <div class="space-y-3 bg-gray-50 p-4 rounded-lg border">
+                                <p>1. Coagulative necrosis results from the enzymatic digestion of cells.<br><strong>Answer: False.</strong> This describes liquefactive necrosis. Coagulative necrosis results from loss of blood supply.</p>
+                                <p>2. Inflammation in fish is not influenced by temperature because they are poikilotherms.<br><strong>Answer: False.</strong> The text states that being poikilotherms means temperature has a *great* influence on their inflammatory response.</p>
+                            </div>
+                        </div>
+
+                        <!-- Match the Following -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">IV. Match the Following</h4>
+                            <div class="bg-gray-50 p-4 rounded-lg border">
+                                <p><strong>Instructions:</strong> Match the term in Column A with its correct description in Column B.</p>
+                                <div class="grid grid-cols-2 gap-4 mt-2">
+                                    <div><strong>Column A</strong><ul class="list-disc list-inside"><li>1. Karyolysis</li><li>2. Tumor</li><li>3. GAS</li><li>4. Granuloma</li></ul></div>
+                                    <div><strong>Column B</strong><ul class="list-disc list-inside"><li>a) Swelling from fluid</li><li>b) Three-stage stress response</li><li>c) Mass of inflamed tissue</li><li>d) Dissolution of nucleus</li></ul></div>
+                                </div>
+                                <p class="mt-3"><strong>Answers:</strong> 1-d, 2-a, 3-b, 4-c</p>
+                            </div>
+                        </div>
+
+                        <!-- Short Notes -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">V. Short Notes</h4>
+                            <div class="space-y-4">
+                                <div class="bg-gray-50 p-4 rounded-lg border">
+                                    <h5 class="font-bold">1. Differentiate between Obligate and Opportunistic Pathogens.</h5>
+                                    <p class="text-gray-700 mt-1">An **obligate pathogen** is an organism that will cause disease simply by its presence in the culture system, as it is inherently virulent (e.g., *Aeromonas salmonicida*). In contrast, an **opportunistic pathogen** is an organism that is normally harmless or a commensal but can cause disease when the host's resistance is lowered due to factors like stress or poor water quality (e.g., *Aeromonas hydrophila*).</p>
+                                </div>
+                                <div class="bg-gray-50 p-4 rounded-lg border">
+                                    <h5 class="font-bold">2. Explain the three stages of Necrosis based on nuclear changes.</h5>
+                                    <p class="text-gray-700 mt-1">Necrosis, or cell death, can be identified by observing changes in the cell's nucleus. The three stages are:
+                                    <br>1. <strong>Pyknosis:</strong> The initial stage where the nucleus shrinks and becomes very dark (haematoxylinophilic).
+                                    <br>2. <strong>Karyorhexis:</strong> The second stage where the nuclear membrane ruptures and the chromatin fragments.
+                                    <br>3. <strong>Karyolysis:</strong> The final stage where the nucleus completely dissolves as its nucleic acids are hydrolyzed, losing their basophilic staining properties.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Long Answer Question -->
+                        <div>
+                            <h4 class="font-semibold text-lg mb-3 text-gray-800">VI. Long Answer Question</h4>
+                             <div class="bg-gray-50 p-4 rounded-lg border">
+                                <h5 class="font-bold">1. Describe the General Adaptation Syndrome (GAS) in fish. Explain the three phases and the hormonal axis that regulates this response.</h5>
+                                <p class="text-gray-700 mt-2">
+                                    The General Adaptation Syndrome (GAS) is the sum of all physiological responses a fish undergoes to maintain or re-establish normal metabolism when faced with a stressor. This response is non-specific, meaning various stressors like infection, fright, or poor water quality can trigger a similar set of reactions. The GAS occurs in three distinct phases:
+                                </p>
+                                <ul class="list-decimal list-inside my-2 space-y-1 text-gray-700">
+                                    <li><strong>Alarm Reaction:</strong> This is the immediate, initial response to the stressor. It involves physical reactions like attempting to escape or physiological changes such as moving to the water surface if dissolved oxygen is low. It's the body's first alert to a change in conditions.</li>
+                                    <li><strong>Stage of Resistance:</strong> If the stressor persists, the fish enters this stage. Here, the body actively adapts to achieve homeostasis (a stable internal state) under the new, challenging circumstances. Hormonal and metabolic changes occur to help the fish cope with the ongoing stress.</li>
+                                    <li><strong>Stage of Exhaustion:</strong> If the fish is unable to adapt and achieve homeostasis during the resistance stage, it enters exhaustion. In this final phase, the fish's resources are depleted, and its physiological systems begin to fail. This stage often leads to a compromised immune system and the onset of disease.</li>
+                                </ul>
+                                <p class="text-gray-700 mt-2">
+                                    <strong>Hormonal Regulation:</strong> The entire GAS process is regulated by the **Hypothalamic-Pituitary-Interrenal (HPI) axis**. The hypothalamus senses the stressor and activates the pituitary gland. The pituitary, in turn, secretes tropic factors that activate the interrenal tissue (the equivalent of the adrenal gland in mammals) to release stress hormones, primarily **Cortisol** and **ACTH**. These hormones drive the physiological changes seen throughout the GAS stages.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 text-center">
+                    <button id="start-quiz-btn" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105">
+                        Start Mock Test (MCQs)
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Part 2: Mock Test -->
+        <section id="interactive-quiz" class="bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold text-center mb-6">Mock Test</h2>
+            
+            <div id="quiz-progress" class="mb-6">
+                <div class="flex justify-between mb-1">
+                    <span class="text-base font-medium text-blue-700">Progress</span>
+                    <span id="progress-text" class="text-sm font-medium text-blue-700"></span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full progress-bar-fill" style="width: 0%"></div>
+                </div>
+                <div class="text-right mt-2 font-bold text-lg">Score: <span id="score-text">0</span></div>
+            </div>
+
+            <div id="quiz-container">
+                <!-- Quiz questions will be injected here by JavaScript -->
+            </div>
+
+            <div id="quiz-controls" class="mt-8 text-center">
+                <button id="next-btn" class="bg-blue-600 text-white font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400" disabled>Next Question</button>
+            </div>
+            
+            <div id="results-container" class="hidden text-center mt-8">
+                <h3 class="text-3xl font-bold text-gray-900">Quiz Complete!</h3>
+                <p class="text-xl mt-4">Your final score is <span id="final-score" class="font-bold text-blue-600"></span>.</p>
+                <p class="text-gray-600 mt-2" id="results-message"></p>
+                <button id="restart-btn" class="mt-6 bg-gray-800 text-white font-bold py-2 px-6 rounded-lg hover:bg-gray-900 transition">Restart Quiz</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="mt-12 py-6 text-center text-gray-500">
+        <p>&copy; 2025 Interactive Study Tools. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Accordion Logic
+            const accordionButtons = document.querySelectorAll('.accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    accordionButtons.forEach(otherButton => {
+                        if (otherButton !== button) otherButton.classList.remove('active');
+                    });
+                    button.classList.toggle('active');
+                });
+            });
+
+            // Smooth scroll to quiz
+            document.getElementById('start-quiz-btn').addEventListener('click', () => {
+                document.getElementById('interactive-quiz').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Quiz Logic
+            const quizData = [
+                { type: 'mcq', question: "An organism that will cause disease simply by being present is known as a(n):", options: ["Opportunistic Pathogen", "Commensal", "Obligate Pathogen", "Saprophyte"], answer: "Obligate Pathogen" },
+                { type: 'mcq', question: "Which phase of the General Adaptation Syndrome involves the animal actively trying to adapt and achieve homeostasis?", options: ["Alarm Reaction", "Stage of Resistance", "Stage of Exhaustion", "Immune Response"], answer: "Stage of Resistance" },
+                { type: 'mcq', question: "The cardinal sign of inflammation 'Tumor' refers to:", options: ["Redness", "Heat", "Pain", "Swelling"], answer: "Swelling" },
+                { type: 'mcq', question: "Which type of necrosis is caused by the loss of blood supply to an area?", options: ["Liquefactive Necrosis", "Fat Necrosis", "Caseous Necrosis", "Coagulative Necrosis"], answer: "Coagulative Necrosis" },
+                { type: 'mcq', question: "The rupture and fragmentation of the nuclear chromatin during cell death is called:", options: ["Pyknosis", "Karyolysis", "Karyorhexis", "Chromatolysis"], answer: "Karyorhexis" }
+            ];
+
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let questionAnswered = false;
+            const totalQuestions = quizData.length;
+
+            const quizContainer = document.getElementById('quiz-container');
+            const nextBtn = document.getElementById('next-btn');
+            const restartBtn = document.getElementById('restart-btn');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+            const scoreText = document.getElementById('score-text');
+            const resultsContainer = document.getElementById('results-container');
+            const finalScoreEl = document.getElementById('final-score');
+            const resultsMessageEl = document.getElementById('results-message');
+            const quizProgress = document.getElementById('quiz-progress');
+            const quizControls = document.getElementById('quiz-controls');
+
+            function startQuiz() {
+                currentQuestionIndex = 0;
+                score = 0;
+                questionAnswered = false;
+                resultsContainer.classList.add('hidden');
+                quizContainer.classList.remove('hidden');
+                quizProgress.classList.remove('hidden');
+                quizControls.classList.remove('hidden');
+                updateProgress();
+                showQuestion();
+            }
+
+            function showQuestion() {
+                questionAnswered = false;
+                nextBtn.disabled = true;
+                const questionData = quizData[currentQuestionIndex];
+                let html = `<div class="mb-4"><p class="text-lg font-semibold">${currentQuestionIndex + 1}. ${questionData.question}</p></div>`;
+
+                if (questionData.type === 'mcq') {
+                    html += '<div class="space-y-3">';
+                    questionData.options.forEach(option => {
+                        html += `<button class="quiz-option w-full text-left p-4 bg-white border-2 border-gray-200 rounded-lg">${option}</button>`;
+                    });
+                    html += '</div>';
+                }
+                quizContainer.innerHTML = html;
+                addEventListeners();
+            }
+
+            function addEventListeners() {
+                if (quizData[currentQuestionIndex].type === 'mcq') {
+                    document.querySelectorAll('.quiz-option').forEach(button => {
+                        button.addEventListener('click', checkMCQAnswer);
+                    });
+                }
+            }
+            
+            function checkMCQAnswer(e) {
+                if (questionAnswered) return;
+                questionAnswered = true;
+                const selectedOption = e.target;
+                const isCorrect = selectedOption.textContent === quizData[currentQuestionIndex].answer;
+                
+                if (isCorrect) {
+                    score++;
+                    selectedOption.classList.add('correct-answer');
+                } else {
+                    selectedOption.classList.add('wrong-answer');
+                    document.querySelectorAll('.quiz-option').forEach(btn => {
+                        if (btn.textContent === quizData[currentQuestionIndex].answer) {
+                            btn.classList.add('correct-answer');
+                        }
+                    });
+                }
+                updateProgress();
+                nextBtn.disabled = false;
+            }
+
+            function updateProgress() {
+                scoreText.textContent = score;
+                const progressPercentage = ((currentQuestionIndex) / totalQuestions) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
+                progressText.textContent = `${currentQuestionIndex} / ${totalQuestions}`;
+            }
+
+            function showNextQuestion() {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < totalQuestions) {
+                    updateProgress();
+                    showQuestion();
+                } else {
+                    showResults();
+                }
+            }
+            
+            function showResults() {
+                progressBar.style.width = '100%';
+                progressText.textContent = `${totalQuestions} / ${totalQuestions}`;
+                quizContainer.classList.add('hidden');
+                quizControls.classList.add('hidden');
+                resultsContainer.classList.remove('hidden');
+                finalScoreEl.textContent = `${score} out of ${totalQuestions}`;
+                
+                const percentage = (score / totalQuestions) * 100;
+                let message = "";
+                if (percentage >= 90) {
+                    message = "Excellent work! You have a strong grasp of the material. �";
+                } else if (percentage >= 70) {
+                    message = "Great job! You know this topic well. A little review will make it perfect.";
+                } else if (percentage >= 50) {
+                    message = "Good effort. Review the concepts to solidify your understanding.";
+                } else {
+                    message = "Keep studying! Re-read the chapter and try the quiz again.";
+                }
+                resultsMessageEl.textContent = message;
+            }
+
+            nextBtn.addEventListener('click', showNextQuestion);
+            restartBtn.addEventListener('click', () => {
+                document.getElementById('study-hub').scrollIntoView({ behavior: 'smooth' });
+                startQuiz();
+            });
+
+            startQuiz();
+        });
+    </script>
+</body>
+</html>
